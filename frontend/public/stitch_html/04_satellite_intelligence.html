@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Satellite Intelligence - SandShield AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#2c344d",
+                      "on-tertiary-fixed": "#07006c",
+                      "tertiary-fixed": "#e1e0ff",
+                      "inverse-surface": "#dbe1ff",
+                      "on-primary-fixed": "#001f24",
+                      "primary-fixed-dim": "#00daf3",
+                      "primary": "#c3f5ff",
+                      "on-tertiary-container": "#4344d1",
+                      "on-tertiary-fixed-variant": "#2f2ebe",
+                      "secondary": "#7bd0ff",
+                      "on-surface": "#dbe1ff",
+                      "on-error-container": "#ffdad6",
+                      "background": "#0a122a",
+                      "secondary-fixed-dim": "#7bd0ff",
+                      "outline": "#849396",
+                      "surface-container-lowest": "#050d25",
+                      "secondary-container": "#00a6e0",
+                      "surface-container-low": "#131a33",
+                      "surface": "#0a122a",
+                      "surface-container-high": "#212942",
+                      "on-primary-container": "#00626e",
+                      "tertiary-fixed-dim": "#c0c1ff",
+                      "inverse-primary": "#006875",
+                      "on-primary-fixed-variant": "#004f58",
+                      "on-error": "#690005",
+                      "on-background": "#dbe1ff",
+                      "surface-variant": "#2c344d",
+                      "surface-dim": "#0a122a",
+                      "on-secondary": "#00354a",
+                      "surface-container": "#171e37",
+                      "on-surface-variant": "#bac9cc",
+                      "on-secondary-fixed-variant": "#004c69",
+                      "on-primary": "#00363d",
+                      "tertiary": "#edeaff",
+                      "outline-variant": "#3b494c",
+                      "surface-bright": "#313852",
+                      "surface-tint": "#00daf3",
+                      "secondary-fixed": "#c4e7ff",
+                      "primary-container": "#00e5ff",
+                      "on-secondary-container": "#00374d",
+                      "error": "#ffb4ab",
+                      "primary-fixed": "#9cf0ff",
+                      "on-tertiary": "#1000a9",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#282f49",
+                      "tertiary-container": "#ccccff",
+                      "on-secondary-fixed": "#001e2c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "container-margin": "24px",
+                      "panel-padding": "20px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-mono": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #0B132B; /* Using literal value to force dark navy theme as requested if config doesn't match perfectly, though config surface is #0a122a */
+        }
+        .glass-card {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid transparent;
+            border-image: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) 1;
+        }
+        .glass-panel-active {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+        
+        .scanline {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0), rgba(0,229,255,0.1), rgba(255,255,255,0), rgba(255,255,255,0));
+            background-size: 100% 4px;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.3;
+        }
+        
+        .slider-handle {
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen overflow-hidden flex flex-col font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface-container-low/60 backdrop-blur-xl border-b border-outline-variant/20 shadow-[0_0_30px_rgba(0,229,255,0.1)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="text-primary-container font-headline-md text-headline-md font-bold tracking-tight">SandShield AI</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest/40 rounded-full border border-primary-fixed-dim/30">
+<div class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></div>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">System Status: Active</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary hover:bg-surface-container-highest/40 transition-all p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hover:text-primary hover:bg-surface-container-highest/40 transition-all p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:text-primary hover:bg-surface-container-highest/40 transition-all p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined">security</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant/50 overflow-hidden ml-2">
+<img class="w-full h-full object-cover" data-alt="A detailed 50-100 word prompt describing a high-tech, glowing minimalist abstract portrait representing a digital operator profile. The avatar features subtle cyan and deep blue gradients, reflecting a sophisticated, secure command-center aesthetic. The image is clean, sharp, and highly technical, blending seamlessly into a dark UI environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnLOCIeHw4z57LiKy1WgEV3vKJ0jmymmz1K-TuSpM9aj_GVnKhA0ckDBKP673Y01iCqO2K1Vo93uN-GNRXc89vensnKjAszMFwZ7PjxdiDjeldpeNfX-98DHxdz4zga4AX6BMWcvKBBxG_2ejLCTh4RSSkZJY0_X1MvPsLePyrXB5MUoz4aBT2OKaRF1DWEpTky8pVrffiF_sNAKDpM-nkiMThSoeqHjCDlGVCG7Nwt7Hs-WuxpAf05NlExmr2s_NN-2rs0F6u16Mf"/>
+</div>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 pt-16 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full py-panel-padding fixed left-0 top-16 bottom-0 w-[280px] bg-surface-container-lowest/80 backdrop-blur-md border-r border-outline-variant/10 z-40">
+<div class="px-container-margin mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center border border-primary/20 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">radar</span>
+</div>
+<div>
+<h2 class="font-headline-md text-primary text-headline-md">STRATCOM</h2>
+<p class="font-data-mono text-data-mono text-on-surface-variant text-xs">Vigilance Alpha-9</p>
+</div>
+</div>
+<button class="w-full mt-4 bg-primary-container text-on-primary-fixed py-2 rounded font-label-caps text-label-caps hover:brightness-110 transition-all shadow-[0_0_15px_rgba(0,229,255,0.2)] active:scale-95">
+                    Initialize Scan
+                </button>
+</div>
+<nav class="flex-1 flex flex-col gap-2 px-4">
+<a class="flex items-center gap-3 p-spacing-unit text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg active:translate-x-1 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+                    Command
+                </a>
+<a class="flex items-center gap-3 p-spacing-unit bg-secondary-container text-on-secondary-container rounded-lg border-l-4 border-primary-fixed-dim shadow-[0_0_12px_rgba(0,229,255,0.3)] font-label-caps text-label-caps active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">satellite_alt</span>
+                    Intelligence
+                </a>
+<a class="flex items-center gap-3 p-spacing-unit text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg active:translate-x-1 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">folder_managed</span>
+                    Archives
+                </a>
+</nav>
+<div class="mt-auto px-4 flex flex-col gap-2 border-t border-outline-variant/10 pt-4">
+<a class="flex items-center gap-3 p-spacing-unit text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 p-spacing-unit text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">terminal</span>
+                    Logs
+                </a>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 md:ml-[280px] p-container-margin overflow-y-auto flex flex-col gap-container-margin relative">
+<!-- Sensor & Filter Controls -->
+<header class="glass-card rounded-xl p-4 flex flex-wrap items-center justify-between gap-4 z-20 relative">
+<div class="flex flex-wrap items-center gap-4 flex-1">
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm">location_on</span>
+<select class="bg-transparent border-none text-data-mono font-data-mono text-on-surface focus:ring-0 p-0 pr-6 text-sm">
+<option>Location: Bhavani River Basin - Sector 4B</option>
+</select>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm">satellite</span>
+<select class="bg-transparent border-none text-data-mono font-data-mono text-on-surface focus:ring-0 p-0 pr-6 text-sm">
+<option>Sensor: Sentinel-2A / PlanetScope Fusion</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-container px-1 py-1 rounded-lg border border-outline-variant/50">
+<button class="px-4 py-1.5 text-data-mono font-data-mono text-xs rounded bg-primary-container/20 text-primary-fixed-dim border border-primary-fixed-dim/50 shadow-[0_0_10px_rgba(0,229,255,0.1)]">
+                        Historical vs Current
+                    </button>
+<button class="px-4 py-1.5 text-data-mono font-data-mono text-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors">
+                        Thermal Anomalies
+                    </button>
+</div>
+</header>
+<div class="flex flex-col lg:flex-row gap-container-margin h-full relative z-10">
+<!-- Image Comparison Widget -->
+<section class="flex-1 glass-panel-active rounded-xl overflow-hidden relative min-h-[500px] flex flex-col">
+<div class="absolute top-4 left-4 z-20 flex gap-2">
+<div class="bg-surface-container-lowest/80 backdrop-blur px-3 py-1 rounded border border-outline-variant/30 text-data-mono font-data-mono text-secondary-fixed-dim text-xs flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+                            JAN 15, 2026
+                        </div>
+</div>
+<div class="absolute top-4 right-4 z-20 flex gap-2">
+<div class="bg-surface-container-lowest/80 backdrop-blur px-3 py-1 rounded border border-outline-variant/30 text-data-mono font-data-mono text-error text-xs flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                            JULY 28, 2026
+                        </div>
+</div>
+<!-- Comparison Container -->
+<div class="relative w-full h-full flex-1 group" id="comparison-container">
+<!-- Before Image (Left) -->
+<div class="absolute inset-0 w-full h-full">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEq7vSwVyt-sMZCtAkuPWk-X5-KRek8Cz99eSfY8L9SLr4UrW9fAsAeErCs5kIKTB24FiESjfH0vZKa3uq2nNKxt1JWQ4XyJHBD-KmzrsmbuhL6iDRN1s714gXsohiXPDXJpzmRvBAYV13wda3I0Y1QBLpmD_vofLPb_qytmnVOLud1P9SU-eyKwMW-8KQPHMdUUW5NZwyNgRnoROD-Pq-MeYxREL6Ez7oMMeTAdK6o3mmHTrk4iZoHUopo-tp8YkWEu55gHvJfzwG"/>
+</div>
+<!-- After Image (Right) -->
+<div class="absolute inset-0 w-full h-full overflow-hidden" id="after-image" style="width: 50%;">
+<img class="w-[200%] h-full object-cover max-w-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKf0h-B22UmGs0x7iqnypzLS8Ga07UrpMYYDK7yDTmyCAgL1TIUkE_6OwmIS5V4j7rtugW63SjrGww0pNcFD_FoNamQO5srK7YW9LNFFFwLzA5ollkHE2WA7GnzBUatZqrFy5OuSSWE8bjqHfDCHFLMUbGiD42I77AIDE8YO1hFa6COymh7E0mKC8Dg-8SYefr7Ds27d9IDDSfEiOroTPMIA3MqLcnkwiGc2pm_CR3A1h0eCuhRQ_m-fROdJ81AfntEtHc9HMzII9A" style="width: calc(100vw - 280px - 48px - 320px); max-width: none;"/> <!-- Rough calc to keep aspect right in clip, simplified for demo -->
+<!-- Actual implemention would use a background image or better clipping, but inline style here simulates the clip -->
+</div>
+<!-- Slider -->
+<div class="absolute inset-y-0 left-[50%] w-0.5 bg-primary-container cursor-ew-resize z-30 flex items-center justify-center transform -translate-x-1/2 group-hover:bg-primary transition-colors" id="slider">
+<div class="w-8 h-8 rounded-full bg-surface-container border-2 border-primary-container slider-handle flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-sm">sync_alt</span>
+</div>
+</div>
+<!-- Overlay Grid -->
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgwem0zOSAzOVYxaC0zOHYzOGgzOHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgwLCAyMjksIDI1NSwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+')] pointer-events-none opacity-50 z-20"></div>
+<div class="scanline"></div>
+</div>
+<!-- Bottom Telemetry bar in widget -->
+<div class="h-8 bg-surface-container-lowest border-t border-primary-fixed-dim/20 flex items-center justify-between px-4 text-[10px] font-data-mono text-on-surface-variant font-data-mono">
+<span>LAT: 11.4589° N | LON: 77.1023° E</span>
+<span>RES: 0.5m/px</span>
+<span>AZIMUTH: 142.4°</span>
+</div>
+</section>
+<!-- AI DETECTED CHANGES Right Sidebar -->
+<aside class="w-full lg:w-[320px] flex flex-col gap-4 z-20">
+<!-- Confidence Card -->
+<div class="glass-card rounded-xl p-5 border border-primary-fixed-dim/40 shadow-[0_0_20px_rgba(0,229,255,0.15)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2">
+<span class="material-symbols-outlined text-primary-fixed-dim/20 text-6xl">target</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">memory</span>
+                                AI CONFIDENCE SCORE
+                            </h3>
+<div class="text-3xl font-display-lg text-primary-container tracking-tight my-2 drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">
+                                96.4%
+                            </div>
+<div class="font-data-mono text-data-mono text-primary-fixed-dim text-xs bg-primary-fixed-dim/10 inline-block px-2 py-1 rounded border-l-2 border-primary-fixed-dim">
+                                HIGH CONFIDENCE
+                            </div>
+<div class="mt-4 text-[10px] font-data-mono text-on-surface-variant/70 border-t border-outline-variant/30 pt-2 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed-dim animate-ping"></span>
+                                S2 &amp; PLANET CONSTELLATION ACTIVE
+                            </div>
+</div>
+</div>
+<div class="flex items-center gap-2 px-1 mt-2">
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+<h3 class="font-headline-md text-sm text-on-surface tracking-wider">AI DETECTED CHANGES</h3>
+<div class="h-px bg-outline-variant/30 flex-1 ml-2"></div>
+</div>
+<!-- Change Cards Grid -->
+<div class="flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar" style="max-height: calc(100vh - 350px);">
+<!-- Card 1 -->
+<div class="bg-surface-container p-3 rounded-lg border-l-2 border-error hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-error/5 to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-data-mono text-data-mono text-sm text-on-surface group-hover:text-primary transition-colors">River Morphology Shift</h4>
+<span class="text-[10px] font-data-mono text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">94.8%</span>
+</div>
+<p class="font-body-md text-xs text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">moving</span>
+                                +14.2m bank erosion
+                            </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container p-3 rounded-lg border-l-2 border-error hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-error/5 to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-data-mono text-data-mono text-sm text-on-surface group-hover:text-primary transition-colors">Shoreline Displacement</h4>
+<span class="text-[10px] font-data-mono text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">96.1%</span>
+</div>
+<p class="font-body-md text-xs text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">water</span>
+                                220m alteration
+                            </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container p-3 rounded-lg border-l-2 border-tertiary-fixed-dim hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-data-mono text-data-mono text-sm text-on-surface group-hover:text-primary transition-colors">Water Turbidity Increase</h4>
+<span class="text-[10px] font-data-mono text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">91.5%</span>
+</div>
+<p class="font-body-md text-xs text-tertiary-fixed-dim font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">opacity</span>
+                                +185% NTU rise
+                            </p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container p-3 rounded-lg border-l-2 border-error hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-data-mono text-data-mono text-sm text-on-surface group-hover:text-primary transition-colors">Vegetation Loss</h4>
+<span class="text-[10px] font-data-mono text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">97.2%</span>
+</div>
+<p class="font-body-md text-xs text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">forest</span>
+                                3.4 Hectares
+                            </p>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container p-3 rounded-lg border-l-2 border-error hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-data-mono text-data-mono text-sm text-on-surface group-hover:text-primary transition-colors">Extraction Pit Volume</h4>
+<span class="text-[10px] font-data-mono text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">95.6%</span>
+</div>
+<p class="font-body-md text-xs text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">landscape</span>
+                                18,500 m²
+                            </p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+<!-- Very basic inline script for slider interaction simulation (visual only for structural demonstration) -->
+<script>
+        // A minimal script to allow sliding if user clicks and drags in a real environment
+        // For this static generation, it provides structural readiness.
+        const container = document.getElementById('comparison-container');
+        const slider = document.getElementById('slider');
+        const afterImage = document.getElementById('after-image');
+
+        if(container && slider && afterImage) {
+            let isDragging = false;
+
+            slider.addEventListener('mousedown', () => isDragging = true);
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const rect = container.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                
+                // Constraints
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                
+                const percentage = (x / rect.width) * 100;
+                
+                slider.style.left = `${percentage}%`;
+                afterImage.style.width = `${percentage}%`;
+            });
+        }
+    </script>
+
+  
+  
+  <script src="/stitch_app.js"></script>
+</body></html>

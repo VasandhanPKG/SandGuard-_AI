@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SandShield AI - Intelligence Report Generation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#0a122a",
+                        "surface": "#0a122a",
+                        "surface-container": "#171e37",
+                        "surface-container-low": "#131a33",
+                        "surface-container-lowest": "#050d25",
+                        "surface-container-high": "#212942",
+                        "surface-container-highest": "#2c344d",
+                        "primary": "#c3f5ff",
+                        "primary-container": "#00e5ff",
+                        "on-primary-container": "#00626e",
+                        "secondary": "#7bd0ff",
+                        "secondary-container": "#00a6e0",
+                        "on-surface": "#dbe1ff",
+                        "on-surface-variant": "#bac9cc",
+                        "outline-variant": "#3b494c",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 229, 255, 0.15);
+        }
+        .active-glass-card {
+            background: rgba(28, 37, 65, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.08);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-surface-container-lowest border-r border-outline-variant/20 bg-surface-container-lowest/60 backdrop-blur-xl z-50 flex flex-col py-5 hidden md:flex">
+<div class="px-5 mb-6">
+<h1 class="font-headline-md text-2xl font-bold text-primary">SandShield AI</h1>
+<p class="font-label-caps text-xs text-on-surface-variant mt-1">Report & Legal Dossiers</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1.5 px-3 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/02_command_center_dashboard.html">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="font-label-caps text-xs">Command Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/03_gis_monitoring.html">
+<span class="material-symbols-outlined text-lg">map</span>
+<span class="font-label-caps text-xs">GIS Monitoring</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/04_satellite_intelligence.html">
+<span class="material-symbols-outlined text-lg">satellite_alt</span>
+<span class="font-label-caps text-xs">Satellite Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/05_drone_verification.html">
+<span class="material-symbols-outlined text-lg">precision_manufacturing</span>
+<span class="font-label-caps text-xs">Drone Monitoring</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/06_vehicle_analytics.html">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="font-label-caps text-xs">Vehicle Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/07_ai_prediction.html">
+<span class="material-symbols-outlined text-lg">psychology</span>
+<span class="font-label-caps text-xs">AI Prediction</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/08_ai_explainability.html">
+<span class="material-symbols-outlined text-lg">query_stats</span>
+<span class="font-label-caps text-xs">AI Explainability</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/09_alert_management.html">
+<span class="material-symbols-outlined text-lg">warning</span>
+<span class="font-label-caps text-xs">Alert Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary border-l-2 border-primary bg-primary/10 rounded-md" href="/stitch_html/10_report_generation.html">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-caps text-xs font-bold">Report Generation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all rounded-md" href="/stitch_html/11_mobile_field_officer.html">
+<span class="material-symbols-outlined text-lg">smartphone</span>
+<span class="font-label-caps text-xs">Mobile Officer App</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-3 py-2 text-error hover:bg-error/10 transition-all rounded-md" href="/stitch_html/01_login.html">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="font-label-caps text-xs">Logout</span>
+</a>
+</div>
+</aside>
+
+<!-- Main Canvas -->
+<div class="flex-1 md:ml-[280px] flex flex-col h-screen relative z-10">
+<!-- Top Header -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-280px)] h-16 bg-surface-container-low border-b border-outline-variant/20 backdrop-blur-xl z-40 flex justify-between items-center px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">description</span>
+<h2 class="font-headline-md text-lg font-bold text-primary uppercase tracking-wide">Court-Admissible Report Generator</h2>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-data-mono text-xs text-primary/70 bg-primary/10 px-3 py-1 rounded-full border border-primary/20">DIGITAL STAMP ACTIVE</span>
+<button id="btn-print-top" class="bg-primary text-on-primary-container font-label-caps text-xs px-4 py-2 rounded flex items-center gap-2 btn-glow font-bold transition-all">
+<span class="material-symbols-outlined text-sm">print</span>
+PRINT / EXPORT DOSSIER
+</button>
+</div>
+</header>
+
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto pt-20 px-6 pb-6 flex flex-col gap-6">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+<!-- Left: Configurator Panel -->
+<div class="glass-card p-5 rounded-xl flex flex-col justify-between gap-6">
+<div class="space-y-4">
+<div class="border-b border-outline-variant/30 pb-3">
+<h3 class="font-headline-md text-base font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">tune</span>
+INTELLIGENCE DOSSIER BUILDER
+</h3>
+<p class="font-data-mono text-xs text-on-surface-variant mt-1">Configure legal evidence & environmental audit documents</p>
+</div>
+
+<div class="space-y-4 font-data-mono text-xs">
+<div>
+<label class="block text-on-surface-variant font-bold mb-1.5 uppercase">Target Incident Selection</label>
+<select id="select-incident" class="w-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface p-2.5 rounded focus:ring-1 focus:ring-primary outline-none">
+<option value="ALT-9942">Incident #ALT-9942 - Bhavani River Sector 4B (Critical)</option>
+<option value="ALT-9941">Incident #ALT-9941 - Cauvery River Basin North (High)</option>
+<option value="ALT-9938">Incident #ALT-9938 - Palar River Reach (Warning)</option>
+</select>
+</div>
+
+<div>
+<label class="block text-on-surface-variant font-bold mb-1.5 uppercase">Report Legal Classification</label>
+<select id="select-classification" class="w-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface p-2.5 rounded focus:ring-1 focus:ring-primary outline-none">
+<option value="Court-Admissible Enforcement Dossier">Court-Admissible Enforcement Dossier (NGT Format)</option>
+<option value="Executive Briefing Summary">Executive Briefing Summary (Ministry Brief)</option>
+<option value="Environmental Impact Assessment">Environmental Impact Assessment (EIA Audit)</option>
+</select>
+</div>
+
+<div>
+<label class="block text-on-surface-variant font-bold mb-2 uppercase">Included Dossier Modules</label>
+<div class="space-y-2.5 text-on-surface">
+<label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+<input type="checkbox" checked class="form-checkbox bg-surface-container-lowest border-outline-variant text-primary rounded" />
+<span>Location GPS & Satellite Map Boundaries</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+<input type="checkbox" checked class="form-checkbox bg-surface-container-lowest border-outline-variant text-primary rounded" />
+<span>Multispectral Surface Change Delta</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+<input type="checkbox" checked class="form-checkbox bg-surface-container-lowest border-outline-variant text-primary rounded" />
+<span>Drone FLIR Recon Bounding Box Data</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+<input type="checkbox" checked class="form-checkbox bg-surface-container-lowest border-outline-variant text-primary rounded" />
+<span>ANPR Tollgate Vehicle Transit Logs</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+<input type="checkbox" checked class="form-checkbox bg-surface-container-lowest border-outline-variant text-primary rounded" />
+<span>Environmental Degradation Index (EDI)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+<input type="checkbox" checked class="form-checkbox bg-surface-container-lowest border-outline-variant text-primary rounded" />
+<span>AI XAI Governance & Confidence Cert</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+
+<button id="btn-generate-pdf" class="w-full bg-primary-container text-on-primary-container font-label-caps text-xs py-3.5 rounded-lg flex items-center justify-center gap-2 font-bold btn-glow transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+GENERATE & DOWNLOAD OFFICIAL PDF
+</button>
+</div>
+
+<!-- Right: Live Document Preview -->
+<div class="lg:col-span-2 glass-card p-6 rounded-xl space-y-4 flex flex-col">
+<div class="flex justify-between items-center border-b border-outline-variant/30 pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">visibility</span>
+<span class="font-label-caps text-xs font-bold text-on-surface">LIVE A4 DOCUMENT PRINT PREVIEW</span>
+</div>
+<span class="font-data-mono text-xs font-bold text-error bg-error-container/20 border border-error/30 px-2.5 py-0.5 rounded">CLASSIFICATION: CONFIDENTIAL / OFFICIAL USE ONLY</span>
+</div>
+
+<!-- Printable Document Sheet -->
+<div id="document-sheet" class="bg-[#050b18] border border-primary/20 p-8 rounded-lg space-y-6 text-on-surface shadow-2xl font-serif">
+<!-- Header -->
+<div class="border-b-2 border-primary pb-4 flex justify-between items-center font-sans">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">shield</span>
+<h2 class="font-headline-md text-xl font-bold text-primary tracking-wide">SANDSHIELD AI ENFORCEMENT CELL</h2>
+</div>
+<p class="font-data-mono text-xs text-on-surface-variant mt-1">STATE ENVIRONMENT TASK FORCE | MINISTRY OF ENVIRONMENT & FORESTS</p>
+</div>
+<div class="text-right font-data-mono text-xs text-on-surface-variant space-y-0.5">
+<div id="dossier-id" class="text-primary font-bold">DOSSIER ID: DOS-2026-BHV-9942</div>
+<div>DATE: 2026-08-01</div>
+<div>STATUS: CERTIFIED</div>
+</div>
+</div>
+
+<!-- Section 1 -->
+<div class="space-y-2 font-sans">
+<h4 class="font-label-caps text-xs font-bold text-primary uppercase">SECTION 1: TARGET INCIDENT SUMMARY</h4>
+<div class="font-data-mono text-xs bg-surface-container-low p-4 rounded border border-outline-variant/30 space-y-1.5">
+<div><strong class="text-on-surface-variant">Location Target:</strong> Bhavani River Basin - Sector 4B (11.3412° N, 77.7172° E)</div>
+<div><strong class="text-on-surface-variant">Composite Risk Rating:</strong> <span class="text-error font-bold">93% CRITICAL HIGH</span></div>
+<div><strong class="text-on-surface-variant">Multispectral Fusion Confidence:</strong> 96.4% Verified by ISRO-SAT 2A</div>
+<div><strong class="text-on-surface-variant">Detected Activity:</strong> Heavy Machinery Dredging & Unlicensed Sand Extraction</div>
+</div>
+</div>
+
+<!-- Section 2 -->
+<div class="space-y-2 font-sans">
+<h4 class="font-label-caps text-xs font-bold text-primary uppercase">SECTION 2: MULTI-SENSOR VISUAL EVIDENCE MATRIX</h4>
+<div class="grid grid-cols-3 gap-3 text-center font-data-mono text-xs">
+<div class="bg-surface-container-low p-3 rounded border border-outline-variant/30">
+<div class="font-bold text-primary mb-1">SATELLITE CHANGE</div>
+<div class="text-on-surface-variant text-[11px]">85% Surface Shift Delta</div>
+<div class="text-xs text-primary mt-1">PASSED</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded border border-outline-variant/30">
+<div class="font-bold text-error mb-1">DRONE FLIR RECON</div>
+<div class="text-on-surface-variant text-[11px]">CAT 320 Excavator Match</div>
+<div class="text-xs text-error mt-1">CONFIRMED</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded border border-outline-variant/30">
+<div class="font-bold text-secondary mb-1">ANPR TOLLGATE LOG</div>
+<div class="text-on-surface-variant text-[11px]">Plate TN52 AB4321 (15 Trips)</div>
+<div class="text-xs text-secondary mt-1">FLAGGED</div>
+</div>
+</div>
+</div>
+
+<!-- Section 3 -->
+<div class="pt-4 border-t border-outline-variant/30 flex justify-between items-end font-sans">
+<div class="space-y-1 max-w-md">
+<h4 class="font-label-caps text-xs font-bold text-primary uppercase">SECTION 3: RECOMMENDED LEGAL ACTION</h4>
+<p class="font-body-md text-xs text-on-surface-variant">
+Immediate impoundment of machinery under Section 21 of Mines & Minerals (Development and Regulation) Act. File FIR against site lease holder.
+</p>
+</div>
+<div class="text-right font-data-mono text-xs space-y-1">
+<div class="text-primary font-bold">INSPECTOR GENERAL R. SHARMA</div>
+<div class="text-on-surface-variant text-[10px]">[DIGITALLY SIGNED & STAMPED]</div>
+<div class="text-primary/70 text-[10px]">HASH: 0x8f92a3c4e5b610d9</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</main>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-surface-container-highest border border-primary text-on-surface px-4 py-3 rounded-lg shadow-2xl font-data-mono text-xs flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span id="toast-msg">Operation completed</span>
+</div>
+
+
+
+  <script src="/stitch_app.js"></script>
+</body>
+</html>

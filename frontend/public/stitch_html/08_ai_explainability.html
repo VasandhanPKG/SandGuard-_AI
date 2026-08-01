@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SandShield AI - Explainability Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#c3f5ff",
+                      "inverse-primary": "#006875",
+                      "secondary": "#7bd0ff",
+                      "inverse-on-surface": "#282f49",
+                      "secondary-container": "#00a6e0",
+                      "surface-variant": "#2c344d",
+                      "tertiary-container": "#ccccff",
+                      "on-tertiary": "#1000a9",
+                      "on-secondary-fixed": "#001e2c",
+                      "primary-fixed-dim": "#00daf3",
+                      "on-primary": "#00363d",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "surface-dim": "#0a122a",
+                      "secondary-fixed": "#c4e7ff",
+                      "on-secondary-container": "#00374d",
+                      "surface-container-lowest": "#050d25",
+                      "outline-variant": "#3b494c",
+                      "surface-container-highest": "#2c344d",
+                      "outline": "#849396",
+                      "surface-container": "#171e37",
+                      "on-primary-container": "#00626e",
+                      "on-background": "#dbe1ff",
+                      "primary-fixed": "#9cf0ff",
+                      "surface-tint": "#00daf3",
+                      "on-tertiary-fixed": "#07006c",
+                      "on-error": "#690005",
+                      "surface-container-low": "#131a33",
+                      "on-surface": "#dbe1ff",
+                      "surface-bright": "#313852",
+                      "tertiary-fixed-dim": "#c0c1ff",
+                      "inverse-surface": "#dbe1ff",
+                      "primary-container": "#00e5ff",
+                      "on-secondary-fixed-variant": "#004c69",
+                      "background": "#0a122a",
+                      "tertiary-fixed": "#e1e0ff",
+                      "surface-container-high": "#212942",
+                      "on-tertiary-fixed-variant": "#2f2ebe",
+                      "on-primary-fixed-variant": "#004f58",
+                      "on-secondary": "#00354a",
+                      "surface": "#0a122a",
+                      "on-tertiary-container": "#4344d1",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#bac9cc",
+                      "tertiary": "#edeaff",
+                      "on-primary-fixed": "#001f24",
+                      "secondary-fixed-dim": "#7bd0ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "panel-padding": "20px",
+                      "unit": "4px",
+                      "container-margin": "24px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "data-mono": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0B132B;
+        }
+        
+        .glass-card {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid transparent;
+            background-image: linear-gradient(rgba(28, 37, 65, 0.6), rgba(28, 37, 65, 0.6)), linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .glass-card-active {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.05);
+        }
+
+        .btn-primary {
+            background-color: #00E5FF;
+            color: #0B132B;
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #38BDF8;
+            color: #38BDF8;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+
+        .tech-badge {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-left: 2px solid #38BDF8;
+        }
+
+        .pulse-indicator {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
+        }
+
+        .shimmer-line {
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00E5FF, transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { left: 200%; }
+        }
+
+        /* Custom Scrollbar for inner components */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(11, 19, 43, 0.5); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3); 
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.6); 
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Background Grid/Glow -->
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-20" style="background-image: radial-gradient(circle at 50% 0%, rgba(0,229,255,0.15) 0%, transparent 60%);"></div>
+<div class="fixed inset-0 z-[-1] pointer-events-none" style="background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);"></div>
+<!-- TopAppBar -->
+<header class="bg-surface-dim/80 backdrop-blur-xl text-primary font-headline-md text-headline-md fixed top-0 w-full z-50 border-b border-outline-variant/20 shadow-sm flex justify-between items-center px-panel-padding h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-display-lg text-primary tracking-tighter text-3xl font-bold">SANDSHIELD AI</span>
+</div>
+<nav class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-label-caps">
+<a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95 duration-150" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95 duration-150" href="#">Incidents</a>
+<a class="text-primary border-b-2 border-primary pb-1 active:scale-95 duration-150" href="#">Audit Logs</a>
+<a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95 duration-150" href="#">Governance</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+</button>
+<img alt="Operator Avatar" class="w-8 h-8 rounded-full border border-primary/30 object-cover" data-alt="A futuristic UI operator avatar placeholder showing a stylized, glowing geometric silhouette of a person in high-tech military gear against a dark navy background. The style is sharp, sleek, and minimalist, emphasizing security and technical proficiency in a command center setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH5PKiLdgaFr6WBL7_m-zxaiyrUFZtquivk21ZRItD9zIJ9svnNwVUa01T79ChW8a_XwCuYV3F3BroxSLx8f2KjsoSMm1ltmY_3qrIbPV_N7rKhtzlOw1V5Z7WIKbfpVWKeIK0Wm8R021ZPRlK1-L_3a_zhSzQ5teKsRnleudbqBqjIHT9jt2HTThwYlOCCRMPovm5E4CQFGW2nBhKqNOhXxbQ6fWYDb8SPAEVYdDHgHQCJOCUt9zIBGKRnZI5bse2LMQOxa0tuxH-"/>
+</div>
+</header>
+<!-- SideNavBar & Main Content Wrapper -->
+<div class="flex pt-16 h-screen w-full">
+<!-- SideNavBar -->
+<aside class="hidden md:flex bg-surface-container-low/60 backdrop-blur-lg text-primary font-label-caps text-label-caps fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-outline-variant/10 shadow-none flex-col py-gutter z-40">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center border border-primary/20 relative">
+<span class="material-symbols-outlined text-primary pulse-indicator absolute">radar</span>
+</div>
+<div>
+<h2 class="font-headline-md text-[16px] text-primary leading-tight">STRAT-DEF 01</h2>
+<p class="text-[10px] text-on-surface-variant opacity-70">XAI Governance Node</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2 w-full">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/30 px-4 py-3 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">security</span>
+<span>Command</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/30 px-4 py-3 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">radar</span>
+<span>Sensors</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container/20 text-primary border-l-4 border-primary px-4 py-3 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Explainability</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/30 px-4 py-3 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Policy</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/30 px-4 py-3 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">fact_check</span>
+<span>Compliance</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/30 px-4 py-3 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+<span>Archive</span>
+</a>
+</nav>
+<div class="px-4 mt-auto mb-4">
+<button class="w-full btn-primary font-label-caps py-2 rounded text-xs flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">description</span>
+                    Generate Report
+                </button>
+</div>
+<div class="mt-4 border-t border-outline-variant/10 pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/30 px-4 py-2 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1 text-[11px]" href="#">
+<span class="material-symbols-outlined text-[16px]">help_outline</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/30 px-4 py-2 hover:bg-surface-container-high transition-all cursor-pointer active:translate-x-1 text-[11px]" href="#">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>Logs</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 p-container-margin md:p-8 overflow-y-auto w-full">
+<div class="max-w-7xl mx-auto space-y-6 pb-24">
+<!-- Target Incident Header -->
+<header class="glass-card rounded-lg p-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 relative overflow-hidden">
+<div class="shimmer-line"></div>
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-error">warning</span>
+<h1 class="font-headline-lg text-headline-lg text-white">ALT-9942</h1>
+<span class="font-data-mono text-on-surface-variant text-sm">| Bhavani River Sector 4B</span>
+</div>
+<div class="flex flex-wrap items-center gap-3 mt-3">
+<div class="tech-badge px-3 py-1 font-data-mono text-[11px] text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                                SHAP Audited
+                            </div>
+<div class="tech-badge px-3 py-1 font-data-mono text-[11px] text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">policy</span>
+                                XAI Compliant
+                            </div>
+<div class="tech-badge px-3 py-1 font-data-mono text-[11px] text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">analytics</span>
+                                99.2% Confidence
+                            </div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs font-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Final Risk Score</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-5xl font-bold text-error">93%</span>
+<span class="font-label-caps text-error bg-error/10 px-2 py-1 rounded border border-error/20">HIGH CRITICAL</span>
+</div>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column (Weights & Narrative) -->
+<div class="lg:col-span-1 space-y-6">
+<!-- AI Reasoning Narrative -->
+<div class="glass-card-active rounded-lg p-6 relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent opacity-50"></div>
+<h3 class="font-headline-md text-lg text-primary flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+                                AI Reasoning Narrative
+                            </h3>
+<p class="font-body-md text-on-surface/90 leading-relaxed text-sm">
+                                High risk assigned due to active excavation patterns, repeated truck movement exceeding baseline by <span class="text-error font-data-mono font-bold">650%</span>, and structural river morphology changes verified across Sentinel-2 satellite passes.
+                            </p>
+</div>
+<!-- Multi-Sensor Weight Breakdown -->
+<div class="glass-card rounded-lg p-6">
+<h3 class="font-label-caps text-on-surface-variant uppercase tracking-widest mb-6 border-b border-outline-variant/30 pb-2">Multi-Sensor Weight Breakdown</h3>
+<div class="space-y-5">
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-data-mono">
+<span class="text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">satellite_alt</span> Satellite Evidence</span>
+<span>30%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 30%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-data-mono">
+<span class="text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">flight</span> Drone Aerial Evidence</span>
+<span>25%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 25%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-data-mono">
+<span class="text-tertiary-container flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">directions_car</span> ANPR Vehicle Anomaly</span>
+<span>20%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full" style="width: 20%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-data-mono">
+<span class="text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">eco</span> Environmental Impact</span>
+<span>15%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full" style="width: 15%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-data-mono">
+<span class="text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">history</span> Historical Violations</span>
+<span>10%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (SHAP Waterfall) -->
+<div class="lg:col-span-2">
+<div class="glass-card rounded-lg p-6 h-full flex flex-col">
+<div class="flex justify-between items-center mb-8 border-b border-outline-variant/30 pb-4">
+<div>
+<h3 class="font-headline-md text-lg text-white mb-1">SHAP Feature Importance</h3>
+<p class="font-data-mono text-xs text-on-surface-variant">Base Score: 0.03 → Output: 0.93</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">waterfall_chart</span>
+</div>
+<!-- Waterfall Chart Visualization -->
+<div class="flex-1 relative font-data-mono text-sm py-4">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex justify-between px-32 pointer-events-none opacity-10">
+<div class="w-px h-full bg-white"></div>
+<div class="w-px h-full bg-white"></div>
+<div class="w-px h-full bg-white"></div>
+<div class="w-px h-full bg-white"></div>
+</div>
+<div class="space-y-6 relative z-10 pl-[220px]">
+<!-- Feature 1 -->
+<div class="relative flex items-center h-8">
+<div class="absolute left-[-220px] w-[200px] text-right text-xs text-on-surface pr-4 truncate" title="Heavy Excavator Drone Detection">Heavy Excavator Drone Det...</div>
+<div class="h-6 bg-error flex items-center justify-end px-2 text-[10px] text-white font-bold ml-0" style="width: 28%;">+0.28</div>
+<!-- Connect line to next -->
+<div class="absolute w-px h-6 bg-outline-variant/50 -bottom-6" style="left: 28%;"></div>
+</div>
+<!-- Feature 2 -->
+<div class="relative flex items-center h-8">
+<div class="absolute left-[-220px] w-[200px] text-right text-xs text-on-surface pr-4 truncate" title="15 ANPR Dump Truck Trips">15 ANPR Dump Truck Trips</div>
+<div class="h-6 bg-error flex items-center justify-end px-2 text-[10px] text-white font-bold" style="margin-left: 28%; width: 24%;">+0.24</div>
+<!-- Connect line to next -->
+<div class="absolute w-px h-6 bg-outline-variant/50 -bottom-6" style="left: calc(28% + 24%);"></div>
+</div>
+<!-- Feature 3 -->
+<div class="relative flex items-center h-8">
+<div class="absolute left-[-220px] w-[200px] text-right text-xs text-on-surface pr-4 truncate" title="Riverbank Morphology Shift">Riverbank Morphology Shift</div>
+<div class="h-6 bg-error flex items-center justify-end px-2 text-[10px] text-white font-bold" style="margin-left: calc(28% + 24%); width: 18%;">+0.18</div>
+<!-- Connect line to next -->
+<div class="absolute w-px h-6 bg-outline-variant/50 -bottom-6" style="left: calc(28% + 24% + 18%);"></div>
+</div>
+<!-- Feature 4 -->
+<div class="relative flex items-center h-8">
+<div class="absolute left-[-220px] w-[200px] text-right text-xs text-on-surface pr-4 truncate" title="Vegetation Loss Index">Vegetation Loss Index</div>
+<div class="h-6 bg-error flex items-center justify-end px-2 text-[10px] text-white font-bold" style="margin-left: calc(28% + 24% + 18%); width: 12%;">+0.12</div>
+<!-- Connect line to next -->
+<div class="absolute w-px h-6 bg-outline-variant/50 -bottom-6" style="left: calc(28% + 24% + 18% + 12%);"></div>
+</div>
+<!-- Feature 5 -->
+<div class="relative flex items-center h-8">
+<div class="absolute left-[-220px] w-[200px] text-right text-xs text-on-surface pr-4 truncate" title="Location Past Violation History">Location Past Violations</div>
+<div class="h-6 bg-error flex items-center justify-end px-2 text-[10px] text-white font-bold" style="margin-left: calc(28% + 24% + 18% + 12%); width: 8%;">+0.08</div>
+<!-- Final line down to total -->
+<div class="absolute w-px h-6 bg-outline-variant/50 -bottom-6" style="left: calc(28% + 24% + 18% + 12% + 8%);"></div>
+</div>
+<!-- Total Output -->
+<div class="relative flex items-center h-10 mt-6 border-t border-outline-variant/30 pt-4">
+<div class="absolute left-[-220px] w-[200px] text-right text-xs font-bold text-white pr-4">Final Prediction f(x)</div>
+<div class="h-8 bg-surface-bright border border-error/50 flex items-center justify-center text-sm text-error font-bold w-full" style="margin-left: 0;">0.93</div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between text-xs text-on-surface-variant font-data-mono">
+<span>Low Risk (0.0)</span>
+<span>High Risk (1.0)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="glass-card rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center gap-4 border-t-2 border-primary">
+<div class="flex flex-wrap gap-3 w-full sm:w-auto">
+<button class="btn-secondary font-label-caps px-4 py-2 rounded text-xs flex items-center gap-2 w-full sm:w-auto justify-center">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+                            Export XAI Evidence Certificate (PDF)
+                        </button>
+<button class="btn-secondary font-label-caps px-4 py-2 rounded text-xs flex items-center gap-2 w-full sm:w-auto justify-center">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+                            Verify Sensor Raw Logs
+                        </button>
+</div>
+<button class="btn-primary font-label-caps px-6 py-3 rounded text-sm font-bold flex items-center gap-2 w-full sm:w-auto justify-center shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+                        Approve Prosecutorial Dossier
+                    </button>
+</div>
+</div>
+</main>
+</div>
+
+  
+  
+  <script src="/stitch_app.js"></script>
+</body></html>

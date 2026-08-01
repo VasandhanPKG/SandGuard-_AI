@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SandShield AI - Environmental Intelligence Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#c4e7ff",
+                      "on-secondary-fixed-variant": "#004c69",
+                      "secondary": "#7bd0ff",
+                      "on-surface": "#dbe1ff",
+                      "inverse-surface": "#dbe1ff",
+                      "secondary-container": "#00a6e0",
+                      "primary": "#c3f5ff",
+                      "outline": "#849396",
+                      "on-primary-fixed": "#001f24",
+                      "surface-dim": "#0a122a",
+                      "primary-container": "#00e5ff",
+                      "on-primary": "#00363d",
+                      "inverse-primary": "#006875",
+                      "surface-container-low": "#131a33",
+                      "surface-container-high": "#212942",
+                      "surface-bright": "#313852",
+                      "surface": "#0a122a",
+                      "on-surface-variant": "#bac9cc",
+                      "tertiary-container": "#ccccff",
+                      "outline-variant": "#3b494c",
+                      "on-secondary": "#00354a",
+                      "tertiary-fixed": "#e1e0ff",
+                      "on-tertiary-fixed-variant": "#2f2ebe",
+                      "on-error": "#690005",
+                      "surface-tint": "#00daf3",
+                      "on-error-container": "#ffdad6",
+                      "surface-variant": "#2c344d",
+                      "surface-container-highest": "#2c344d",
+                      "error-container": "#93000a",
+                      "primary-fixed": "#9cf0ff",
+                      "tertiary-fixed-dim": "#c0c1ff",
+                      "background": "#0a122a",
+                      "on-tertiary-container": "#4344d1",
+                      "on-secondary-container": "#00374d",
+                      "tertiary": "#edeaff",
+                      "secondary-fixed-dim": "#7bd0ff",
+                      "on-tertiary-fixed": "#07006c",
+                      "on-secondary-fixed": "#001e2c",
+                      "on-primary-container": "#00626e",
+                      "inverse-on-surface": "#282f49",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#00daf3",
+                      "on-tertiary": "#1000a9",
+                      "surface-container": "#171e37",
+                      "on-background": "#dbe1ff",
+                      "surface-container-lowest": "#050d25",
+                      "on-primary-fixed-variant": "#004f58"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "panel-padding": "20px",
+                      "unit": "4px",
+                      "gutter": "16px",
+                      "container-margin": "24px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-mono": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #0B132B;
+            color: #dbe1ff;
+            overflow: hidden; /* Full screen map vibe */
+        }
+        
+        .glass-panel {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-image: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        }
+        
+        .glass-panel-active {
+            background: rgba(28, 37, 65, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.05);
+        }
+
+        .tech-badge {
+            background: rgba(0, 229, 255, 0.1);
+            border-left: 2px solid #00E5FF;
+        }
+
+        .pulse-reticle {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                box-shadow: 0 0 0 0 rgba(255, 50, 50, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 20px rgba(255, 50, 50, 0);
+            }
+            100% {
+                transform: scale(0.8);
+                box-shadow: 0 0 0 0 rgba(255, 50, 50, 0);
+            }
+        }
+        
+        .grid-bg {
+            background-image: linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        /* Custom Checkbox */
+        .tech-checkbox:checked {
+            background-color: #00E5FF;
+            border-color: #00E5FF;
+        }
+        .tech-checkbox:focus {
+            box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2);
+        }
+        
+        /* Progress Bar Animation */
+        .progress-fill {
+            transition: width 1s ease-out;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col font-body-md text-body-md selection:bg-primary/30">
+<!-- Top Navigation Bar (Predicted Component) -->
+<nav class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 border-b border-outline-variant/20 bg-surface-container-low/60 backdrop-blur-xl shadow-sm flex justify-between items-center px-container-margin z-50 transition-all duration-300 hidden md:flex">
+<!-- Search Bar (on_left) -->
+<div class="flex items-center w-1/3">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-dim border border-outline-variant/30 rounded-DEFAULT py-1.5 pl-10 pr-4 text-data-mono font-data-mono text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all shadow-inner" placeholder="Search coordinates, sites, officers..." type="text"/>
+</div>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button aria-label="Satellite Status" class="text-on-surface-variant hover:text-primary-container transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">satellite</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary-container rounded-full animate-pulse"></span>
+</button>
+<button aria-label="Sensors" class="text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">sensors</span>
+</button>
+<button aria-label="Live Video Feeds" class="text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+</button>
+</div>
+<button class="bg-primary-container/10 text-primary-container border border-primary-container/30 px-4 py-1.5 rounded-DEFAULT font-label-caps text-label-caps tracking-wider hover:bg-primary-container/20 hover:shadow-[0_0_12px_rgba(0,229,255,0.2)] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">security</span>
+                SYSTEM SECURE
+            </button>
+<div class="h-8 w-px bg-outline-variant/30"></div>
+<button class="flex items-center gap-3 group focus:outline-none focus:ring-1 focus:ring-primary focus:ring-opacity-50 rounded-DEFAULT p-1">
+<div class="text-right hidden lg:block">
+<p class="font-data-mono text-data-mono text-on-surface">Inspector General R. Sharma</p>
+<p class="font-label-caps text-[10px] text-primary/70 tracking-widest uppercase">Command clearance level 5</p>
+</div>
+<div class="w-9 h-9 rounded-DEFAULT overflow-hidden border border-outline-variant group-hover:border-primary/50 transition-colors bg-surface-dim flex items-center justify-center">
+<img alt="Inspector General R. Sharma" class="w-full h-full object-cover" data-alt="A highly detailed, professional headshot of a mature Indian military officer in a dark, high-tech command center environment. The lighting is dramatic, with cool cyan rim lights reflecting off a dark, formal uniform. The mood is serious, vigilant, and authoritative, matching a dark-mode cyberpunk or military tactical UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm6729TNUxCpA5eiE6itT-Yq1W-olFnbOdNH2HjZ-_DfWivq_rXou5jfPfIodrQ9qIyv20G7dMbuxGO8C_Ht3DKGIg4BTO8h8RpNm4xlZYWSnLhtvJe_3ciEaYYgM0nnl8Yl1v3q0V7Z0knpXU7EVMe0rqUgqChOx6NuAmg2TBQLPwFuYF35Ojn8qSJW9VJDCigQbb_bT6dCRHYRm7cGP7w-vCLLuN9x5eN8yyEQPrLm2vvBIQuWiXfP-HWJrlrQNYBajRQwyqWJxt"/>
+</div>
+</button>
+</div>
+</nav>
+<!-- Side Navigation Bar (Predicted Component) -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] border-r border-outline-variant/20 bg-surface-container-lowest/60 backdrop-blur-xl shadow-sm flex flex-col py-panel-padding z-50 transition-all duration-300 transform md:translate-x-0 -translate-x-full">
+<!-- Brand Header -->
+<div class="px-container-margin mb-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-DEFAULT flex-shrink-0 flex items-center justify-center bg-surface-dim border border-outline-variant/30 overflow-hidden shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+<img alt="SandShield AI Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtlIpcy1atGiep7p6en4gOZtpH-uFCnHmzVvCK7J2z7xuAkxxbh0E0QfmYR71r67hxCtdwDfs4GWtfzEf_EpoXGZxmGl0KzkdLJTti0kueXPIFY8pDYx22MvWA6I1vADxEVbuhScpyuGgY8G2S4EPYoExCyG_igbfz3vF_oGHTKKqOo2pionw0dzp6ErL_iDrq9vaYcH3KEXK70tXgSDji-aQE6hh5FEWLBor8yumXXM9pEc39ZWsyu1FCd"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim tracking-tight">SandShield AI</h1>
+<p class="font-label-caps text-[10px] text-on-surface-variant tracking-widest uppercase mt-0.5">Vigilance System</p>
+</div>
+</div>
+<!-- Main Navigation -->
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-primary dark:text-primary-fixed-dim border-l-2 border-primary bg-primary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps text-label-caps tracking-wide">Command Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">satellite_alt</span>
+<span class="font-label-caps text-label-caps tracking-wide">Satellite Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">precision_manufacturing</span>
+<span class="font-label-caps text-label-caps tracking-wide">Drone Monitoring</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="font-label-caps text-label-caps tracking-wide">AI Prediction</span>
+</a>
+</nav>
+<!-- CTA & Footer Nav -->
+<div class="px-container-margin mt-auto space-y-6">
+<button class="w-full bg-error-container/20 text-error border border-error/50 py-2.5 rounded-DEFAULT font-label-caps text-label-caps tracking-wider hover:bg-error-container/40 hover:shadow-[0_0_15px_rgba(255,180,171,0.2)] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                EMERGENCY OVERRIDE
+            </button>
+<div class="h-px bg-outline-variant/30 w-full"></div>
+<nav class="space-y-1 -mx-3">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span class="font-label-caps text-[11px] tracking-wide">System Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">admin_panel_settings</span>
+<span class="font-label-caps text-[11px] tracking-wide">Security Logs</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Viewport Canvas (Canvas Area) -->
+<main class="flex-1 relative w-full h-full md:pl-[280px] md:pt-16">
+<!-- Map Background (Underlying layer) -->
+<div class="absolute inset-0 z-0 bg-surface-dim">
+<div class="w-full h-full bg-cover bg-center opacity-40 mix-blend-luminosity" style="background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLscqR7_I7jP0rFPtdGheyr3wURyHoExNXasGC0WNdQ2tHqORP2tU1JTWadQl9VV3Tv55DigqjVrOcyeF7iA-LT8XIkWb5g9RJzj31S6-n1KDs9d8-wAmMlOc045xE1l5dxLwOzgexGnGBf5vWA_DC5grRyZyBWItWRcXiun4K2K8-jFvyzN8vFv43i4WEUtqTyPR4E7m8nuaTnodX0de7RcIoNmtIN6SFiO9jfTClESrEgKtJf8Wv6587Hc')"></div>
+<!-- Overlay Grid for tech aesthetic -->
+<div class="absolute inset-0 grid-bg opacity-30"></div>
+<!-- Vignette effect to focus on center -->
+<div class="absolute inset-0 bg-radial-gradient from-transparent via-surface-lowest/50 to-surface-lowest/90"></div>
+</div>
+<!-- Target Reticle & Hotspot Marker -->
+<div class="absolute top-[45%] left-[40%] z-10 flex flex-col items-center transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<!-- Pulsing elements -->
+<div class="absolute inset-0 border-2 border-error/80 rounded-full pulse-reticle"></div>
+<div class="absolute inset-2 border border-error/50 rounded-full"></div>
+<!-- Crosshairs -->
+<div class="absolute w-full h-[1px] bg-error/70"></div>
+<div class="absolute h-full w-[1px] bg-error/70"></div>
+<!-- Center dot -->
+<div class="w-2 h-2 bg-error rounded-full shadow-[0_0_10px_rgba(255,180,171,0.8)]"></div>
+</div>
+<!-- Label -->
+<div class="mt-4 glass-panel border-error/30 px-3 py-1.5 rounded-DEFAULT backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[14px]">warning</span>
+<span class="font-label-caps text-error text-label-caps tracking-widest">Hotspot Delta-7</span>
+</div>
+</div>
+<!-- Connection Line to Sidebar (Decorative SVGs) -->
+<svg class="absolute top-8 left-8 w-64 h-32 text-error/40 overflow-visible" style="pointer-events: none;">
+<path d="M 0 0 L 80 40 L 250 40" fill="none" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1.5"></path>
+<circle cx="250" cy="40" fill="currentColor" r="3"></circle>
+</svg>
+</div>
+<!-- Floating Controls Area (Safe Zone padding) -->
+<div class="relative z-20 w-full h-full p-6 md:p-10 flex justify-between items-start pointer-events-none">
+<!-- Left Side: Layer Controls -->
+<div class="glass-panel rounded-lg p-5 w-80 pointer-events-auto flex flex-col gap-4">
+<div class="flex items-center gap-3 border-b border-outline-variant/30 pb-3">
+<span class="material-symbols-outlined text-primary text-[20px]">layers</span>
+<h2 class="font-headline-md text-[16px] font-semibold text-primary tracking-wide">MAP LAYERS</h2>
+</div>
+<div class="space-y-3 font-data-mono text-[13px] text-on-surface-variant">
+<!-- Layer Item 1 -->
+<label class="flex items-start gap-3 cursor-pointer group">
+<input checked="" class="tech-checkbox w-4 h-4 mt-0.5 rounded-sm border-outline-variant/50 bg-surface-dim/50 text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="group-hover:text-primary-fixed-dim transition-colors">High-Res Satellite Imagery</span>
+</label>
+<!-- Layer Item 2 -->
+<label class="flex items-start gap-3 cursor-pointer group">
+<input checked="" class="tech-checkbox w-4 h-4 mt-0.5 rounded-sm border-outline-variant/50 bg-surface-dim/50 text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="group-hover:text-primary-fixed-dim transition-colors">Drone Live Video Layers</span>
+</label>
+<!-- Layer Item 3 -->
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="tech-checkbox w-4 h-4 mt-0.5 rounded-sm border-outline-variant/50 bg-surface-dim/50 text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="group-hover:text-primary-fixed-dim transition-colors">ANPR Road Camera Nodes</span>
+</label>
+<!-- Layer Item 4 -->
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="tech-checkbox w-4 h-4 mt-0.5 rounded-sm border-outline-variant/50 bg-surface-dim/50 text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="group-hover:text-primary-fixed-dim transition-colors">Auth. Sand Mining Leases</span>
+</label>
+<!-- Layer Item 5 -->
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="tech-checkbox w-4 h-4 mt-0.5 rounded-sm border-outline-variant/50 bg-surface-dim/50 text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="group-hover:text-primary-fixed-dim transition-colors">River Bank Protection Zones</span>
+</label>
+<!-- Layer Item 6 -->
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="tech-checkbox w-4 h-4 mt-0.5 rounded-sm border-outline-variant/50 bg-surface-dim/50 text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="group-hover:text-primary-fixed-dim transition-colors">Env. Impact Risk Heatmap</span>
+</label>
+</div>
+</div>
+<!-- Right Side: Intelligence Overlay -->
+<div class="glass-panel-active rounded-lg w-96 flex flex-col pointer-events-auto h-auto max-h-[calc(100vh-140px)] overflow-y-auto custom-scrollbar shadow-xl shadow-surface-lowest/50">
+<!-- Header -->
+<div class="p-5 border-b border-primary/20 bg-primary/5 flex flex-col gap-2 relative overflow-hidden">
+<!-- Subtle scanline bg effect -->
+<div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,229,255,0.05)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+<h3 class="font-label-caps text-label-caps tracking-widest text-error">SUSPICIOUS ZONE INTELLIGENCE</h3>
+</div>
+<h2 class="font-headline-lg text-[24px] font-bold text-on-surface mt-1">DELTA-7</h2>
+<div class="tech-badge px-3 py-2 mt-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">pin_drop</span>
+<span class="font-data-mono text-[12px] text-primary/90">Lat 11.3412° N, Lng 77.7172° E<br/><span class="text-on-surface-variant/70 text-[10px]">(Bhavani River Basin)</span></span>
+</div>
+</div>
+<!-- Content Body -->
+<div class="p-5 flex flex-col gap-6">
+<!-- Risk Score -->
+<div class="bg-surface-dim border border-error/30 rounded-lg p-4 flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-error/5 group-hover:bg-error/10 transition-colors"></div>
+<span class="font-display-lg text-[42px] font-bold text-error drop-shadow-[0_0_8px_rgba(255,180,171,0.5)]">93%</span>
+<span class="font-label-caps text-[12px] text-error/80 tracking-widest mt-1">HIGH CRITICAL RISK</span>
+</div>
+<!-- AI Metrics -->
+<div class="space-y-4">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant tracking-widest flex items-center gap-2 border-b border-outline-variant/30 pb-2">
+<span class="material-symbols-outlined text-[14px]">analytics</span>
+                            AI DETECTION METRICS
+                        </h4>
+<!-- Metric 1 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-end font-data-mono text-[12px]">
+<span class="text-on-surface">Satellite Change Index</span>
+<span class="text-secondary">85%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-secondary progress-fill" style="width: 85%"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-end font-data-mono text-[12px]">
+<span class="text-on-surface">Drone Recon. Detection</span>
+<span class="text-error">92%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-error progress-fill" style="width: 92%"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-end font-data-mono text-[12px]">
+<span class="text-on-surface">ANPR Vehicle Anomaly</span>
+<span class="text-secondary">88%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-secondary progress-fill" style="width: 88%"></div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-end font-data-mono text-[12px]">
+<span class="text-on-surface">Riverbank Veg. Loss</span>
+<span class="text-outline">40%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-outline progress-fill" style="width: 40%"></div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-3 pt-2 border-t border-outline-variant/30">
+<button class="w-full bg-primary-container text-on-primary py-2.5 rounded-DEFAULT font-label-caps text-label-caps tracking-widest hover:bg-primary hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">summarize</span>
+                            GENERATE REPORT
+                        </button>
+<button class="w-full bg-[#f97316] text-[#fff8f1] py-2.5 rounded-DEFAULT font-label-caps text-label-caps tracking-widest hover:bg-[#fb923c] hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">person_alert</span>
+                            ASSIGN FIELD OFFICER
+                        </button>
+<button class="w-full bg-transparent border border-primary/50 text-primary py-2.5 rounded-DEFAULT font-label-caps text-[11px] tracking-widest hover:bg-primary/10 hover:shadow-[0_0_12px_rgba(0,229,255,0.2)] transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                            VIEW HISTORICAL TIMELINE
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Telemetry Bar -->
+<div class="absolute bottom-0 left-0 w-full h-10 border-t border-outline-variant/20 bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-between px-6 z-30 font-data-mono text-[11px] text-on-surface-variant">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-primary/50">straighten</span>
+                    Scale: 1:25,000
+                </span>
+<div class="w-px h-4 bg-outline-variant/50"></div>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-primary/50">explore</span>
+                    Cursor: <span class="text-primary-fixed-dim">11.3450° N, 77.7120° E</span>
+</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-secondary">satellite</span>
+                    Sat Pass: Sentinel-2A (14m ago)
+                </span>
+<div class="w-px h-4 bg-outline-variant/50"></div>
+<span class="flex items-center gap-2 text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                    SYS: OPTIMAL
+                </span>
+</div>
+</div>
+</main>
+
+  
+  
+  <script src="/stitch_app.js"></script>
+</body></html>

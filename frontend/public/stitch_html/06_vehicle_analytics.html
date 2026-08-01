@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vehicle &amp; Tollgate Analytics - SandShield AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#dbe1ff",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "primary-fixed-dim": "#00daf3",
+                        "inverse-primary": "#006875",
+                        "background": "#0a122a",
+                        "surface-dim": "#0a122a",
+                        "outline-variant": "#3b494c",
+                        "surface-container": "#171e37",
+                        "primary": "#c3f5ff",
+                        "outline": "#849396",
+                        "on-primary-fixed-variant": "#004f58",
+                        "surface-tint": "#00daf3",
+                        "surface-container-lowest": "#050d25",
+                        "on-secondary": "#00354a",
+                        "on-primary-container": "#00626e",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#001e2c",
+                        "surface-container-high": "#212942",
+                        "surface-bright": "#313852",
+                        "inverse-surface": "#dbe1ff",
+                        "secondary-fixed": "#c4e7ff",
+                        "inverse-on-surface": "#282f49",
+                        "tertiary": "#edeaff",
+                        "on-tertiary-container": "#4344d1",
+                        "secondary": "#7bd0ff",
+                        "surface": "#0a122a",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#7bd0ff",
+                        "on-tertiary-fixed": "#07006c",
+                        "on-primary-fixed": "#001f24",
+                        "primary-fixed": "#9cf0ff",
+                        "primary-container": "#00e5ff",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "tertiary-fixed": "#e1e0ff",
+                        "on-surface": "#dbe1ff",
+                        "surface-container-highest": "#2c344d",
+                        "surface-container-low": "#131a33",
+                        "on-secondary-container": "#00374d",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "surface-variant": "#2c344d",
+                        "on-tertiary": "#1000a9",
+                        "error-container": "#93000a",
+                        "on-primary": "#00363d",
+                        "secondary-container": "#00a6e0",
+                        "on-surface-variant": "#bac9cc",
+                        "tertiary-container": "#ccccff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "panel-padding": "20px",
+                        "gutter": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0B132B; color: #dbe1ff; }
+        .glass-panel {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid;
+            border-image-source: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-image-slice: 1;
+        }
+        .active-panel {
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 229, 255, 0.5);
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,229,255,0.05)] fixed top-0 w-full z-50 flex justify-between items-center px-panel-padding h-16">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-headline-md font-bold tracking-tighter text-primary">SANDSHIELD AI</span>
+<div class="h-6 w-px bg-white/20 mx-2"></div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Vehicle &amp; Tollgate Analytics</h1>
+</div>
+<div class="flex items-center gap-6 flex-1 justify-end">
+<!-- Controls -->
+<div class="hidden md:flex items-center gap-4">
+<div class="flex items-center bg-surface-container px-3 py-1.5 rounded border border-white/5">
+<span class="material-symbols-outlined text-primary text-sm mr-2" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-xs">Bhavani River Basin Access Gate #03</span>
+</div>
+<div class="flex items-center bg-surface-container px-3 py-1.5 rounded border border-white/5">
+<span class="material-symbols-outlined text-primary text-sm mr-2">calendar_today</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-xs">Last 24 Hours</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container border border-white/10 rounded pl-9 pr-3 py-1.5 font-data-mono text-data-mono text-on-surface text-xs focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-48" placeholder="Search Plate..." type="text"/>
+</div>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-4 text-on-surface-variant font-label-caps text-label-caps">
+<button class="hover:text-primary-fixed-dim transition-colors opacity-80 scale-95 duration-150">
+<span class="material-symbols-outlined">security</span>
+</button>
+<button class="hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+<button class="hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="bg-surface-container-low/60 backdrop-blur-xl border-r border-white/10 fixed left-0 top-16 bottom-0 z-40 flex flex-col w-[280px] hidden md:flex transition-all duration-300 ease-in-out">
+<div class="p-panel-padding border-b border-white/5">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">admin_panel_settings</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-semibold">STRATCOM-01</div>
+<div class="font-data-mono text-data-mono text-primary/80 text-[10px]">System Administrator</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant text-[10px]">Level 5 Clearance</div>
+</div>
+</div>
+<button class="w-full bg-error/10 hover:bg-error/20 text-error border border-error/30 py-2 rounded font-label-caps text-label-caps transition-colors">
+                EMERGENCY LOCKDOWN
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto py-4 font-body-md text-body-md">
+<a class="flex items-center gap-3 px-panel-padding py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Command
+            </a>
+<a class="flex items-center gap-3 px-panel-padding py-3 text-primary bg-primary/10 border-l-4 border-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">visibility</span>
+                Intelligence
+            </a>
+<a class="flex items-center gap-3 px-panel-padding py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">package_2</span>
+                Logistics
+            </a>
+<a class="flex items-center gap-3 px-panel-padding py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">database</span>
+                Archives
+            </a>
+</div>
+<div class="mt-auto border-t border-white/5 p-4 font-data-mono text-data-mono">
+<a class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-[280px] mt-16 p-container-padding flex flex-col gap-6 p-6">
+<!-- Top Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6 h-auto xl:h-[500px]">
+<!-- Left Column: ANPR & Intelligence -->
+<div class="xl:col-span-4 flex flex-col gap-6 h-full">
+<!-- ANPR Feed -->
+<div class="glass-panel active-panel rounded-lg flex flex-col relative overflow-hidden h-1/2">
+<div class="p-3 border-b border-white/10 flex justify-between items-center bg-surface-container/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">videocam</span>
+<span class="font-label-caps text-label-caps text-primary tracking-widest">LIVE ANPR FEED - CAM 04</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+</div>
+<div class="flex-1 relative bg-black">
+<img alt="" class="w-full h-full object-cover opacity-80 mix-blend-screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6WjKonytjq557v0hpLHeYZLYdhywGW_PqKTR2V1KXg3gKbLYiD9T0i181gC2KnER1-ZRyIXuR-L1DhV-X9Uri-fofHvortpMyvJHkFCmmKG4lHs2-ty8gIBF5vc5PIadB0PdvY1Bec_GmmqtuXJy_C_AcL43PjNOLHdf8098IkpgJcWEcH_YFefs71lnItDdpMhcY-tCr7LNZ8QiD-7Cox3k-ATb5CNVCGzMrh7_8fAWLAOL-5jXXBlNmvVRWGGK69CCE6iON1M8m"/>
+<div class="scanline"></div>
+<!-- Overlay UI -->
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div class="bg-surface/80 border border-primary/50 p-2 rounded backdrop-blur-sm">
+<div class="font-data-mono text-data-mono text-xs text-on-surface-variant mb-1">OCR READOUT</div>
+<div class="font-data-mono text-data-mono text-lg text-primary font-bold tracking-widest">TN52 AB4321</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-xs text-on-surface-variant">CONFIDENCE</div>
+<div class="font-data-mono text-data-mono text-sm text-secondary">99.1%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Vehicle Intelligence Card -->
+<div class="glass-panel rounded-lg flex flex-col h-1/2 p-4">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">TN52 AB4321</h3>
+<div class="font-data-mono text-data-mono text-sm text-on-surface-variant">10-Wheeler Tipper • Heavy Vehicle</div>
+</div>
+<div class="bg-error/10 border border-error/30 px-2 py-1 rounded">
+<span class="font-label-caps text-label-caps text-error">FLAGGED</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 flex-1">
+<div class="bg-surface-container/30 border-l-2 border-error p-3 rounded">
+<div class="font-data-mono text-data-mono text-[10px] text-on-surface-variant mb-1">ACTIVITY (24H)</div>
+<div class="font-headline-lg text-headline-lg text-error">15 Trips</div>
+<div class="font-data-mono text-data-mono text-[10px] text-error mt-1">ANOMALY DETECTED</div>
+</div>
+<div class="bg-surface-container/30 border-l-2 border-primary p-3 rounded">
+<div class="font-data-mono text-data-mono text-[10px] text-on-surface-variant mb-1">RISK SCORE</div>
+<div class="font-headline-lg text-headline-lg text-primary">89<span class="text-sm text-on-surface-variant">/100</span></div>
+<div class="font-data-mono text-data-mono text-[10px] text-primary mt-1">HIGH RISK</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/10">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant font-data-mono text-data-mono">
+<span class="material-symbols-outlined text-sm text-secondary">share</span>
+                            Linked to: <span class="text-secondary">Bhavani River Basin Sector 4B</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Tactical Map -->
+<div class="xl:col-span-8 h-full">
+<div class="glass-panel active-panel rounded-lg flex flex-col relative overflow-hidden h-full">
+<div class="p-3 border-b border-white/10 flex justify-between items-center bg-surface-container/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">map</span>
+<span class="font-label-caps text-label-caps text-primary tracking-widest">TACTICAL ROUTE MAP</span>
+</div>
+<div class="font-data-mono text-data-mono text-xs text-on-surface-variant">TRACKING: TN52 AB4321</div>
+</div>
+<div class="flex-1 relative bg-[#050B14]">
+<img alt="" class="w-full h-full object-cover opacity-70" data-location="Bhavani River Basin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJyz6hV-9QGjme1a871IMtp20WEQyoUZGUmLYr9aDa9sBfpj-z-2Qc14J7o_hlTq5GJC81x1sZ2S0tFUKR91vvrUx6MQSQ3z8HyXiNiTL-2il2Y-9L38fasATJJN9_13l_70B4_NFYuEYcqGi8nWu80qBB1_-VCAVyo4ZLosoRIDqjez713kblfp89roEIL2wJAMhVje0Ptx8-UgrQjIkrwfUE1G6pWheVaBIsiLAKMs2AmuZV3xDd3AbzIie4S-CPtMtxCZTN833r"/>
+<!-- HUD Elements -->
+<div class="absolute top-4 right-4 bg-surface/80 border border-white/10 p-3 rounded backdrop-blur-md w-48">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">ROUTE STATUS</div>
+<div class="font-data-mono text-data-mono text-sm text-primary mb-3">ACTIVE LOOP</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">TOTAL DISTANCE</div>
+<div class="font-data-mono text-data-mono text-sm text-on-surface mb-3">12.5 KM</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">ANOMALIES</div>
+<div class="font-data-mono text-data-mono text-sm text-error">4 DETECTED</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Telemetry Table -->
+<div class="glass-panel rounded-lg flex flex-col">
+<div class="p-4 border-b border-white/10 flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface text-lg">Flagged Vehicle Telemetry</h2>
+<button class="text-xs font-label-caps text-label-caps text-primary hover:text-primary-fixed border border-primary/30 px-3 py-1.5 rounded flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span> EXPORT LOG
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container/30 border-b border-white/10 font-label-caps text-label-caps text-on-surface-variant">
+<th class="p-4 font-normal">VEHICLE PLATE</th>
+<th class="p-4 font-normal">TYPE</th>
+<th class="p-4 font-normal">24H TRIPS</th>
+<th class="p-4 font-normal">LINKED SECTOR</th>
+<th class="p-4 font-normal">RISK LEVEL</th>
+<th class="p-4 font-normal">ACTION</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono text-sm">
+<!-- Row 1 -->
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors bg-error/5">
+<td class="p-4 text-on-surface font-bold">TN52 C8841</td>
+<td class="p-4 text-on-surface-variant">Heavy Tipper</td>
+<td class="p-4 text-error">18 Trips</td>
+<td class="p-4 text-secondary">Bhavani Sector 4B</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container rounded overflow-hidden">
+<div class="h-full bg-error w-[94%]"></div>
+</div>
+<span class="text-error">94% CRITICAL</span>
+</div>
+</td>
+<td class="p-4">
+<button class="bg-error text-on-error px-3 py-1 rounded text-xs hover:opacity-90 transition-opacity whitespace-nowrap">Issue Seizure Warrant</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors bg-primary/5 border-l-2 border-l-primary">
+<td class="p-4 text-on-surface font-bold">TN52 AB4321</td>
+<td class="p-4 text-on-surface-variant">Heavy Tipper</td>
+<td class="p-4 text-primary">15 Trips</td>
+<td class="p-4 text-secondary">Bhavani Sector 4B</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container rounded overflow-hidden">
+<div class="h-full bg-primary w-[89%]"></div>
+</div>
+<span class="text-primary">89% HIGH</span>
+</div>
+</td>
+<td class="p-4">
+<button class="bg-primary text-on-primary px-3 py-1 rounded text-xs hover:opacity-90 transition-opacity whitespace-nowrap">Track Vehicle</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+<td class="p-4 text-on-surface font-bold">TN38 X9920</td>
+<td class="p-4 text-on-surface-variant">Dump Truck</td>
+<td class="p-4 text-on-surface-variant">11 Trips</td>
+<td class="p-4 text-secondary">Bhavani Sector 2A</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container rounded overflow-hidden">
+<div class="h-full bg-secondary w-[84%]"></div>
+</div>
+<span class="text-secondary">84% HIGH</span>
+</div>
+</td>
+<td class="p-4">
+<button class="border border-secondary text-secondary hover:bg-secondary/10 px-3 py-1 rounded text-xs transition-colors whitespace-nowrap">Inspect Log</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest/80 backdrop-blur-md border-t border-white/5 fixed bottom-0 w-full z-50 flex justify-between items-center px-panel-padding py-2 h-10 md:ml-[280px] md:w-[calc(100%-280px)]">
+<div class="font-data-mono text-data-mono text-xs text-on-surface-variant">
+            © 2024 SANDSHIELD AI // SECURE ENCRYPTION ACTIVE
+        </div>
+<div class="flex items-center gap-6 font-data-mono text-data-mono text-xs">
+<a class="text-primary hover:text-secondary-fixed-dim transition-colors flex items-center gap-1" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                System Status: Operational
+            </a>
+<a class="text-on-surface-variant hover:text-secondary-fixed-dim transition-colors" href="#">Node: US-EAST-01</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed-dim transition-colors" href="#">Privacy Protocol</a>
+</div>
+</footer>
+
+  
+  
+  <script src="/stitch_app.js"></script>
+</body></html>

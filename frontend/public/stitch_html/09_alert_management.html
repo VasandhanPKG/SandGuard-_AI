@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SandShield AI - Alert Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#0a122a",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "primary": "#c3f5ff",
+                        "inverse-primary": "#006875",
+                        "primary-fixed": "#9cf0ff",
+                        "on-background": "#dbe1ff",
+                        "on-surface-variant": "#bac9cc",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-tertiary-fixed": "#07006c",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-secondary": "#00354a",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface-bright": "#313852",
+                        "primary-fixed-dim": "#00daf3",
+                        "outline": "#849396",
+                        "secondary-fixed-dim": "#7bd0ff",
+                        "on-primary-container": "#00626e",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-primary-fixed-variant": "#004f58",
+                        "surface-variant": "#2c344d",
+                        "surface-container-highest": "#2c344d",
+                        "primary-container": "#00e5ff",
+                        "secondary-container": "#00a6e0",
+                        "outline-variant": "#3b494c",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#0a122a",
+                        "tertiary-container": "#ccccff",
+                        "surface": "#0a122a",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#050d25",
+                        "on-tertiary-container": "#4344d1",
+                        "surface-tint": "#00daf3",
+                        "on-error": "#690005",
+                        "tertiary": "#edeaff",
+                        "surface-container": "#171e37",
+                        "on-tertiary": "#1000a9",
+                        "secondary-fixed": "#c4e7ff",
+                        "secondary": "#7bd0ff",
+                        "on-surface": "#dbe1ff",
+                        "surface-container-low": "#131a33",
+                        "surface-container-high": "#212942",
+                        "inverse-surface": "#dbe1ff",
+                        "on-primary-fixed": "#001f24",
+                        "on-primary": "#00363d",
+                        "inverse-on-surface": "#282f49",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#00374d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "panel-padding": "20px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid;
+            border-image-source: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-image-slice: 1;
+        }
+        .active-panel {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.05);
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.2) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .tech-border {
+            position: relative;
+        }
+        .tech-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, #00E5FF 0%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen overflow-hidden flex flex-col relative">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-background/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_20px_rgba(0,229,255,0.05)]">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg text-headline-lg font-bold tracking-tighter text-primary-fixed-dim uppercase">SandShield AI</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-low border border-outline-variant/50 rounded-DEFAULT py-1.5 pl-9 pr-4 text-data-mono font-data-mono text-on-surface focus:outline-none focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim/50 w-64 placeholder:text-on-surface-variant/50" placeholder="Search Intel..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-variant/50 transition-colors p-2 rounded-full relative group">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full animate-pulse"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-variant/50 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-variant/50 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="hidden lg:flex items-center gap-4 border-l border-outline-variant/30 pl-6">
+<div class="flex flex-col items-end">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">Clearance: Level 4</span>
+<span class="font-data-mono text-[10px] text-on-surface-variant">Opr. 8942-X</span>
+</div>
+<img alt="Operator profile avatar" class="w-8 h-8 rounded-full border border-primary/30" data-alt="A small circular profile picture of a serious-looking operator in a tactical command center environment, lit by cool blue screen light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8YtBrwEJT45Sv5VTwKxMT3ICYxGxX9bluW_VI6AORi7ov2nX2ZdVBA4nGg64BnaaBcXvMEZrecdsFTwwDSL995LRRWIHSaCwnzxKJ9QQOEyEvkFT9x9rQI7TDJZ5xvuRx3j1jBGutyRLosJXk8Diniqwr_AeeyBnaprFfYmgWDxjixhiJplkqOKdLWnAF6iHXH6OSCm1ciwSa5L3gYgQOePwwL5KPuTjIGRkntdA6IcIy2R1IIOnsUQU68tjkVb4y69K4i27ErCts"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-16 h-screen w-full relative">
+<!-- Background Texture -->
+<div class="absolute inset-0 scanline opacity-20 z-0"></div>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-16 bottom-0 w-[280px] flex flex-col py-panel-padding bg-surface-container-low/60 backdrop-blur-md border-r border-outline-variant/20 z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary-fixed-dim animate-pulse">adjust</span>
+<h2 class="font-headline-md text-headline-md text-primary-fixed-dim uppercase tracking-wider">STRATCOM-1</h2>
+</div>
+<p class="font-data-mono text-xs text-on-surface-variant ml-9">Active Monitoring</p>
+</div>
+<div class="flex-1 flex flex-col gap-1 px-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-variant/40 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-label-caps text-label-caps uppercase">Command Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-variant/40 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">satellite_alt</span>
+<span class="font-label-caps text-label-caps uppercase">Live Intel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-primary-fixed-dim bg-primary-container/10 border-l-4 border-primary-fixed-dim font-bold translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">emergency_home</span>
+<span class="font-label-caps text-label-caps uppercase">Alert Queue</span>
+<span class="ml-auto bg-error/20 text-error px-2 py-0.5 rounded font-data-mono text-[10px]">8</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-variant/40 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">history</span>
+<span class="font-label-caps text-label-caps uppercase">Archive</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-variant/40 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">security</span>
+<span class="font-label-caps text-label-caps uppercase">Personnel</span>
+</a>
+</div>
+<div class="px-6 mt-auto">
+<button class="w-full py-2 border border-error/50 text-error hover:bg-error/10 transition-colors rounded-DEFAULT font-label-caps text-label-caps uppercase flex items-center justify-center gap-2 mb-6">
+<span class="material-symbols-outlined text-sm">warning</span>
+                    Initiate Emergency Protocol
+                </button>
+<div class="flex flex-col gap-2 pt-4 border-t border-outline-variant/30">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary text-xs font-data-mono transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">analytics</span> System Health
+                    </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary text-xs font-data-mono transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">logout</span> Logout
+                    </a>
+</div>
+</div>
+</nav>
+<!-- Main Workspace -->
+<main class="flex-1 ml-[280px] p-container-margin flex flex-col gap-6 relative z-10 h-full overflow-hidden">
+<!-- Top Filters -->
+<div class="flex justify-between items-center bg-surface-container/40 p-4 rounded-DEFAULT glass-card shrink-0">
+<div class="flex gap-4">
+<button class="px-4 py-1.5 border-b-2 border-primary-fixed-dim text-primary-fixed-dim font-label-caps text-label-caps uppercase flex items-center gap-2">
+                        All Alerts <span class="bg-surface-variant px-1.5 py-0.5 rounded text-[10px]">42</span>
+</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-2 transition-colors">
+<span class="w-2 h-2 rounded-full bg-error"></span> Critical <span class="bg-error/20 text-error px-1.5 py-0.5 rounded text-[10px]">8</span>
+</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-2 transition-colors">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> High <span class="bg-orange-500/20 text-orange-400 px-1.5 py-0.5 rounded text-[10px]">14</span>
+</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-2 transition-colors">
+<span class="w-2 h-2 rounded-full bg-yellow-500"></span> Medium <span class="bg-yellow-500/20 text-yellow-400 px-1.5 py-0.5 rounded text-[10px]">12</span>
+</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-2 transition-colors">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Low <span class="bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded text-[10px]">8</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-xs text-on-surface-variant">Status:</span>
+<select class="bg-surface-variant border border-outline-variant/50 text-on-surface font-data-mono text-xs rounded-DEFAULT focus:ring-1 focus:ring-primary py-1 pl-3 pr-8">
+<option>Open</option>
+<option>In-Progress Inspection</option>
+<option>Closed</option>
+</select>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="flex gap-6 h-[calc(100%-80px)]">
+<!-- Left Panel: Master Alert Queue -->
+<div class="w-[35%] flex flex-col gap-4 overflow-y-auto pr-2 custom-scrollbar">
+<!-- Alert Card 1 (Active) -->
+<div class="active-panel p-4 rounded-DEFAULT cursor-pointer relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+<span class="font-data-mono text-primary-fixed-dim font-bold">ALT-9942</span>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant">12m ago</span>
+</div>
+<div class="flex gap-2 mb-3">
+<span class="bg-error/20 border border-error/50 text-error px-2 py-0.5 rounded text-[10px] font-data-mono tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-error rounded-full animate-pulse"></span> CRITICAL 93%
+                            </span>
+</div>
+<h3 class="font-headline-md text-sm mb-1 text-on-surface">Unauthorised Suction Dredging</h3>
+<p class="font-data-mono text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Bhavani River Sector 4B
+                        </p>
+</div>
+<!-- Alert Card 2 -->
+<div class="glass-card p-4 rounded-DEFAULT cursor-pointer hover:bg-surface-variant/30 transition-colors border-l-4 border-l-orange-500 border-transparent">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-400 text-sm">local_shipping</span>
+<span class="font-data-mono text-on-surface">ALT-9941</span>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant">45m ago</span>
+</div>
+<div class="flex gap-2 mb-3">
+<span class="bg-orange-500/10 border border-orange-500/30 text-orange-400 px-2 py-0.5 rounded text-[10px] font-data-mono tracking-wider">
+                                HIGH 84%
+                            </span>
+</div>
+<h3 class="font-headline-md text-sm mb-1 text-on-surface">Night Tipper Convoy Anomaly</h3>
+<p class="font-data-mono text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Cauvery North
+                        </p>
+</div>
+<!-- Alert Card 3 -->
+<div class="glass-card p-4 rounded-DEFAULT cursor-pointer hover:bg-surface-variant/30 transition-colors border-l-4 border-l-yellow-500 border-transparent">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-400 text-sm">forest</span>
+<span class="font-data-mono text-on-surface">ALT-9939</span>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant">2h ago</span>
+</div>
+<div class="flex gap-2 mb-3">
+<span class="bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-2 py-0.5 rounded text-[10px] font-data-mono tracking-wider">
+                                MEDIUM 68%
+                            </span>
+</div>
+<h3 class="font-headline-md text-sm mb-1 text-on-surface">Vegetation Buffer Stripping</h3>
+<p class="font-data-mono text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Palar River
+                        </p>
+</div>
+</div>
+<!-- Right Panel: Intelligence Workspace -->
+<div class="w-[65%] glass-card rounded-lg flex flex-col p-6 overflow-hidden">
+<div class="flex justify-between items-end mb-6 tech-border pb-2">
+<div>
+<h2 class="font-headline-lg text-lg text-primary-fixed-dim uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim">policy</span>
+                                ALERT #ALT-9942 EVIDENCE &amp; DISPATCH DOSSIER
+                            </h2>
+<p class="font-data-mono text-xs text-on-surface-variant mt-1">Cross-referencing multiple sensor feeds for validation.</p>
+</div>
+<div class="bg-surface-container p-2 rounded border border-outline-variant/30 flex items-center gap-3">
+<div class="w-12 h-12 bg-surface-variant rounded border border-primary/20 overflow-hidden relative">
+<!-- Mini Map placeholder, could be an actual image or styling -->
+<div class="absolute inset-0 bg-blue-900/20" style="background-image: radial-gradient(#00E5FF 1px, transparent 1px); background-size: 4px 4px;"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="w-2 h-2 bg-error rounded-full animate-pulse shadow-[0_0_8px_#ffb4ab]"></span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-data-mono text-[10px] text-outline">COORDINATES</span>
+<span class="font-data-mono text-xs text-primary">11.3412° N, 77.7172° E</span>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-6">
+<!-- Evidence Grid -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">grid_view</span> Multi-Sensor Evidence
+                            </h3>
+<div class="grid grid-cols-2 gap-4">
+<!-- Image 1 -->
+<div class="relative group rounded overflow-hidden border border-outline-variant/50">
+<img class="w-full h-40 object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A highly detailed aerial satellite view of a river basin with digital overlays indicating 'Critical Degradation' and 'Illegal Sand Pits' highlighted with cyan borders. The image has a dark, analytical command center aesthetic with orange heat-map-like turbidity zones." src="https://lh3.googleusercontent.com/aida/AP1WRLuk1NgiIpkcFfXIJHBXr7hLLtf2cujMNKHuBwLyQwTz4SmByf6SMOo_7rJuQBoRiclRhGTeS_nuTgn9ezsrw8oF4JbCg9KdgVCljlPbNM9H78rP-hhL2o5W6rmBuM2Zq2-tzPUBAVJMhUMORCjCbisdZFr47HVOwlpApXEp1N_EBJh6FlqqeKg6zgjHzRC8xQ7F2TYKKfUbc04KdSNMNHbr-N3GDcMv7GPDZk6R986YTqSnSnuhFVu98us"/>
+<div class="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur p-2 border-t border-outline-variant/50">
+<p class="font-data-mono text-[10px] text-primary">Satellite Change Detection</p>
+</div>
+</div>
+<!-- Image 2 -->
+<div class="relative group rounded overflow-hidden border border-outline-variant/50">
+<img class="w-full h-40 object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A thermal FLIR drone camera feed showing excavators and dump trucks working illegally at night by a river. The image is split between deep blue/purple thermal heat signatures and grey night vision, with red and cyan targeting boxes overlaying the machinery." src="https://lh3.googleusercontent.com/aida/AP1WRLu_BKxM6-wnsxSWMpopTZBM_F-B2zVGjyBaJmkBGh0Tf9ObN1pzgSpMBg-JI17A-l1sAkAUnP9JlDqR4p2ur7WrrkLFK5Kj-MZTAllWJMslznPX07sMbm5TdJWVKlCLefjEA_f5bhXpbftXCr6l2VYez1SBCmxCVCwVH3TjLj3ogC6c_PYCqMsToMnkpxRR1Jt7_bi6EKoHwU3YMAnprbYCdyIB-qhFlRo2oj-yLojz7FEm4osBnEDhm0M"/>
+<div class="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur p-2 border-t border-outline-variant/50">
+<p class="font-data-mono text-[10px] text-primary">Drone FLIR Excavator Capture</p>
+</div>
+</div>
+<!-- Image 3 -->
+<div class="relative group rounded overflow-hidden border border-outline-variant/50 col-span-2">
+<img class="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity object-center" data-alt="A grainy, monochromatic night-vision ANPR security camera feed capturing the rear of a heavy dump truck on a road. A cyan digital targeting box highlights the license plate, with technical system text overlaying the top right corner indicating high confidence detection." src="https://lh3.googleusercontent.com/aida/AP1WRLvtKyY0xCqJvtFebgfYagjqy5EBtUfQmfGBSCXLhLPaoxLUwdSX-d6bsymJyLgvLHFR91PZfUuiFQTdg1dw7c2L-d6P-D8bpoCqm6jOBr_bWav96kXDU71eRK-D2-_KJ8rAvIjWu_Ygd2439DMeRklnzSBb7JhQ4IQyZnWHW3ndFnqi3aUp0bpW2asVXCiV5Z209ZO7YGmK-lqI1zSUyDt28WHZ38tydPtrKQlPb7LoOnvXwA95kXVehSPY"/>
+<div class="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur p-2 border-t border-outline-variant/50">
+<p class="font-data-mono text-[10px] text-primary">ANPR Truck Capture</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">timeline</span> Incident Audit Timeline
+                            </h3>
+<div class="flex flex-col gap-3 relative before:absolute before:inset-y-0 before:left-2 before:w-px before:bg-outline-variant/50 ml-2">
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-4 h-4 rounded-full bg-surface border-2 border-outline mt-0.5"></div>
+<div class="flex flex-col">
+<span class="font-data-mono text-xs text-on-surface-variant">14:10</span>
+<span class="font-body-md text-sm text-on-surface">Sat pass detection</span>
+</div>
+</div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-4 h-4 rounded-full bg-surface border-2 border-outline mt-0.5"></div>
+<div class="flex flex-col">
+<span class="font-data-mono text-xs text-on-surface-variant">14:15</span>
+<span class="font-body-md text-sm text-on-surface">ANPR spike</span>
+</div>
+</div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-4 h-4 rounded-full bg-surface border-2 border-outline mt-0.5"></div>
+<div class="flex flex-col">
+<span class="font-data-mono text-xs text-on-surface-variant">14:20</span>
+<span class="font-body-md text-sm text-on-surface">Drone dispatch</span>
+</div>
+</div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-4 h-4 rounded-full bg-error border-2 border-error/50 mt-0.5 shadow-[0_0_8px_#ffb4ab]"></div>
+<div class="flex flex-col">
+<span class="font-data-mono text-xs text-error font-bold">14:22</span>
+<span class="font-body-md text-sm text-on-surface font-semibold">AI Critical Alert</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between gap-4 shrink-0">
+<button class="px-6 py-2 border border-outline-variant text-on-surface hover:bg-surface-variant transition-colors rounded-DEFAULT font-label-caps text-xs uppercase tracking-wider">
+                            Close Alert
+                        </button>
+<div class="flex gap-3">
+<button class="px-6 py-2 bg-red-600 hover:bg-red-500 text-white transition-colors rounded-DEFAULT font-label-caps text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(220,38,38,0.3)]">
+                                Issue Vehicle Seizure
+                            </button>
+<button class="px-6 py-2 bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors rounded-DEFAULT font-label-caps text-xs uppercase tracking-wider font-bold">
+                                Assign Response Officer
+                            </button>
+<button class="px-6 py-2 bg-emerald-500 hover:bg-emerald-400 text-black transition-colors rounded-DEFAULT font-label-caps text-xs uppercase tracking-wider font-bold">
+                                Approve Field Inspection
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<style>
+        /* Custom scrollbar for a more tech look */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(28, 37, 65, 0.2);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 218, 243, 0.3);
+            border-radius: 2px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 218, 243, 0.6);
+        }
+    </style>
+
+  
+  
+  <script src="/stitch_app.js"></script>
+</body></html>

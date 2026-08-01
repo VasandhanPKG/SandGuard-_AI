@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Surveillance - SandShield AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "inverse-on-surface": "#282f49",
+                        "surface-bright": "#313852",
+                        "outline": "#849396",
+                        "inverse-primary": "#006875",
+                        "on-error": "#690005",
+                        "primary": "#c3f5ff",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-secondary-fixed": "#001e2c",
+                        "primary-fixed-dim": "#00daf3",
+                        "on-primary": "#00363d",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#212942",
+                        "surface-tint": "#00daf3",
+                        "outline-variant": "#3b494c",
+                        "surface-container-highest": "#2c344d",
+                        "secondary-fixed-dim": "#7bd0ff",
+                        "surface-container-lowest": "#050d25",
+                        "primary-container": "#00e5ff",
+                        "surface-container-low": "#131a33",
+                        "on-primary-container": "#00626e",
+                        "primary-fixed": "#9cf0ff",
+                        "inverse-surface": "#dbe1ff",
+                        "on-tertiary": "#1000a9",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface": "#0a122a",
+                        "tertiary": "#edeaff",
+                        "secondary-fixed": "#c4e7ff",
+                        "on-secondary-container": "#00374d",
+                        "tertiary-container": "#ccccff",
+                        "surface-dim": "#0a122a",
+                        "on-tertiary-container": "#4344d1",
+                        "error-container": "#93000a",
+                        "on-surface": "#dbe1ff",
+                        "surface-variant": "#2c344d",
+                        "on-primary-fixed": "#001f24",
+                        "error": "#ffb4ab",
+                        "surface-container": "#171e37",
+                        "secondary": "#7bd0ff",
+                        "on-primary-fixed-variant": "#004f58",
+                        "secondary-container": "#00a6e0",
+                        "on-surface-variant": "#bac9cc",
+                        "on-tertiary-fixed": "#07006c",
+                        "background": "#0a122a",
+                        "on-background": "#dbe1ff",
+                        "on-secondary": "#00354a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "panel-padding": "20px",
+                        "unit": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid transparent;
+            border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)) 1;
+        }
+        .glow-active {
+            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.05);
+        }
+        .pulse-dot {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-hidden flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-dim/60 backdrop-blur-xl border-b border-outline-variant/20 shadow-[0_0_30px_rgba(0,229,255,0.1)] flex items-center justify-between px-container-margin h-16 w-full hidden md:flex">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary-fixed-dim tracking-tight">SandShield AI</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="flex gap-4">
+<a class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors px-3 py-2 rounded-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Command
+                </a>
+<a class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors px-3 py-2 rounded-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">drone</span>
+                    Fleet
+                </a>
+<a class="text-primary border-b-2 border-primary-container px-3 py-2 flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">videocam</span>
+                    Surveillance
+                </a>
+<a class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors px-3 py-2 rounded-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+                    Logs
+                </a>
+<a class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors px-3 py-2 rounded-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">gavel</span>
+                    Enforcement
+                </a>
+</nav>
+<div class="flex items-center gap-4 border-l border-outline-variant/20 pl-4">
+<button class="text-primary-fixed-dim hover:bg-surface-bright/50 transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined">radar</span>
+</button>
+<button class="text-primary-fixed-dim hover:bg-surface-bright/50 transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-primary-fixed-dim hover:bg-surface-bright/50 transition-colors p-2 rounded-full active:scale-95 duration-150 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<img alt="Mission Commander Profile" class="w-8 h-8 rounded-full border border-primary-container cursor-pointer hover:ring-2 hover:ring-primary-container transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlxcaHByzKxEyGyxiMDrVozt9OBe8ntQURvYlwC3gbXbTOgguxYG2KRzrS5EaqLklF08nncn38xE12yXDiHLrpWzDgNhabGQEHlFl7ezyTfQ0yc4u1vNEpmYJOcVwu8Xqruvr4duEhWMhGo_8NxC9HIYJGmhZGZjsjXrTvvofsn4et2eoS9sskLZ3NsO370-T69gHPtYDtmbgHcTM-BNcIu0bj242tHWDvCsaLjdi-OgHkv1__tDVfccacJqzdCz76PYu7hLWihLLd"/>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen w-full">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col py-panel-padding bg-surface-container-low/60 backdrop-blur-md border-r border-outline-variant/10 fixed left-0 top-16 h-[calc(100vh-64px)] w-[280px] z-40 transition-all duration-300 ease-in-out">
+<div class="px-6 mb-8 flex flex-col gap-1">
+<span class="font-headline-lg text-headline-lg text-primary">SandShield AI</span>
+<span class="text-on-surface-variant font-data-mono text-xs opacity-70">Vigilance Protocol v4.2</span>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="text-on-surface-variant flex items-center gap-4 px-6 py-4 hover:bg-surface-container-high/40 hover:text-on-surface transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Command
+                </a>
+<a class="text-on-surface-variant flex items-center gap-4 px-6 py-4 hover:bg-surface-container-high/40 hover:text-on-surface transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">drone</span>
+                    Fleet
+                </a>
+<a class="bg-primary-container/20 text-primary-container border-l-4 border-primary-container flex items-center gap-4 px-6 py-4 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">videocam</span>
+                    Surveillance
+                </a>
+<a class="text-on-surface-variant flex items-center gap-4 px-6 py-4 hover:bg-surface-container-high/40 hover:text-on-surface transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">list_alt</span>
+                    Logs
+                </a>
+<a class="text-on-surface-variant flex items-center gap-4 px-6 py-4 hover:bg-surface-container-high/40 hover:text-on-surface transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+                    Enforcement
+                </a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-error text-on-error font-label-caps py-3 rounded hover:bg-error/90 transition-colors shadow-[0_0_15px_rgba(255,180,171,0.2)]">
+                    Initiate Scramble
+                </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-grow ml-0 md:ml-[280px] p-container-margin overflow-y-auto bg-surface flex flex-col gap-6">
+<!-- Top Section: Telemetry & Missions -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Drone Telemetry -->
+<div class="glass-card glow-active rounded-lg p-panel-padding flex flex-col gap-4">
+<div class="flex justify-between items-center border-b border-outline-variant/30 pb-2">
+<h2 class="font-label-caps text-primary tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">flight</span> UAV-ALPHA-04
+                        </h2>
+<span class="font-data-mono text-secondary-fixed-dim text-xs bg-surface-container p-1 px-2 rounded">CONNECTED</span>
+</div>
+<div class="grid grid-cols-2 gap-x-8 gap-y-4 font-data-mono text-sm">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-on-surface-variant text-xs"><span>BATTERY</span> <span class="text-primary-fixed-dim">78%</span></div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[78%]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-on-surface-variant text-xs"><span>SIGNAL (5G)</span> <span class="text-primary-fixed-dim">98%</span></div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[98%]"></div>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-xs">ALTITUDE</span>
+<span class="text-on-surface text-lg">120m <span class="text-xs text-outline ml-1">ASL</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-xs">PAYLOAD</span>
+<span class="text-on-surface text-sm mt-1">HD Thermal / EO</span>
+</div>
+</div>
+</div>
+<!-- Active Missions -->
+<div class="glass-card rounded-lg p-panel-padding flex flex-col gap-4">
+<div class="flex justify-between items-center border-b border-outline-variant/30 pb-2">
+<h2 class="font-label-caps text-on-surface-variant tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">assignment</span> ACTIVE PATROL MISSIONS
+                        </h2>
+</div>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center justify-between p-2 bg-surface-container-high/50 rounded border-l-2 border-primary-container">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface text-sm">Bhavani River Sector Patrol</span>
+<span class="font-data-mono text-outline text-xs">WP-04 -&gt; WP-05</span>
+</div>
+<span class="font-label-caps text-primary bg-primary/10 px-2 py-1 rounded text-[10px] animate-pulse">ACTIVE</span>
+</li>
+<li class="flex items-center justify-between p-2 bg-surface-container-low rounded border-l-2 border-outline-variant">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface-variant text-sm">Cauvery Sector Sweep</span>
+<span class="font-data-mono text-outline text-xs">Awaiting Clearance</span>
+</div>
+<span class="font-label-caps text-on-surface-variant bg-surface-container-highest px-2 py-1 rounded text-[10px]">STANDBY</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Main Layout: Feed + Sidebar -->
+<div class="flex flex-col xl:flex-row gap-6 h-[600px]">
+<!-- Video Feed -->
+<div class="flex-grow glass-card rounded-lg relative overflow-hidden border border-primary-container/30 shadow-[0_0_20px_rgba(0,229,255,0.05)]">
+<img class="w-full h-full object-cover" data-alt="A split-screen drone surveillance feed. The left side shows a false-color thermal imaging view (purples, oranges, yellows) revealing hot heavy machinery on a riverbank at night. The right side shows an electro-optical night vision view with cyan overlay boxes identifying 'ILLEGAL ACTIVITY' and red boxes stating 'TARGET ACQUIRED' over dump trucks and an excavator. A heads-up display overlays coordinates, pitch, roll, altitude, and speed data." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDGmXrDL7aj70sBq8f_iwFHk-lTop9bH3xvDaBvdu3vu_R4cS6XpQRtRavatuTd9olBNp0y82tSmMCYchetreuiOdcK3Wss96KnM6WC07eaV75zXbMYSAxUZdZ-ExMtgSsxrBjg_nnenPj6t4prdtvRlmY0HV9R2vII1u_sfFXrqEGZBuuN2snBAWc7ZcLme7x_ts0FX8mEQ6D_T9gApWKdjtPETX6hpcSy8E2E2WhDGssAuVxryyfMSwsm1LPCDvzzyo5bJoT3YAI"/>
+<!-- HUD Overlays -->
+<div class="absolute top-4 left-4 font-data-mono text-primary-fixed-dim text-xs bg-surface-container-lowest/80 px-2 py-1 rounded backdrop-blur">
+                        REC 00:14:32
+                    </div>
+<div class="absolute top-4 right-4 flex items-center gap-2 font-label-caps text-error bg-surface-container-lowest/80 px-3 py-1 rounded backdrop-blur border border-error/30 shadow-[0_0_10px_rgba(255,180,171,0.2)]">
+<div class="w-2 h-2 rounded-full bg-error pulse-dot"></div>
+                        LIVE FEED
+                    </div>
+<div class="absolute bottom-4 left-4 font-data-mono text-primary-fixed-dim text-xs flex flex-col gap-1 bg-surface-container-lowest/60 p-2 rounded backdrop-blur">
+<span>LAT: 11.4522° N</span>
+<span>LON: 77.3184° E</span>
+<span class="text-on-surface-variant mt-1">SPD: 42km/h HDG: 104°</span>
+</div>
+<!-- Crosshair/Center Reticle Simulation -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-primary-container/20 rounded-full flex items-center justify-center pointer-events-none">
+<div class="w-1 h-4 bg-primary-container/50 absolute top-0"></div>
+<div class="w-1 h-4 bg-primary-container/50 absolute bottom-0"></div>
+<div class="w-4 h-1 bg-primary-container/50 absolute left-0"></div>
+<div class="w-4 h-1 bg-primary-container/50 absolute right-0"></div>
+<div class="w-1 h-1 bg-primary-container rounded-full"></div>
+</div>
+</div>
+<!-- Right Sidebar: Logs & Controls -->
+<div class="w-full xl:w-[400px] flex flex-col gap-6">
+<!-- AI Detections -->
+<div class="glass-card rounded-lg p-4 flex-grow flex flex-col gap-3 overflow-hidden">
+<div class="flex justify-between items-center border-b border-outline-variant/30 pb-2">
+<h3 class="font-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">memory</span> AI DETECTION LOG
+                            </h3>
+<span class="text-xs font-data-mono text-outline">AUTO-REFRESH</span>
+</div>
+<div class="overflow-y-auto flex-grow pr-2 scrollbar-thin">
+<table class="w-full text-left font-data-mono text-[11px]">
+<thead class="text-outline border-b border-surface-container-highest sticky top-0 bg-[#1C2541]/90 backdrop-blur z-10">
+<tr>
+<th class="py-2">OBJECT</th>
+<th class="py-2">CONF</th>
+<th class="py-2 text-right">TIME</th>
+</tr>
+</thead>
+<tbody class="text-on-surface-variant divide-y divide-surface-container-highest">
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-2 text-primary-fixed-dim">CAT 320 Excavator</td>
+<td class="py-2 text-primary">96.8%</td>
+<td class="py-2 text-right text-outline">NOW</td>
+</tr>
+<tr class="hover:bg-surface-container-high/30 transition-colors bg-error/5 border-l-2 border-error">
+<td class="py-2 text-error">Dump Truck TN52...</td>
+<td class="py-2 text-error">94.2%</td>
+<td class="py-2 text-right text-outline">-1m</td>
+</tr>
+<tr class="hover:bg-surface-container-high/30 transition-colors bg-error/5 border-l-2 border-error">
+<td class="py-2 text-error">Illegal Suction Dr...</td>
+<td class="py-2 text-error">98.1%</td>
+<td class="py-2 text-right text-outline">-3m</td>
+</tr>
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-2 text-secondary-fixed-dim">Sand Stockpile</td>
+<td class="py-2 text-secondary-fixed-dim">92.4%</td>
+<td class="py-2 text-right text-outline">-5m</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Tactical Controls -->
+<div class="glass-card rounded-lg p-4 flex flex-col gap-3">
+<div class="border-b border-outline-variant/30 pb-2 mb-2">
+<h3 class="font-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">settings_remote</span> TACTICAL CONTROLS
+                            </h3>
+</div>
+<button class="w-full bg-surface-container hover:bg-surface-container-high border border-primary-container/30 text-primary-fixed-dim font-data-mono text-sm py-2 rounded flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_12px_rgba(0,229,255,0.2)]">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+                            Capture High-Res Snapshot
+                        </button>
+<button class="w-full bg-surface-container hover:bg-surface-container-high border border-primary-container/30 text-primary-fixed-dim font-data-mono text-sm py-2 rounded flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_12px_rgba(0,229,255,0.2)]">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+                            Record Evidence Video
+                        </button>
+<div class="w-full h-[1px] bg-outline-variant/30 my-1"></div>
+<button class="w-full bg-secondary-container hover:bg-secondary-container/90 text-on-secondary-container font-label-caps text-sm py-3 rounded flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(0,166,224,0.3)]">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">local_police</span>
+                            Dispatch Ground Enforcement
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+  
+  
+  <script src="/stitch_app.js"></script>
+</body></html>
