@@ -213,11 +213,3 @@ Dashboard
 - Improved temporal prediction models
 
 ---
-
-## License
-
-*(Add license information here)*
-
-## Contributing
-
-*(Add contribution guidelines here)*
