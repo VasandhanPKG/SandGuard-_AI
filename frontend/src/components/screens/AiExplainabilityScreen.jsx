@@ -14,9 +14,9 @@ export default function AiExplainabilityScreen() {
   return (
     <div className="space-y-6 font-mono text-xs">
       {/* Target Incident Header Bar */}
-      <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20 flex flex-wrap items-center justify-between gap-4">
+      <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center space-x-3">
-          <ShieldCheck className="w-6 h-6 text-[#00e5ff]" />
+          <ShieldCheck className="w-6 h-6 text-[#d9a441]" />
           <div>
             <div className="text-gray-400 text-[10px]">EXPLAINABLE AI (XAI) AUDIT DOSSIER</div>
             <div className="text-white font-bold text-sm">Target Incident #ALT-9942 - Bhavani River Sector 4B</div>
@@ -27,7 +27,7 @@ export default function AiExplainabilityScreen() {
           <span className="bg-red-500/20 text-red-400 border border-red-500/40 px-3 py-1 rounded text-xs font-bold">
             COMPOSITE RISK: 93% CRITICAL
           </span>
-          <span className="bg-[#00e5ff]/10 text-[#00e5ff] border border-[#00e5ff]/30 px-3 py-1 rounded text-xs font-bold">
+          <span className="bg-[#d9a441]/10 text-[#d9a441] border border-[#d9a441]/30 px-3 py-1 rounded text-xs font-bold">
             SHAP AUDITED (99.2% ACCURACY)
           </span>
         </div>
@@ -36,21 +36,21 @@ export default function AiExplainabilityScreen() {
       {/* Main Grid: Multi-Sensor Weight Breakdown + SHAP Waterfall Chart */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left: Risk Score Percentage Breakdown Cards */}
-        <div className="glass-card p-5 rounded-xl border border-[#00e5ff]/20 space-y-4">
-          <div className="border-b border-[#00e5ff]/20 pb-3">
-            <h4 className="text-sm font-bold text-[#00e5ff]">AI RISK SCORE MULTI-SENSOR WEIGHT DISTRIBUTION</h4>
+        <div className="glass-card p-5 rounded-xl border border-[#d9a441]/20 space-y-4">
+          <div className="border-b border-[#d9a441]/20 pb-3">
+            <h4 className="text-sm font-bold text-[#d9a441]">AI RISK SCORE MULTI-SENSOR WEIGHT DISTRIBUTION</h4>
             <p className="text-[10px] text-gray-400 mt-0.5">Contribution percentages forming the final 93% risk score</p>
           </div>
 
           <div className="space-y-3">
             {scoreBreakdown.map((s, i) => (
-              <div key={i} className="bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/15">
+              <div key={i} className="bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/15">
                 <div className="flex justify-between items-center mb-1 font-bold text-white">
                   <span>{s.category}</span>
-                  <span className="text-[#00e5ff]">{s.pct}%</span>
+                  <span className="text-[#d9a441]">{s.pct}%</span>
                 </div>
                 <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden mb-1.5">
-                  <div className="h-full bg-[#00e5ff]" style={{ width: `${s.pct * 3}%` }}></div>
+                  <div className="h-full bg-[#d9a441]" style={{ width: `${s.pct * 3}%` }}></div>
                 </div>
                 <p className="text-[10px] text-gray-400">{s.desc}</p>
               </div>
@@ -63,18 +63,18 @@ export default function AiExplainabilityScreen() {
       </div>
 
       {/* Natural Language AI Explanation Summary Card */}
-      <div className="glass-card p-5 rounded-xl border border-[#00e5ff]/40 bg-[#070d1e]/90 space-y-3">
-        <h4 className="text-sm font-bold text-[#00e5ff] flex items-center space-x-2">
+      <div className="glass-card p-5 rounded-xl border border-[#d9a441]/40 bg-[#1b1610]/90 space-y-3">
+        <h4 className="text-sm font-bold text-[#d9a441] flex items-center space-x-2">
           <Cpu className="w-4 h-4" />
           <span>NATURAL LANGUAGE AI REASONING SYNTHESIS</span>
         </h4>
 
-        <blockquote className="p-4 bg-[#0a142c] border-l-4 border-[#00e5ff] rounded-r-lg text-gray-200 text-xs italic leading-relaxed">
+        <blockquote className="p-4 bg-[#0a142c] border-l-4 border-[#d9a441] rounded-r-lg text-gray-200 text-xs italic leading-relaxed">
           "High risk score (93%) is driven primarily by active excavation patterns identified via drone FLIR sensors (+0.28 SHAP weight), combined with abnormal 15-trip heavy truck movements through Tollgate Gate 03 (+0.24 SHAP weight), and verified 14.2m river morphology shifting between January and July 2026 satellite passes."
         </blockquote>
 
         <div className="flex justify-end space-x-3 pt-2">
-          <button className="bg-[#00e5ff] hover:bg-[#38bdf8] text-black font-bold px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+          <button className="bg-[#d9a441] hover:bg-[#8aa48f] text-black font-bold px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
             <Download className="w-4 h-4" />
             <span>EXPORT XAI COMPLIANCE CERTIFICATE (PDF)</span>
           </button>

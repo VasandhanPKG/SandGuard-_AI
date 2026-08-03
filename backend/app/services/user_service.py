@@ -9,8 +9,8 @@ from fastapi import HTTPException, status
 
 from app.models.user import User, Organization
 from app.repositories.user_repository import UserRepository, OrganizationRepository
-from app.schemas.user import UserCreate, UserUpdate, OrganizationCreate
-from app.core.security import get_password_hash, verify_password, create_access_token, create_refresh_token, Token, UserRole
+from app.schemas.user import UserCreate, UserUpdate, OrganizationCreate, Token
+from app.core.security import get_password_hash, verify_password, create_access_token, create_refresh_token, UserRole
 
 
 class UserService:

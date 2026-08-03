@@ -3,7 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI Predictive Analytics Dashboard - SandShield AI</title>
+<title>AI Predictive Analytics Dashboard - Sand Guard</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
@@ -20,32 +20,32 @@
                       "on-secondary-fixed": "#001e2c",
                       "on-secondary": "#00354a",
                       "tertiary-fixed-dim": "#c0c1ff",
-                      "background": "#0a122a",
+                      "background": "#151007",
                       "secondary-fixed": "#c4e7ff",
                       "error-container": "#93000a",
                       "on-secondary-container": "#00374d",
                       "on-primary-fixed": "#001f24",
                       "inverse-primary": "#006875",
                       "error": "#ffb4ab",
-                      "surface-tint": "#00daf3",
-                      "surface-dim": "#0a122a",
+                      "surface-tint": "#d9a441",
+                      "surface-dim": "#151007",
                       "on-error": "#690005",
                       "on-tertiary-container": "#4344d1",
                       "on-primary": "#00363d",
-                      "surface-container": "#171e37",
+                      "surface-container": "#332b1f",
                       "surface-variant": "#2c344d",
                       "secondary-container": "#00a6e0",
                       "on-tertiary-fixed-variant": "#2f2ebe",
                       "on-primary-fixed-variant": "#004f58",
                       "on-secondary-fixed-variant": "#004c69",
-                      "primary-container": "#00e5ff",
+                      "primary-container": "#d9a441",
                       "outline-variant": "#3b494c",
                       "on-tertiary": "#1000a9",
                       "on-background": "#dbe1ff",
                       "surface-container-lowest": "#050d25",
                       "inverse-surface": "#dbe1ff",
-                      "primary-fixed-dim": "#00daf3",
-                      "surface": "#0a122a",
+                      "primary-fixed-dim": "#d9a441",
+                      "surface": "#151007",
                       "inverse-on-surface": "#282f49",
                       "tertiary-fixed": "#e1e0ff",
                       "surface-container-low": "#131a33",
@@ -174,8 +174,8 @@
             background: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
         }
         .active-glow {
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
-            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 12px rgba(138, 164, 143, 0.2);
+            border-color: rgba(138, 164, 143, 0.2);
         }
         
         /* Map Heatmap Gradient Overlay */
@@ -192,13 +192,13 @@
         .scanline {
             width: 100%;
             height: 2px;
-            background: rgba(0, 229, 255, 0.3);
+            background: rgba(217, 164, 65, 0.3);
             position: absolute;
             top: 0;
             left: 0;
             animation: scan 4s linear infinite;
             z-index: 10;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            box-shadow: 0 0 10px rgba(217, 164, 65, 0.5);
         }
         @keyframes scan {
             0% { top: 0; }
@@ -218,15 +218,15 @@
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: rgba(11, 19, 43, 0.5); }
-        ::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.3); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.6); }
+        ::-webkit-scrollbar-thumb { background: rgba(138, 164, 143, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(138, 164, 143, 0.6); }
     </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md overflow-hidden antialiased">
 <!-- TopAppBar -->
 <header class="bg-surface-container-high/60 backdrop-blur-xl border-b border-white/10 shadow-[0_0_30px_rgba(0,229,255,0.1)] flex justify-between items-center w-full px-gutter h-16 z-50 shrink-0">
 <div class="flex items-center gap-6 h-full">
-<span class="font-display-lg text-headline-md font-bold text-primary tracking-tight">SandShield AI</span>
+<span class="font-display-lg text-headline-md font-bold text-primary tracking-tight">Sand Guard</span>
 <nav class="hidden md:flex h-full items-center gap-6 ml-8">
 <a class="text-on-surface-variant font-medium hover:text-primary-fixed-dim transition-colors active:scale-95 duration-200" href="#">Operations</a>
 <a class="text-primary border-b-2 border-primary pb-1 font-medium hover:text-primary-fixed-dim transition-colors active:scale-95 duration-200" href="#">Intelligence</a>
@@ -401,11 +401,11 @@
 <polyline fill="none" points="0,80 20,75 40,85 60,80 80,78 100,82" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" stroke-width="1"></polyline>
 <!-- Prediction -->
 <path d="M0,90 L10,85 L20,60 L30,40 L40,45 L50,20 L60,10 L70,30 L80,50 L90,65 L100,70 L100,100 L0,100 Z" fill="url(#grad1)" opacity="0.2"></path>
-<polyline fill="none" points="0,90 10,85 20,60 30,40 40,45 50,20 60,10 70,30 80,50 90,65 100,70" stroke="#00E5FF" stroke-width="2"></polyline>
+<polyline fill="none" points="0,90 10,85 20,60 30,40 40,45 50,20 60,10 70,30 80,50 90,65 100,70" stroke="#d9a441" stroke-width="2"></polyline>
 <defs>
 <lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1"></stop>
-<stop offset="100%" style="stop-color:#00E5FF;stop-opacity:0"></stop>
+<stop offset="0%" style="stop-color:#d9a441;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#d9a441;stop-opacity:0"></stop>
 </lineargradient>
 </defs>
 <!-- Peak Indicator -->

@@ -24,15 +24,14 @@ export default function Sidebar({ currentScreen, onNavigate }) {
     { id: 'prediction', label: 'AI Prediction', icon: TrendingUp, num: '07' },
     { id: 'xai', label: 'AI Explainability', icon: ShieldCheck, num: '08' },
     { id: 'alerts', label: 'Alert Management', icon: AlertOctagon, num: '09', badge: '8' },
-    { id: 'reports', label: 'Report Generation', icon: FileText, num: '10' },
-    { id: 'mobile', label: 'Mobile Officer App', icon: Smartphone, num: '11' }
+    { id: 'reports', label: 'Report Generation', icon: FileText, num: '10' }
   ];
 
   return (
-    <aside className="w-64 bg-[#0f172a]/95 backdrop-blur-md border-r border-[#00e5ff]/20 flex flex-col justify-between p-4 font-mono text-xs select-none">
+    <aside className="w-64 bg-[#2d2418]/95 backdrop-blur-md border-r border-[#d9a441]/20 flex flex-col justify-between p-4 font-mono text-xs select-none">
       <div className="space-y-6">
         {/* Navigation Category Label */}
-        <div className="text-[10px] font-bold text-[#00e5ff] tracking-widest uppercase px-3 border-b border-[#00e5ff]/20 pb-2">
+        <div className="text-[10px] font-bold text-[#d9a441] tracking-widest uppercase px-3 border-b border-[#d9a441]/20 pb-2">
           INTELLIGENCE MODULES
         </div>
 
@@ -47,12 +46,12 @@ export default function Sidebar({ currentScreen, onNavigate }) {
                 onClick={() => onNavigate(item.id)}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all text-left cursor-pointer ${
                   isActive
-                    ? 'bg-[#00e5ff]/15 text-[#00e5ff] border border-[#00e5ff]/40 font-bold glow-cyan'
-                    : 'text-gray-400 hover:text-white hover:bg-[#17213b]/60'
+                    ? 'bg-[#d9a441]/15 text-[#d9a441] border border-[#d9a441]/40 font-bold glow-cyan'
+                    : 'text-[#b9b1a7] hover:text-white hover:bg-[#3d2f23]/60'
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#00e5ff]' : 'text-gray-400'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#d9a441]' : 'text-[#b9b1a7]'}`} />
                   <span>{item.label}</span>
                 </div>
 
@@ -70,10 +69,10 @@ export default function Sidebar({ currentScreen, onNavigate }) {
       </div>
 
       {/* Logout / Switch Auth Link */}
-      <div className="pt-4 border-t border-[#00e5ff]/20">
+      <div className="pt-4 border-t border-[#d9a441]/20">
         <button
           onClick={() => onNavigate('login')}
-          className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-950/30 transition-colors cursor-pointer"
+          className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-[#b9b1a7] hover:text-[#c94c2b] hover:bg-[#3d2f23]/70 transition-colors cursor-pointer"
         >
           <LogOut className="w-4 h-4" />
           <span>Exit / Re-authenticate</span>

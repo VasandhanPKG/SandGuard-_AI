@@ -7,14 +7,14 @@ export default function MobileFieldOfficerApp() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div className="max-w-md mx-auto min-h-[640px] bg-[#070d1e] border-4 border-[#00e5ff]/50 rounded-[36px] overflow-hidden shadow-2xl font-mono text-xs text-white select-none flex flex-col justify-between p-4 relative">
+    <div className="max-w-md mx-auto min-h-[640px] bg-[#1b1610] border-4 border-[#d9a441]/50 rounded-[36px] overflow-hidden shadow-2xl font-mono text-xs text-white select-none flex flex-col justify-between p-4 relative">
       {/* Mobile Top Status Notch & App Header */}
       <div>
-        <div className="flex items-center justify-between border-b border-[#00e5ff]/30 pb-3 mb-3 pt-2 px-1">
+        <div className="flex items-center justify-between border-b border-[#d9a441]/30 pb-3 mb-3 pt-2 px-1">
           <div className="flex items-center space-x-2">
-            <Shield className="w-5 h-5 text-[#00e5ff]" />
+            <Shield className="w-5 h-5 text-[#d9a441]" />
             <div>
-              <div className="font-bold text-white text-xs">SANDSHIELD MOBILE</div>
+              <div className="font-bold text-white text-xs">SAND GUARD MOBILE</div>
               <div className="text-[10px] text-gray-400">Officer R. Sharma | Unit 04</div>
             </div>
           </div>
@@ -47,15 +47,15 @@ export default function MobileFieldOfficerApp() {
             <span>Bhavani River Basin Sector 4B</span>
           </div>
 
-          <button className="w-full mt-2 bg-[#00e5ff] hover:bg-[#38bdf8] text-black font-bold py-2.5 rounded-xl flex items-center justify-center space-x-2 text-xs cursor-pointer shadow-lg">
+          <button className="w-full mt-2 bg-[#d9a441] hover:bg-[#8aa48f] text-black font-bold py-2.5 rounded-xl flex items-center justify-center space-x-2 text-xs cursor-pointer shadow-lg">
             <Navigation className="w-4 h-4" />
             <span>START GPS NAVIGATION TO HOTSPOT</span>
           </button>
         </div>
 
         {/* Tactical Ground Inspection Module */}
-        <div className="glass-card p-4 rounded-2xl border border-[#00e5ff]/30 space-y-3">
-          <div className="text-xs font-bold text-[#00e5ff] uppercase border-b border-[#00e5ff]/20 pb-2">
+        <div className="glass-card p-4 rounded-2xl border border-[#d9a441]/30 space-y-3">
+          <div className="text-xs font-bold text-[#d9a441] uppercase border-b border-[#d9a441]/20 pb-2">
             FIELD EVIDENCE CAPTURE
           </div>
 
@@ -63,9 +63,9 @@ export default function MobileFieldOfficerApp() {
           <div className="space-y-2">
             <button
               onClick={() => setPhotoCaptured(true)}
-              className="w-full bg-[#070d1e] border border-[#00e5ff]/40 hover:border-[#00e5ff] text-gray-200 py-3 rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer"
+              className="w-full bg-[#1b1610] border border-[#d9a441]/40 hover:border-[#d9a441] text-gray-200 py-3 rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer"
             >
-              <Camera className="w-4 h-4 text-[#00e5ff]" />
+              <Camera className="w-4 h-4 text-[#d9a441]" />
               <span>{photoCaptured ? 'PHOTO CAPTURED (GEOTAGGED)' : 'CAPTURE GEOTAGGED EVIDENCE PHOTO'}</span>
             </button>
 
@@ -84,15 +84,15 @@ export default function MobileFieldOfficerApp() {
           <div className="space-y-1.5 pt-1 text-gray-300 text-[11px]">
             <div className="text-gray-400 text-[10px]">MACHINERY DISCOVERY CHECKLIST:</div>
             <label className="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" defaultChecked className="rounded accent-[#00e5ff]" />
+              <input type="checkbox" defaultChecked className="rounded accent-[#d9a441]" />
               <span>CAT Excavators (2 Units Found)</span>
             </label>
             <label className="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" defaultChecked className="rounded accent-[#00e5ff]" />
+              <input type="checkbox" defaultChecked className="rounded accent-[#d9a441]" />
               <span>Suction Dredging Vessel (1 Unit Found)</span>
             </label>
             <label className="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" defaultChecked className="rounded accent-[#00e5ff]" />
+              <input type="checkbox" defaultChecked className="rounded accent-[#d9a441]" />
               <span>Tipper Dump Trucks (4 Units Scanned)</span>
             </label>
           </div>

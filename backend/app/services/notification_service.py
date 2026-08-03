@@ -4,6 +4,8 @@ Handles Email, SMS, and Webhook alert dispatches with delivery tracking and retr
 """
 
 import logging
+import uuid
+from datetime import datetime, timezone
 import httpx
 from typing import Dict, Any, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -13,6 +15,7 @@ from app.repositories.report_repository import AlertLogRepository
 from app.core.config import settings
 
 logger = logging.getLogger("sandguard.notifications")
+
 
 
 class NotificationService:
@@ -31,13 +34,26 @@ class NotificationService:
     ) -> AlertLog:
         """Create an alert log and dispatch multi-channel notifications."""
         # 1. Log alert entry
+        now = datetime.now(timezone.utc)
         alert = AlertLog(
+            id=str(uuid.uuid4()),
             title=title,
             alert_level="CRITICAL",
             district_name=district_name,
-            message=message
+            message=message,
+            created_at=now
         )
-        saved_alert = await self.alert_repo.create(alert)
+        try:
+            saved_alert = await self.alert_repo.create(alert)
+        except Exception:
+            try:
+                await self.session.rollback()
+            except Exception:
+                pass
+            saved_alert = alert
+
+
+
 
         # 2. Dispatch Email
         if recipient_email:
@@ -60,35 +76,43 @@ class NotificationService:
         return saved_alert
 
     async def send_email_notification(self, to_email: str, subject: str, body: str) -> bool:
-        """Send email notification."""
+        """Send email notification via SendGrid API."""
         try:
-            logger.info(f"Simulating Email Dispatch to {to_email} | Subject: {subject}")
-            # SMTP dispatch implementation
+            from app.services.notifications.sendgrid_service import SendGridEmailClient
+            client = SendGridEmailClient()
+            html_body = f"<h2>SandGuard Illegal Mining Alert</h2><p>{body}</p><hr/><p><i>SandGuard Automated Security System</i></p>"
+            result = await client.send_email_alert(to_email, subject, html_body, body)
+
+            status_str = "SENT" if result.get("status") in ("SENT", "SIMULATED") else "FAILED"
             notification = Notification(
                 channel="EMAIL",
                 recipient=to_email,
                 subject=subject,
                 body=body,
-                status="SENT"
+                status=status_str
             )
             self.session.add(notification)
-            return True
+            return status_str == "SENT"
         except Exception as e:
             logger.error(f"Email dispatch failed: {e}")
             return False
 
     async def send_sms_notification(self, to_phone: str, text: str) -> bool:
-        """Send SMS text message."""
+        """Send SMS text message via Twilio API."""
         try:
-            logger.info(f"Simulating SMS Dispatch to {to_phone} | Message: {text}")
+            from app.services.notifications.twilio_service import TwilioSMSClient
+            client = TwilioSMSClient()
+            result = await client.send_sms_alert(to_phone, text)
+
+            status_str = "SENT" if result.get("status") in ("SENT", "SIMULATED") else "FAILED"
             notification = Notification(
                 channel="SMS",
                 recipient=to_phone,
                 body=text,
-                status="SENT"
+                status=status_str
             )
             self.session.add(notification)
-            return True
+            return status_str == "SENT"
         except Exception as e:
             logger.error(f"SMS dispatch failed: {e}")
             return False

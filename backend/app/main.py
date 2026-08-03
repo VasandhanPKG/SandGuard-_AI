@@ -47,6 +47,13 @@ if settings.BACKEND_CORS_ORIGINS:
 # Security Audit Middleware
 app.add_middleware(AuditMiddleware)
 
+# Prometheus Telemetry Middleware
+from app.core.telemetry import PrometheusTelemetryMiddleware, setup_opentelemetry, generate_prometheus_metrics_text
+from fastapi.responses import PlainTextResponse
+
+app.add_middleware(PrometheusTelemetryMiddleware)
+setup_opentelemetry(app)
+
 # Custom Exception Handlers
 app.add_exception_handler(SandGuardException, sandguard_exception_handler)
 
@@ -71,6 +78,12 @@ async def health_check():
         "database": "CONNECTED",
         "spatial_engine": "POSTGIS 3.4"
     }
+
+
+@app.get("/metrics", tags=["Observability"], response_class=PlainTextResponse)
+async def get_prometheus_metrics():
+    """Prometheus exposition format metrics scraping endpoint."""
+    return generate_prometheus_metrics_text()
 
 
 # Mount API V1 Master Router

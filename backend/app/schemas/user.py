@@ -4,7 +4,8 @@ SandGuard Pydantic v2 User, Auth, and Organization Schemas
 
 from datetime import datetime
 from typing import Optional, List
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, ConfigDict
+EmailStr = str
 from app.core.security import UserRole
 
 

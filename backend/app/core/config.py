@@ -61,25 +61,36 @@ class Settings(BaseSettings):
     CELERY_BROKER_URL: str = "redis://localhost:6379/0"
     CELERY_RESULT_BACKEND: str = "redis://localhost:6379/1"
 
-    # AI Service Keys
-    GEMINI_API_KEY: str = ""
-    OPENROUTER_API_KEY: str = ""
+    # External Satellite Data Providers
+    SENTINEL_HUB_CLIENT_ID: str = ""
+    SENTINEL_HUB_CLIENT_SECRET: str = ""
+    PLANET_API_KEY: str = ""
 
-    # GIS & File Storage
-    UPLOAD_DIR: str = "./uploads"
-    MAX_UPLOAD_SIZE_MB: int = 500
+    # ONNX & AI Inference Settings
+    ONNX_MODEL_DIR: str = "./models/onnx"
+    TORCHSERVE_INFERENCE_URL: str = "http://localhost:8080/predictions"
 
-    # Notification & Email Settings
-    SMTP_HOST: str = "smtp.gmail.com"
-    SMTP_PORT: int = 587
-    SMTP_USER: str = ""
-    SMTP_PASSWORD: str = ""
+    # Notification Services (SendGrid & Twilio)
+    SENDGRID_API_KEY: str = ""
     EMAILS_FROM_EMAIL: str = "alerts@sandguard.gov"
     EMAILS_FROM_NAME: str = "SandGuard Monitoring Team"
+    TWILIO_ACCOUNT_SID: str = ""
+    TWILIO_AUTH_TOKEN: str = ""
+    TWILIO_FROM_NUMBER: str = ""
+    TWILIO_WHATSAPP_NUMBER: str = ""
 
-    # SMS Settings
-    SMS_API_KEY: str = ""
-    SMS_SENDER_ID: str = "SANDGUARD"
+    # Telemetry & Observability
+    ENABLE_TELEMETRY: bool = True
+    OTEL_EXPORTER_OTLP_ENDPOINT: str = "http://localhost:4317"
+
+    # AI & Gemini API
+    GEMINI_API_KEY: str = ""
+
+    # File Storage
+    UPLOAD_DIR: str = "./uploads"
+    REPORTS_DIR: str = "./uploads/reports"
 
 
 settings = Settings()
+
+

@@ -41,8 +41,8 @@ export default function GisMonitoringScreen({ onNavigate }) {
         />
 
         {/* Layer Control Floating Panel (Top-Left Widget) */}
-        <div className="absolute top-16 left-6 z-30 bg-[#0f172a]/95 backdrop-blur-md border border-[#00e5ff]/30 p-4 rounded-xl shadow-2xl w-64 text-xs space-y-2.5">
-          <div className="flex items-center justify-between border-b border-[#00e5ff]/20 pb-2 text-[#00e5ff] font-bold">
+        <div className="absolute top-16 left-6 z-30 bg-[#2d2418]/95 backdrop-blur-md border border-[#d9a441]/30 p-4 rounded-xl shadow-2xl w-64 text-xs space-y-2.5">
+          <div className="flex items-center justify-between border-b border-[#d9a441]/20 pb-2 text-[#d9a441] font-bold">
             <span className="flex items-center space-x-2">
               <Layers className="w-4 h-4" />
               <span>GIS MAP LAYERS</span>
@@ -62,7 +62,7 @@ export default function GisMonitoringScreen({ onNavigate }) {
                 type="checkbox"
                 checked={activeLayers[l.key]}
                 onChange={() => toggleLayer(l.key)}
-                className="rounded accent-[#00e5ff]"
+                className="rounded accent-[#d9a441]"
               />
               <span>{l.label}</span>
             </label>
@@ -71,9 +71,9 @@ export default function GisMonitoringScreen({ onNavigate }) {
 
         {/* Intelligence Overlay Drawer (Right Sliding Panel) */}
         {selectedHotspot && (
-          <div className="absolute top-16 right-6 bottom-16 z-30 bg-[#0f172a]/95 backdrop-blur-md border border-[#00e5ff]/40 p-5 rounded-xl shadow-2xl w-80 text-xs flex flex-col justify-between overflow-y-auto">
+          <div className="absolute top-16 right-6 bottom-16 z-30 bg-[#2d2418]/95 backdrop-blur-md border border-[#d9a441]/40 p-5 rounded-xl shadow-2xl w-80 text-xs flex flex-col justify-between overflow-y-auto">
             <div>
-              <div className="flex items-center justify-between border-b border-[#00e5ff]/20 pb-3 mb-4">
+              <div className="flex items-center justify-between border-b border-[#d9a441]/20 pb-3 mb-4">
                 <div className="flex items-center space-x-2 text-red-400 font-bold">
                   <ShieldAlert className="w-5 h-5" />
                   <span>HOTSPOT DOSSIER</span>
@@ -83,7 +83,7 @@ export default function GisMonitoringScreen({ onNavigate }) {
 
               <div className="space-y-4">
                 {/* Location Lat/Long */}
-                <div className="bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/20">
+                <div className="bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/20">
                   <div className="text-gray-400 text-[10px] uppercase">TARGET GEOLOCATION</div>
                   <div className="text-white font-bold text-sm mt-0.5">{selectedHotspot.name}</div>
                   <div className="text-emerald-400 text-[11px] mt-1 font-mono">{selectedHotspot.lat}, {selectedHotspot.lng}</div>
@@ -97,20 +97,20 @@ export default function GisMonitoringScreen({ onNavigate }) {
                     <div>
                       <div className="flex justify-between text-gray-300 mb-1">
                         <span>Satellite Change Index</span>
-                        <span className="text-[#00e5ff] font-bold">{selectedHotspot.satelliteChange || 85}%</span>
+                        <span className="text-[#d9a441] font-bold">{selectedHotspot.satelliteChange || 85}%</span>
                       </div>
                       <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#00e5ff]" style={{ width: `${selectedHotspot.satelliteChange || 85}%` }}></div>
+                        <div className="h-full bg-[#d9a441]" style={{ width: `${selectedHotspot.satelliteChange || 85}%` }}></div>
                       </div>
                     </div>
 
                     <div>
                       <div className="flex justify-between text-gray-300 mb-1">
                         <span>Drone Recon Detection</span>
-                        <span className="text-[#00e5ff] font-bold">{selectedHotspot.droneDetect || 92}%</span>
+                        <span className="text-[#d9a441] font-bold">{selectedHotspot.droneDetect || 92}%</span>
                       </div>
                       <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#00e5ff]" style={{ width: `${selectedHotspot.droneDetect || 92}%` }}></div>
+                        <div className="h-full bg-[#d9a441]" style={{ width: `${selectedHotspot.droneDetect || 92}%` }}></div>
                       </div>
                     </div>
 
@@ -149,7 +149,7 @@ export default function GisMonitoringScreen({ onNavigate }) {
             <div className="space-y-2 mt-4">
               <button
                 onClick={() => onNavigate && onNavigate('reports')}
-                className="w-full bg-[#00e5ff] text-black font-bold py-2.5 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#38bdf8] transition-colors"
+                className="w-full bg-[#d9a441] text-black font-bold py-2.5 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#8aa48f] transition-colors"
               >
                 <FileText className="w-4 h-4" />
                 <span>GENERATE REPORT</span>

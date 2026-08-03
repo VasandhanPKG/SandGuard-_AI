@@ -3,7 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>SandShield AI - Explainability Dashboard</title>
+<title>Sand Guard - Explainability Dashboard</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -23,22 +23,22 @@
                       "tertiary-container": "#ccccff",
                       "on-tertiary": "#1000a9",
                       "on-secondary-fixed": "#001e2c",
-                      "primary-fixed-dim": "#00daf3",
+                      "primary-fixed-dim": "#d9a441",
                       "on-primary": "#00363d",
                       "on-error-container": "#ffdad6",
                       "error-container": "#93000a",
-                      "surface-dim": "#0a122a",
+                      "surface-dim": "#151007",
                       "secondary-fixed": "#c4e7ff",
                       "on-secondary-container": "#00374d",
                       "surface-container-lowest": "#050d25",
                       "outline-variant": "#3b494c",
                       "surface-container-highest": "#2c344d",
                       "outline": "#849396",
-                      "surface-container": "#171e37",
+                      "surface-container": "#332b1f",
                       "on-primary-container": "#00626e",
                       "on-background": "#dbe1ff",
                       "primary-fixed": "#9cf0ff",
-                      "surface-tint": "#00daf3",
+                      "surface-tint": "#d9a441",
                       "on-tertiary-fixed": "#07006c",
                       "on-error": "#690005",
                       "surface-container-low": "#131a33",
@@ -46,15 +46,15 @@
                       "surface-bright": "#313852",
                       "tertiary-fixed-dim": "#c0c1ff",
                       "inverse-surface": "#dbe1ff",
-                      "primary-container": "#00e5ff",
+                      "primary-container": "#d9a441",
                       "on-secondary-fixed-variant": "#004c69",
-                      "background": "#0a122a",
+                      "background": "#151007",
                       "tertiary-fixed": "#e1e0ff",
                       "surface-container-high": "#212942",
                       "on-tertiary-fixed-variant": "#2f2ebe",
                       "on-primary-fixed-variant": "#004f58",
                       "on-secondary": "#00354a",
-                      "surface": "#0a122a",
+                      "surface": "#151007",
                       "on-tertiary-container": "#4344d1",
                       "error": "#ffb4ab",
                       "on-surface-variant": "#bac9cc",
@@ -173,34 +173,34 @@
             background: rgba(28, 37, 65, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(138, 164, 143, 0.2);
+            box-shadow: inset 0 0 20px rgba(138, 164, 143, 0.05);
         }
 
         .btn-primary {
-            background-color: #00E5FF;
+            background-color: #d9a441;
             color: #0B132B;
             transition: all 0.2s ease;
         }
         .btn-primary:hover {
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            box-shadow: 0 0 15px rgba(217, 164, 65, 0.4);
             transform: translateY(-1px);
         }
 
         .btn-secondary {
             background-color: transparent;
-            border: 1px solid #38BDF8;
-            color: #38BDF8;
+            border: 1px solid #8aa48f;
+            color: #8aa48f;
             transition: all 0.2s ease;
         }
         .btn-secondary:hover {
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
-            background-color: rgba(56, 189, 248, 0.05);
+            box-shadow: 0 0 12px rgba(138, 164, 143, 0.3);
+            background-color: rgba(138, 164, 143, 0.05);
         }
 
         .tech-badge {
-            background-color: rgba(56, 189, 248, 0.1);
-            border-left: 2px solid #38BDF8;
+            background-color: rgba(138, 164, 143, 0.1);
+            border-left: 2px solid #8aa48f;
         }
 
         .pulse-indicator {
@@ -208,9 +208,9 @@
         }
 
         @keyframes pulse-ring {
-            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
-            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(217, 164, 65, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(217, 164, 65, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(217, 164, 65, 0); }
         }
 
         .shimmer-line {
@@ -219,7 +219,7 @@
             left: -100%;
             width: 50%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, #00E5FF, transparent);
+            background: linear-gradient(90deg, transparent, #d9a441, transparent);
             animation: shimmer 3s infinite;
         }
 
@@ -236,11 +236,11 @@
             background: rgba(11, 19, 43, 0.5); 
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.3); 
+            background: rgba(138, 164, 143, 0.3); 
             border-radius: 2px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(56, 189, 248, 0.6); 
+            background: rgba(138, 164, 143, 0.6); 
         }
     </style>
 </head>
@@ -251,7 +251,7 @@
 <!-- TopAppBar -->
 <header class="bg-surface-dim/80 backdrop-blur-xl text-primary font-headline-md text-headline-md fixed top-0 w-full z-50 border-b border-outline-variant/20 shadow-sm flex justify-between items-center px-panel-padding h-16 w-full">
 <div class="flex items-center gap-4">
-<span class="font-display-lg text-display-lg text-primary tracking-tighter text-3xl font-bold">SANDSHIELD AI</span>
+<span class="font-display-lg text-display-lg text-primary tracking-tighter text-3xl font-bold">SAND GUARD</span>
 </div>
 <nav class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-label-caps">
 <a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95 duration-150" href="#">Dashboard</a>

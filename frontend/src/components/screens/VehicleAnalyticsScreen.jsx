@@ -12,9 +12,9 @@ export default function VehicleAnalyticsScreen() {
   return (
     <div className="space-y-6 font-mono text-xs">
       {/* Top ANPR Controls */}
-      <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20 flex items-center justify-between">
+      <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20 flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <Truck className="w-5 h-5 text-[#00e5ff]" />
+          <Truck className="w-5 h-5 text-[#d9a441]" />
           <div>
             <div className="text-gray-400 text-[10px]">ANPR CAMERA NODE</div>
             <div className="text-white font-bold text-sm">Bhavani River Access Gate #03 (Tollgate Camera Node #44)</div>
@@ -30,10 +30,10 @@ export default function VehicleAnalyticsScreen() {
       {/* Main Grid: ANPR Scanner Feed + Target Vehicle Intelligence Profile */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Container: Live ANPR Camera OCR Scanning Viewport */}
-        <div className="glass-card p-5 rounded-xl border border-[#00e5ff]/30 flex flex-col justify-between">
+        <div className="glass-card p-5 rounded-xl border border-[#d9a441]/30 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between border-b border-[#00e5ff]/20 pb-3 mb-4">
-              <h4 className="text-sm font-bold text-[#00e5ff] flex items-center space-x-2">
+            <div className="flex items-center justify-between border-b border-[#d9a441]/20 pb-3 mb-4">
+              <h4 className="text-sm font-bold text-[#d9a441] flex items-center space-x-2">
                 <Video className="w-4 h-4" />
                 <span>ANPR CAMERA FEED & LICENSE PLATE SCANNER</span>
               </h4>
@@ -41,17 +41,17 @@ export default function VehicleAnalyticsScreen() {
             </div>
 
             {/* Camera Viewport Placeholder */}
-            <div className="relative w-full h-[260px] bg-[#050b18] rounded-lg overflow-hidden border border-[#00e5ff]/30 flex items-center justify-center">
+            <div className="relative w-full h-[260px] bg-[#140f08] rounded-lg overflow-hidden border border-[#d9a441]/30 flex items-center justify-center">
               <svg className="w-full h-full" viewBox="0 0 500 260">
                 <rect width="500" height="260" fill="#081427" />
                 {/* Truck Silhouette */}
-                <rect x="150" y="80" width="200" height="110" fill="#17283c" stroke="#38bdf8" strokeWidth="1.5" />
+                <rect x="150" y="80" width="200" height="110" fill="#3d2f23" stroke="#8aa48f" strokeWidth="1.5" />
                 <rect x="110" y="110" width="40" height="80" fill="#1e344f" />
 
                 {/* License Plate Scanning Box */}
                 <g transform="translate(190, 140)">
-                  <rect width="120" height="35" fill="none" stroke="#ef4444" strokeWidth="2.5" className="animate-pulse" />
-                  <rect x="0" y="-18" width="100" height="16" fill="#ef4444" rx="2" />
+                  <rect width="120" height="35" fill="none" stroke="#c94c2b" strokeWidth="2.5" className="animate-pulse" />
+                  <rect x="0" y="-18" width="100" height="16" fill="#c94c2b" rx="2" />
                   <text x="5" y="-6" fill="#ffffff" fontSize="9" fontWeight="bold">ANPR SCANNING</text>
                   <rect x="10" y="5" width="100" height="25" fill="#ffffff" rx="2" />
                   <text x="60" y="22" textAnchor="middle" fill="#000000" fontSize="12" fontWeight="bold">TN52 AB4321</text>
@@ -60,7 +60,7 @@ export default function VehicleAnalyticsScreen() {
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-[#00e5ff]/20 flex items-center justify-between text-gray-300">
+          <div className="mt-4 pt-3 border-t border-[#d9a441]/20 flex items-center justify-between text-gray-300">
             <span>LAST CAPTURED PLATE: <strong className="text-white">TN52 AB4321</strong></span>
             <span className="text-emerald-400">TIMESTAMP: 14:31:02 IST</span>
           </div>
@@ -80,31 +80,31 @@ export default function VehicleAnalyticsScreen() {
             </div>
 
             <div className="space-y-3">
-              <div className="flex justify-between items-center bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/20">
+              <div className="flex justify-between items-center bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/20">
                 <span className="text-gray-400">LICENSE PLATE:</span>
-                <span className="text-lg font-bold text-[#00e5ff] font-mono">TN52 AB4321</span>
+                <span className="text-lg font-bold text-[#d9a441] font-mono">TN52 AB4321</span>
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-gray-300">
-                <div className="bg-[#070d1e] p-2.5 rounded border border-gray-800">
+                <div className="bg-[#1b1610] p-2.5 rounded border border-gray-800">
                   <div className="text-gray-500 text-[10px]">VEHICLE TYPE</div>
                   <div className="font-bold text-white mt-0.5">10-Wheeler Tipper</div>
                 </div>
-                <div className="bg-[#070d1e] p-2.5 rounded border border-gray-800">
+                <div className="bg-[#1b1610] p-2.5 rounded border border-gray-800">
                   <div className="text-gray-500 text-[10px]">24H TRIP COUNT</div>
                   <div className="font-bold text-amber-400 mt-0.5">15 Trips (Baseline: 2)</div>
                 </div>
               </div>
 
               {/* Transit Route Trace Preview */}
-              <div className="bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/20 space-y-2">
+              <div className="bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/20 space-y-2">
                 <div className="text-gray-400 text-[10px] uppercase">DETECTED TRANSIT ROUTE LOOP</div>
                 <div className="flex items-center space-x-2 text-[11px] text-gray-300">
                   <span className="text-red-400">Riverbank Sector 4B</span>
-                  <ArrowRight className="w-3 h-3 text-[#00e5ff]" />
+                  <ArrowRight className="w-3 h-3 text-[#d9a441]" />
                   <span className="text-amber-400">Tollgate Gate 03</span>
-                  <ArrowRight className="w-3 h-3 text-[#00e5ff]" />
-                  <span className="text-[#00e5ff]">Private Stockpile Yard</span>
+                  <ArrowRight className="w-3 h-3 text-[#d9a441]" />
+                  <span className="text-[#d9a441]">Private Stockpile Yard</span>
                 </div>
               </div>
             </div>
@@ -122,9 +122,9 @@ export default function VehicleAnalyticsScreen() {
       </div>
 
       {/* Flagged Suspicious Vehicle Fleet Table */}
-      <div className="glass-card p-5 rounded-xl border border-[#00e5ff]/20">
-        <div className="flex items-center justify-between border-b border-[#00e5ff]/20 pb-3 mb-4">
-          <h4 className="text-sm font-bold text-[#00e5ff]">SUSPICIOUS COMMERCIAL VEHICLE MONITORING QUEUE</h4>
+      <div className="glass-card p-5 rounded-xl border border-[#d9a441]/20">
+        <div className="flex items-center justify-between border-b border-[#d9a441]/20 pb-3 mb-4">
+          <h4 className="text-sm font-bold text-[#d9a441]">SUSPICIOUS COMMERCIAL VEHICLE MONITORING QUEUE</h4>
           <span className="text-gray-400">4 HIGH-RISK VEHICLES FLAGGED TODAY</span>
         </div>
 
@@ -142,8 +142,8 @@ export default function VehicleAnalyticsScreen() {
             </thead>
             <tbody className="divide-y divide-gray-800 text-gray-300">
               {flaggedVehicles.map((v, i) => (
-                <tr key={i} className="hover:bg-[#17213b]/50">
-                  <td className="py-2.5 font-bold text-[#00e5ff]">{v.plate}</td>
+                <tr key={i} className="hover:bg-[#3d2f23]/50">
+                  <td className="py-2.5 font-bold text-[#d9a441]">{v.plate}</td>
                   <td className="py-2.5">{v.type}</td>
                   <td className="py-2.5 text-amber-400 font-bold">{v.trips} Trips</td>
                   <td className="py-2.5 text-gray-400">{v.zone}</td>
@@ -155,7 +155,7 @@ export default function VehicleAnalyticsScreen() {
                     </span>
                   </td>
                   <td className="py-2.5 text-right">
-                    <button className="bg-[#00e5ff]/10 hover:bg-[#00e5ff]/20 text-[#00e5ff] border border-[#00e5ff]/30 px-2.5 py-1 rounded text-[10px] font-bold">
+                    <button className="bg-[#d9a441]/10 hover:bg-[#d9a441]/20 text-[#d9a441] border border-[#d9a441]/30 px-2.5 py-1 rounded text-[10px] font-bold">
                       FLAG VEHICLE
                     </button>
                   </td>

@@ -1,19 +1,19 @@
 /**
- * SandShield AI - Master Interactivity & Interconnected Navigation Script
+ * Sand Guard - Master Interactivity & Interconnected Navigation Script
  * Provides unified sidebar navigation, topbar controls, live search, global modals,
  * and complete page-specific interactive logic across all 11 Stitch HTML screens.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('[SandShield AI] Initializing master application interactivity...');
+    console.log('[Sand Guard] Initializing master application interactivity...');
 
     const currentPath = window.location.pathname;
 
     // --- 1. Toast Notification System ---
-    let toastContainer = document.getElementById('sandshield-toast-container');
+    let toastContainer = document.getElementById('sandguard-toast-container');
     if (!toastContainer) {
         toastContainer = document.createElement('div');
-        toastContainer.id = 'sandshield-toast-container';
+        toastContainer.id = 'sandguard-toast-container';
         toastContainer.className = 'fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 pointer-events-none';
         document.body.appendChild(toastContainer);
     }
@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.showToast = function(message, type = 'info') {
         const toast = document.createElement('div');
         let icon = 'info';
-        let borderColor = 'border-[#00e5ff]';
-        let textColor = 'text-[#00e5ff]';
+        let borderColor = 'border-[#d9a441]';
+        let textColor = 'text-[#d9a441]';
         if (type === 'success') { icon = 'check_circle'; borderColor = 'border-emerald-400'; textColor = 'text-emerald-400'; }
         if (type === 'warning') { icon = 'warning'; borderColor = 'border-amber-400'; textColor = 'text-amber-400'; }
         if (type === 'error') { icon = 'error'; borderColor = 'border-red-400'; textColor = 'text-red-400'; }
 
-        toast.className = `pointer-events-auto bg-[#171e37]/95 border ${borderColor} text-white px-4 py-3 rounded-lg shadow-2xl font-mono text-xs flex items-center gap-3 transform translate-y-4 opacity-0 transition-all duration-300 backdrop-blur-md`;
+        toast.className = `pointer-events-auto bg-[#332b1f]/95 border ${borderColor} text-white px-4 py-3 rounded-lg shadow-2xl font-mono text-xs flex items-center gap-3 transform translate-y-4 opacity-0 transition-all duration-300 backdrop-blur-md`;
         toast.innerHTML = `
             <span class="material-symbols-outlined ${textColor} text-lg">${icon}</span>
             <span>${message}</span>
@@ -45,30 +45,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- 2. Global Modal Container ---
-    let modalOverlay = document.getElementById('sandshield-modal-overlay');
+    let modalOverlay = document.getElementById('sandguard-modal-overlay');
     if (!modalOverlay) {
         modalOverlay = document.createElement('div');
-        modalOverlay.id = 'sandshield-modal-overlay';
+        modalOverlay.id = 'sandguard-modal-overlay';
         modalOverlay.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[9990] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300';
         modalOverlay.innerHTML = `
-            <div id="sandshield-modal-content" class="bg-[#171e37] border border-[#00e5ff]/40 rounded-xl p-6 max-w-lg w-full text-white shadow-2xl relative font-mono text-xs space-y-4 transform scale-95 transition-transform duration-300">
-                <button id="sandshield-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+            <div id="sandguard-modal-content" class="bg-[#332b1f] border border-[#d9a441]/40 rounded-xl p-6 max-w-lg w-full text-white shadow-2xl relative font-mono text-xs space-y-4 transform scale-95 transition-transform duration-300">
+                <button id="sandguard-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
                     <span class="material-symbols-outlined">close</span>
                 </button>
-                <div id="sandshield-modal-body"></div>
+                <div id="sandguard-modal-body"></div>
             </div>
         `;
         document.body.appendChild(modalOverlay);
 
-        document.getElementById('sandshield-modal-close').addEventListener('click', closeModal);
+        document.getElementById('sandguard-modal-close').addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) closeModal();
         });
     }
 
     function openModal(htmlContent) {
-        const body = document.getElementById('sandshield-modal-body');
-        const content = document.getElementById('sandshield-modal-content');
+        const body = document.getElementById('sandguard-modal-body');
+        const content = document.getElementById('sandguard-modal-content');
         body.innerHTML = htmlContent;
         modalOverlay.classList.remove('hidden');
         requestAnimationFrame(() => {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function closeModal() {
-        const content = document.getElementById('sandshield-modal-content');
+        const content = document.getElementById('sandguard-modal-content');
         modalOverlay.classList.add('opacity-0');
         content.classList.add('scale-95');
         setTimeout(() => {
@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.innerHTML = sidebarRoutes.map(item => {
                 const isActive = currentPath.includes(item.path.split('/').pop());
                 const activeClasses = isActive 
-                    ? 'text-[#c3f5ff] border-l-2 border-[#00e5ff] bg-[#00e5ff]/10 font-bold' 
-                    : 'text-[#bac9cc] hover:bg-[#00e5ff]/5 hover:text-[#c3f5ff]';
+                    ? 'text-[#c3f5ff] border-l-2 border-[#d9a441] bg-[#d9a441]/10 font-bold' 
+                    : 'text-[#bac9cc] hover:bg-[#d9a441]/5 hover:text-[#c3f5ff]';
                 return `
                     <a class="flex items-center gap-3 px-3 py-2 ${activeClasses} transition-all rounded-md" href="${item.path}">
                         <span class="material-symbols-outlined text-lg" ${isActive ? "style=\"font-variation-settings: 'FILL' 1;\"" : ""}>${item.icon}</span>
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         parent.style.position = 'relative';
 
         let dropdown = document.createElement('div');
-        dropdown.className = 'absolute top-full left-0 w-full mt-2 bg-[#171e37] border border-[#00e5ff]/40 rounded-lg shadow-2xl text-white font-mono text-xs hidden z-[999] overflow-hidden';
+        dropdown.className = 'absolute top-full left-0 w-full mt-2 bg-[#332b1f] border border-[#d9a441]/40 rounded-lg shadow-2xl text-white font-mono text-xs hidden z-[999] overflow-hidden';
         parent.appendChild(dropdown);
 
         const mockResults = [
@@ -168,9 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 dropdown.innerHTML = `<div class="p-3 text-gray-400">No matching telemetry found</div>`;
             } else {
                 dropdown.innerHTML = matches.map(m => `
-                    <div class="p-3 hover:bg-[#00e5ff]/15 cursor-pointer border-b border-gray-800/50 flex items-center justify-between" onclick="window.location.href='${m.path}'">
+                    <div class="p-3 hover:bg-[#d9a441]/15 cursor-pointer border-b border-gray-800/50 flex items-center justify-between" onclick="window.location.href='${m.path}'">
                         <span>${m.text}</span>
-                        <span class="material-symbols-outlined text-sm text-[#00e5ff]">arrow_forward</span>
+                        <span class="material-symbols-outlined text-sm text-[#d9a441]">arrow_forward</span>
                     </div>
                 `).join('');
             }
@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 openModal(`
                     <div class="space-y-3">
-                        <div class="flex justify-between items-center border-b border-[#00e5ff]/30 pb-2">
-                            <h3 class="font-bold text-[#00e5ff] flex items-center gap-2">
+                        <div class="flex justify-between items-center border-b border-[#d9a441]/30 pb-2">
+                            <h3 class="font-bold text-[#d9a441] flex items-center gap-2">
                                 <span class="material-symbols-outlined">notifications</span>
                                 REAL-TIME SYSTEM NOTIFICATIONS (7)
                             </h3>
@@ -205,9 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <span class="text-[10px] text-gray-400">2m ago</span>
                             </div>
-                            <div class="bg-[#00e5ff]/10 border border-[#00e5ff]/30 p-2.5 rounded flex justify-between items-start">
+                            <div class="bg-[#d9a441]/10 border border-[#d9a441]/30 p-2.5 rounded flex justify-between items-start">
                                 <div>
-                                    <div class="font-bold text-[#00e5ff]">ANPR FLAG #VEH-4321</div>
+                                    <div class="font-bold text-[#d9a441]">ANPR FLAG #VEH-4321</div>
                                     <div class="text-gray-300 text-[11px]">Blacklisted truck passed Checkpost 09</div>
                                 </div>
                                 <span class="text-[10px] text-gray-400">14m ago</span>
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="text-[10px] text-gray-400">45m ago</span>
                             </div>
                         </div>
-                        <button onclick="window.showToast('All notifications marked as read', 'success'); window.closeModal();" class="w-full bg-[#00e5ff] text-black font-bold py-2 rounded hover:bg-[#38bdf8] transition-colors">
+                        <button onclick="window.showToast('All notifications marked as read', 'success'); window.closeModal();" class="w-full bg-[#d9a441] text-black font-bold py-2 rounded hover:bg-[#8aa48f] transition-colors">
                             MARK ALL AS READ
                         </button>
                     </div>
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 openModal(`
                     <div class="space-y-3">
-                        <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2 flex items-center gap-2">
+                        <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2 flex items-center gap-2">
                             <span class="material-symbols-outlined">satellite_alt</span>
                             ISRO-SAT TELEMETRY STATUS
                         </h3>
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div><strong>RESOLUTION:</strong> 10m Multispectral / 0.5m Pan</div>
                             <div><strong>STATUS:</strong> <span class="text-emerald-400 font-bold">ONLINE & SYNCED</span></div>
                         </div>
-                        <button onclick="window.location.href='/stitch_html/04_satellite_intelligence.html'" class="w-full bg-[#00e5ff] text-black font-bold py-2 rounded">
+                        <button onclick="window.location.href='/stitch_html/04_satellite_intelligence.html'" class="w-full bg-[#d9a441] text-black font-bold py-2 rounded">
                             OPEN SATELLITE INTELLIGENCE
                         </button>
                     </div>
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 openModal(`
                     <div class="space-y-3">
-                        <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2 flex items-center gap-2">
+                        <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2 flex items-center gap-2">
                             <span class="material-symbols-outlined">sensors</span>
                             RIVER BASIN SENSOR NETWORK
                         </h3>
@@ -286,21 +286,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 openModal(`
                     <div class="space-y-3">
-                        <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2 flex items-center gap-2">
+                        <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2 flex items-center gap-2">
                             <span class="material-symbols-outlined">videocam</span>
                             LIVE CAMERA FEED GRID
                         </h3>
                         <div class="grid grid-cols-2 gap-2 text-[10px]">
                             <div class="bg-black border border-gray-700 p-2 text-center rounded">
-                                <div class="text-[#00e5ff] font-bold">DRONE ALPHA-1 FLIR</div>
+                                <div class="text-[#d9a441] font-bold">DRONE ALPHA-1 FLIR</div>
                                 <div class="text-emerald-400 animate-pulse mt-1">● LIVE STREAMING</div>
                             </div>
                             <div class="bg-black border border-gray-700 p-2 text-center rounded">
-                                <div class="text-[#00e5ff] font-bold">ANPR CHECKPOST 09</div>
+                                <div class="text-[#d9a441] font-bold">ANPR CHECKPOST 09</div>
                                 <div class="text-emerald-400 animate-pulse mt-1">● LIVE STREAMING</div>
                             </div>
                         </div>
-                        <button onclick="window.location.href='/stitch_html/05_drone_verification.html'" class="w-full bg-[#00e5ff] text-black font-bold py-2 rounded">
+                        <button onclick="window.location.href='/stitch_html/05_drone_verification.html'" class="w-full bg-[#d9a441] text-black font-bold py-2 rounded">
                             OPEN DRONE RECON FEED
                         </button>
                     </div>
@@ -315,14 +315,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 openModal(`
                     <div class="space-y-3">
-                        <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2 flex items-center gap-2">
+                        <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2 flex items-center gap-2">
                             <span class="material-symbols-outlined">settings</span>
                             SYSTEM PARAMETERS CONFIGURATION
                         </h3>
                         <div class="space-y-3 text-xs">
                             <div>
                                 <label class="block text-gray-300 font-bold mb-1">AI ALERT THRESHOLD</label>
-                                <input type="range" min="50" max="95" value="80" class="w-full accent-[#00e5ff]" />
+                                <input type="range" min="50" max="95" value="80" class="w-full accent-[#d9a441]" />
                             </div>
                             <div>
                                 <label class="block text-gray-300 font-bold mb-1">SATELLITE AUTO-REFRESH</label>
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </select>
                             </div>
                         </div>
-                        <button onclick="window.showToast('Settings saved successfully', 'success'); window.closeModal();" class="w-full bg-[#00e5ff] text-black font-bold py-2 rounded">
+                        <button onclick="window.showToast('Settings saved successfully', 'success'); window.closeModal();" class="w-full bg-[#d9a441] text-black font-bold py-2 rounded">
                             SAVE PREFERENCES
                         </button>
                     </div>
@@ -348,12 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
         img.addEventListener('click', () => {
             openModal(`
                 <div class="space-y-3 text-center">
-                    <div class="w-16 h-16 rounded-full overflow-hidden mx-auto border-2 border-[#00e5ff]">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mx-auto border-2 border-[#d9a441]">
                         <img src="${img.src}" class="w-full h-full object-cover" />
                     </div>
                     <div>
                         <h3 class="font-bold text-lg text-white">Inspector General R. Sharma</h3>
-                        <p class="text-xs text-[#00e5ff]">State Sand Mining Enforcement Cell</p>
+                        <p class="text-xs text-[#d9a441]">State Sand Mining Enforcement Cell</p>
                         <p class="text-[10px] text-gray-400 mt-0.5">Badge ID: ENV-OFF-042 | Level 5 Clearance</p>
                     </div>
                     <button onclick="window.location.href='/stitch_html/01_login.html'" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded transition-colors">
@@ -387,10 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 openModal(`
                     <div class="space-y-3">
-                        <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2">RESET SECURITY ACCESS TOKEN</h3>
+                        <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2">RESET SECURITY ACCESS TOKEN</h3>
                         <p class="text-gray-300">Enter your Official Badge ID to receive an OTP on your registered government mobile.</p>
                         <input type="text" placeholder="e.g. env-off-042" class="w-full bg-[#0c162d] border border-gray-700 p-2.5 rounded text-white font-mono" />
-                        <button onclick="window.showToast('OTP sent to registered mobile number', 'info'); window.closeModal();" class="w-full bg-[#00e5ff] text-black font-bold py-2.5 rounded">
+                        <button onclick="window.showToast('OTP sent to registered mobile number', 'info'); window.closeModal();" class="w-full bg-[#d9a441] text-black font-bold py-2.5 rounded">
                             SEND OTP TOKEN
                         </button>
                     </div>
@@ -428,9 +428,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.addEventListener('click', () => {
                     openModal(`
                         <div class="space-y-3">
-                            <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2">DISPATCH RECON DRONE ALPHA-1</h3>
+                            <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2">DISPATCH RECON DRONE ALPHA-1</h3>
                             <p class="text-gray-300">Target Coordinates: Lat 11.3412° N, Lng 77.7172° E (Bhavani River Sector 4B)</p>
-                            <button onclick="window.showToast('Drone Alpha-1 dispatched to Sector 4B!', 'success'); window.closeModal(); setTimeout(() => window.location.href='/stitch_html/05_drone_verification.html', 1000);" class="w-full bg-[#00e5ff] text-black font-bold py-2.5 rounded">
+                            <button onclick="window.showToast('Drone Alpha-1 dispatched to Sector 4B!', 'success'); window.closeModal(); setTimeout(() => window.location.href='/stitch_html/05_drone_verification.html', 1000);" class="w-full bg-[#d9a441] text-black font-bold py-2.5 rounded">
                                 CONFIRM DRONE LAUNCH
                             </button>
                         </div>
@@ -502,9 +502,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.addEventListener('click', () => {
                     openModal(`
                         <div class="space-y-3">
-                            <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2">REQUEST SATELLITE HIGH-RES TASKING</h3>
+                            <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2">REQUEST SATELLITE HIGH-RES TASKING</h3>
                             <p class="text-gray-300">Requesting immediate ISRO Sentinel-2A panchromatic re-imaging over target river basin.</p>
-                            <button onclick="window.showToast('Satellite Tasking Scheduled for next pass (04:15 UTC)', 'success'); window.closeModal();" class="w-full bg-[#00e5ff] text-black font-bold py-2.5 rounded">
+                            <button onclick="window.showToast('Satellite Tasking Scheduled for next pass (04:15 UTC)', 'success'); window.closeModal();" class="w-full bg-[#d9a441] text-black font-bold py-2.5 rounded">
                                 CONFIRM TASKING REQUEST
                             </button>
                         </div>
@@ -589,9 +589,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.addEventListener('click', () => {
                     openModal(`
                         <div class="space-y-3">
-                            <h3 class="font-bold text-[#00e5ff] border-b border-[#00e5ff]/30 pb-2">DISPATCH FIELD ENFORCEMENT OFFICER</h3>
+                            <h3 class="font-bold text-[#d9a441] border-b border-[#d9a441]/30 pb-2">DISPATCH FIELD ENFORCEMENT OFFICER</h3>
                             <p class="text-gray-300">Assigning Officer to Incident #ALT-9942 (Bhavani River Sector 4B)</p>
-                            <button onclick="window.showToast('Field Officer Dispatched to Sector 4B via Mobile App', 'success'); window.closeModal();" class="w-full bg-[#00e5ff] text-black font-bold py-2.5 rounded">
+                            <button onclick="window.showToast('Field Officer Dispatched to Sector 4B via Mobile App', 'success'); window.closeModal();" class="w-full bg-[#d9a441] text-black font-bold py-2.5 rounded">
                                 DISPATCH NEAREST PATROL
                             </button>
                         </div>

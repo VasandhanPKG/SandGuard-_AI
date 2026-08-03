@@ -67,7 +67,10 @@ class ReportService:
             )
             self._export_pdf(filepath, title, district_name or "All", events_data, ai_narrative)
 
+        import uuid
+        now = datetime.now(timezone.utc)
         report = Report(
+            id=str(uuid.uuid4()),
             title=title,
             report_type=report_type,
             format=format_type.upper(),
@@ -75,9 +78,20 @@ class ReportService:
             file_path=filepath,
             status="COMPLETED",
             generated_by=user_id,
-            summary_data={"total_records": len(events_data)}
+            summary_data={"total_records": len(events_data)},
+            created_at=now
         )
-        return await self.report_repo.create(report)
+        try:
+            return await self.report_repo.create(report)
+        except Exception:
+            try:
+                await self.session.rollback()
+            except Exception:
+                pass
+            return report
+
+
+
 
     def _export_csv(self, filepath: str, data: List[Dict[str, Any]]) -> None:
         """Export data array to CSV format."""

@@ -3,7 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Vehicle &amp; Tollgate Analytics - SandShield AI</title>
+<title>Vehicle &amp; Tollgate Analytics - Sand Guard</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -17,16 +17,16 @@
                         "on-error-container": "#ffdad6",
                         "on-background": "#dbe1ff",
                         "tertiary-fixed-dim": "#c0c1ff",
-                        "primary-fixed-dim": "#00daf3",
+                        "primary-fixed-dim": "#d9a441",
                         "inverse-primary": "#006875",
-                        "background": "#0a122a",
-                        "surface-dim": "#0a122a",
+                        "background": "#151007",
+                        "surface-dim": "#151007",
                         "outline-variant": "#3b494c",
-                        "surface-container": "#171e37",
+                        "surface-container": "#332b1f",
                         "primary": "#c3f5ff",
                         "outline": "#849396",
                         "on-primary-fixed-variant": "#004f58",
-                        "surface-tint": "#00daf3",
+                        "surface-tint": "#d9a441",
                         "surface-container-lowest": "#050d25",
                         "on-secondary": "#00354a",
                         "on-primary-container": "#00626e",
@@ -40,13 +40,13 @@
                         "tertiary": "#edeaff",
                         "on-tertiary-container": "#4344d1",
                         "secondary": "#7bd0ff",
-                        "surface": "#0a122a",
+                        "surface": "#151007",
                         "on-error": "#690005",
                         "secondary-fixed-dim": "#7bd0ff",
                         "on-tertiary-fixed": "#07006c",
                         "on-primary-fixed": "#001f24",
                         "primary-fixed": "#9cf0ff",
-                        "primary-container": "#00e5ff",
+                        "primary-container": "#d9a441",
                         "on-tertiary-fixed-variant": "#2f2ebe",
                         "tertiary-fixed": "#e1e0ff",
                         "on-surface": "#dbe1ff",
@@ -107,8 +107,8 @@
             border-image-slice: 1;
         }
         .active-panel {
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(138, 164, 143, 0.2);
+            box-shadow: inset 0 0 20px rgba(217, 164, 65, 0.05);
         }
         .scanline {
             position: absolute;
@@ -116,7 +116,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: rgba(0, 229, 255, 0.5);
+            background: rgba(217, 164, 65, 0.5);
             animation: scan 3s linear infinite;
         }
         @keyframes scan {
@@ -126,7 +126,7 @@
             100% { transform: translateY(100%); opacity: 0; }
         }
         .text-glow {
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            text-shadow: 0 0 10px rgba(217, 164, 65, 0.5);
         }
     </style>
 </head>
@@ -134,7 +134,7 @@
 <!-- TopAppBar -->
 <header class="bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,229,255,0.05)] fixed top-0 w-full z-50 flex justify-between items-center px-panel-padding h-16">
 <div class="flex items-center gap-4">
-<span class="text-headline-md font-headline-md font-bold tracking-tighter text-primary">SANDSHIELD AI</span>
+<span class="text-headline-md font-headline-md font-bold tracking-tighter text-primary">SAND GUARD</span>
 <div class="h-6 w-px bg-white/20 mx-2"></div>
 <h1 class="font-headline-md text-headline-md text-on-surface">Vehicle &amp; Tollgate Analytics</h1>
 </div>
@@ -384,7 +384,7 @@
 <!-- Footer -->
 <footer class="bg-surface-container-lowest/80 backdrop-blur-md border-t border-white/5 fixed bottom-0 w-full z-50 flex justify-between items-center px-panel-padding py-2 h-10 md:ml-[280px] md:w-[calc(100%-280px)]">
 <div class="font-data-mono text-data-mono text-xs text-on-surface-variant">
-            © 2024 SANDSHIELD AI // SECURE ENCRYPTION ACTIVE
+            © 2024 SAND GUARD // SECURE ENCRYPTION ACTIVE
         </div>
 <div class="flex items-center gap-6 font-data-mono text-data-mono text-xs">
 <a class="text-primary hover:text-secondary-fixed-dim transition-colors flex items-center gap-1" href="#">

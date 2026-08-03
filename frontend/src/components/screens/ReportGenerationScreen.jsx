@@ -33,11 +33,11 @@ export default function ReportGenerationScreen() {
       {/* Top Controls Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 1 Column: Report Configurator */}
-        <div className="glass-card p-5 rounded-xl border border-[#00e5ff]/30 space-y-4 flex flex-col justify-between">
+        <div className="glass-card p-5 rounded-xl border border-[rgba(217,164,65,0.2)] space-y-4 flex flex-col justify-between">
           <div>
-            <div className="border-b border-[#00e5ff]/20 pb-3 mb-4">
-              <h3 className="text-sm font-bold text-[#00e5ff] flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
+            <div className="border-b border-[rgba(217,164,65,0.2)] pb-3 mb-4">
+              <h3 className="text-sm font-bold text-[#d9a441] flex items-center space-x-2">
+                <FileText className="w-4 h-4 text-[#d9a441]" />
                 <span>INTELLIGENCE DOSSIER BUILDER</span>
               </h3>
               <p className="text-[10px] text-gray-400 mt-0.5">Generate court-admissible government enforcement PDF reports</p>
@@ -46,7 +46,7 @@ export default function ReportGenerationScreen() {
             <div className="space-y-3">
               <div>
                 <label className="block text-gray-300 font-semibold mb-1">TARGET INCIDENT</label>
-                <select className="w-full bg-[#070d1e] border border-[#00e5ff]/30 text-white p-2 rounded outline-none">
+                <select className="w-full bg-[#1b1610] border border-[#d9a441]/30 text-white p-2 rounded outline-none">
                   <option>Incident #ALT-9942 - Bhavani River Sector 4B</option>
                   <option>Incident #ALT-9941 - Cauvery North Bank</option>
                 </select>
@@ -54,7 +54,7 @@ export default function ReportGenerationScreen() {
 
               <div>
                 <label className="block text-gray-300 font-semibold mb-1">REPORT CLASSIFICATION</label>
-                <select className="w-full bg-[#070d1e] border border-[#00e5ff]/30 text-white p-2 rounded outline-none">
+                <select className="w-full bg-[#1b1610] border border-[#d9a441]/30 text-white p-2 rounded outline-none">
                   <option>Court-Admissible Enforcement Dossier</option>
                   <option>Executive Briefing Summary</option>
                   <option>Environmental Impact Assessment</option>
@@ -79,7 +79,7 @@ export default function ReportGenerationScreen() {
                         type="checkbox"
                         checked={selectedModules[m.key]}
                         onChange={() => toggleModule(m.key)}
-                        className="rounded accent-[#00e5ff]"
+                        className="rounded accent-[#d9a441]"
                       />
                       <span>{m.label}</span>
                     </label>
@@ -92,7 +92,7 @@ export default function ReportGenerationScreen() {
           <button
             onClick={handleDownload}
             disabled={isGenerating}
-            className="w-full bg-[#00e5ff] hover:bg-[#38bdf8] text-black font-bold py-3 rounded-lg flex items-center justify-center space-x-2 transition-all glow-cyan cursor-pointer"
+            className="w-full bg-[#d9a441] hover:bg-[#d68a2c] text-black font-bold py-3 rounded-lg flex items-center justify-center space-x-2 transition-all glow-cyan cursor-pointer"
           >
             {isGenerating ? (
               <span>COMPILING PDF ENFORCEMENT DOSSIER...</span>
@@ -106,20 +106,20 @@ export default function ReportGenerationScreen() {
         </div>
 
         {/* Right 2 Columns: Live Interactive A4 PDF Document Preview */}
-        <div className="lg:col-span-2 glass-card p-6 rounded-xl border border-[#00e5ff]/30 space-y-4">
-          <div className="flex justify-between items-center border-b border-[#00e5ff]/20 pb-3">
-            <span className="text-xs font-bold text-gray-300">LIVE A4 DOCUMENT PRINT PREVIEW</span>
-            <span className="text-emerald-400 font-bold text-[11px]">CLASSIFICATION: CONFIDENTIAL</span>
+        <div className="lg:col-span-2 glass-card p-6 rounded-xl border border-[rgba(217,164,65,0.2)] space-y-4">
+          <div className="flex justify-between items-center border-b border-[rgba(217,164,65,0.2)] pb-3">
+            <span className="text-xs font-bold text-[#b9b1a7]">LIVE A4 DOCUMENT PRINT PREVIEW</span>
+            <span className="text-[#8aa48f] font-bold text-[11px]">CLASSIFICATION: CONFIDENTIAL</span>
           </div>
 
           {/* Printable A4 Formatted Document Container */}
-          <div className="bg-[#050b18] text-gray-200 border border-[#00e5ff]/20 p-8 rounded-lg space-y-5 shadow-2xl font-serif">
+          <div className="bg-[#140f08] text-[#e8dfd3] border border-[rgba(217,164,65,0.2)] p-8 rounded-lg space-y-5 shadow-2xl font-serif">
             {/* Document Government Header */}
-            <div className="border-b-2 border-[#00e5ff] pb-4 flex justify-between items-center font-sans">
+            <div className="border-b-2 border-[#d9a441] pb-4 flex justify-between items-center font-sans">
               <div>
                 <div className="flex items-center space-x-2">
-                  <Shield className="w-6 h-6 text-[#00e5ff]" />
-                  <h2 className="text-lg font-bold text-white tracking-wide">SANDSHIELD AI ENFORCEMENT CELL</h2>
+                  <Shield className="w-6 h-6 text-[#d9a441]" />
+                  <h2 className="text-lg font-bold text-white tracking-wide">SAND GUARD ENFORCEMENT CELL</h2>
                 </div>
                 <p className="text-xs text-gray-400 mt-0.5">STATE ENVIRONMENT TASK FORCE | GOVERNMENT OF INDIA</p>
               </div>
@@ -132,7 +132,7 @@ export default function ReportGenerationScreen() {
 
             {/* Section 1: Executive Summary */}
             <div className="space-y-1 font-sans">
-              <h4 className="font-bold text-[#00e5ff] uppercase text-xs">SECTION 1: TARGET INCIDENT SUMMARY</h4>
+              <h4 className="font-bold text-[#d9a441] uppercase text-xs">SECTION 1: TARGET INCIDENT SUMMARY</h4>
               <div className="text-xs text-gray-300 bg-[#0c162d] p-3 rounded border border-gray-800 space-y-1">
                 <div><strong>Location:</strong> Bhavani River Basin - Sector 4B (11.3412° N, 77.7172° E)</div>
                 <div><strong>Composite Risk Assessment:</strong> <span className="text-red-400 font-bold">93% CRITICAL HIGH</span></div>
@@ -142,10 +142,10 @@ export default function ReportGenerationScreen() {
 
             {/* Section 2: Visual Evidence Matrix */}
             <div className="space-y-2 font-sans">
-              <h4 className="font-bold text-[#00e5ff] uppercase text-xs">SECTION 2: MULTI-SENSOR VISUAL EVIDENCE</h4>
+              <h4 className="font-bold text-[#d9a441] uppercase text-xs">SECTION 2: MULTI-SENSOR VISUAL EVIDENCE</h4>
               <div className="grid grid-cols-3 gap-2 text-center text-[10px]">
                 <div className="bg-[#0c162d] p-2.5 rounded border border-gray-800">
-                  <div className="font-bold text-[#00e5ff] mb-1">SATELLITE CHANGE</div>
+                  <div className="font-bold text-[#d9a441] mb-1">SATELLITE CHANGE</div>
                   <div className="text-gray-400">85% Surface Shift Delta</div>
                 </div>
                 <div className="bg-[#0c162d] p-2.5 rounded border border-gray-800">
@@ -162,14 +162,14 @@ export default function ReportGenerationScreen() {
             {/* Section 3: Recommended Action & Signature Block */}
             <div className="pt-4 border-t border-gray-800 flex justify-between items-end font-sans">
               <div className="space-y-1">
-                <h4 className="font-bold text-[#00e5ff] uppercase text-xs">SECTION 3: RECOMMENDED LEGAL ACTION</h4>
+                <h4 className="font-bold text-[#d9a441] uppercase text-xs">SECTION 3: RECOMMENDED LEGAL ACTION</h4>
                 <p className="text-xs text-gray-300 max-w-md">
                   Immediate impoundment of machinery under Section 21 of Mines & Minerals Act.
                 </p>
               </div>
 
               <div className="text-right font-mono text-[10px] space-y-1">
-                <div className="text-[#00e5ff] font-bold">INSPECTOR GENERAL R. SHARMA</div>
+                <div className="text-[#d9a441] font-bold">INSPECTOR GENERAL R. SHARMA</div>
                 <div className="text-gray-400">[DIGITALLY SIGNED & STAMPED]</div>
               </div>
             </div>

@@ -83,12 +83,12 @@ export default function GisMapCanvas({
   ];
 
   return (
-    <div className={`relative w-full ${height} bg-[#070d1e] overflow-hidden rounded-xl border border-[#00e5ff]/20 shadow-2xl flex flex-col select-none`}>
+    <div className={`relative w-full ${height} bg-[#1b1610] overflow-hidden rounded-xl border border-[#d9a441]/20 shadow-2xl flex flex-col select-none`}>
       {/* Top Map Header Telemetry */}
-      <div className="absolute top-4 left-4 z-20 flex items-center space-x-3 bg-[#0f172a]/90 backdrop-blur-md border border-[#00e5ff]/30 px-4 py-2 rounded-lg text-xs font-mono text-[#00e5ff]">
+      <div className="absolute top-4 left-4 z-20 flex items-center space-x-3 bg-[#2d2418]/90 backdrop-blur-md border border-[#d9a441]/30 px-4 py-2 rounded-lg text-xs font-mono text-[#d9a441]">
         <span className="flex h-2 w-2 relative">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00e5ff] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00e5ff]"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d9a441] opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d9a441]"></span>
         </span>
         <span>ISRO SENTINEL-2 FUSION STREAM</span>
         <span className="text-gray-500">|</span>
@@ -98,9 +98,9 @@ export default function GisMapCanvas({
       </div>
 
       {/* Map Zoom Controls */}
-      <div className="absolute top-4 right-4 z-20 flex flex-col bg-[#0f172a]/90 backdrop-blur-md border border-[#00e5ff]/30 rounded-lg overflow-hidden text-xs font-mono text-gray-200">
-        <button onClick={() => setZoom(z => Math.min(z + 1, 18))} className="p-2.5 hover:bg-[#00e5ff]/20 border-b border-[#00e5ff]/20 transition-colors">+</button>
-        <button onClick={() => setZoom(z => Math.max(z - 1, 10))} className="p-2.5 hover:bg-[#00e5ff]/20 transition-colors">-</button>
+      <div className="absolute top-4 right-4 z-20 flex flex-col bg-[#2d2418]/90 backdrop-blur-md border border-[#d9a441]/30 rounded-lg overflow-hidden text-xs font-mono text-gray-200">
+        <button onClick={() => setZoom(z => Math.min(z + 1, 18))} className="p-2.5 hover:bg-[#d9a441]/20 border-b border-[#d9a441]/20 transition-colors">+</button>
+        <button onClick={() => setZoom(z => Math.max(z - 1, 10))} className="p-2.5 hover:bg-[#d9a441]/20 transition-colors">-</button>
       </div>
 
       {/* Interactive Canvas SVG Overlay */}
@@ -117,7 +117,7 @@ export default function GisMapCanvas({
             <stop offset="100%" stopColor="#F59E0B" stopOpacity="0" />
           </radialGradient>
           <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 229, 255, 0.06)" strokeWidth="1" />
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(217, 164, 65, 0.06)" strokeWidth="1" />
           </pattern>
         </defs>
 
@@ -125,9 +125,9 @@ export default function GisMapCanvas({
         <rect width="1000" height="600" fill="url(#grid)" />
 
         {/* Topographic Elevation Curves & Contour Lines */}
-        <path d="M 0,100 Q 300,80 500,160 T 1000,120" fill="none" stroke="rgba(56, 189, 248, 0.12)" strokeWidth="1" strokeDasharray="4,4" />
-        <path d="M 0,250 Q 250,220 520,280 T 1000,240" fill="none" stroke="rgba(56, 189, 248, 0.18)" strokeWidth="1.5" strokeDasharray="6,4" />
-        <path d="M 0,450 Q 400,400 700,480 T 1000,420" fill="none" stroke="rgba(56, 189, 248, 0.12)" strokeWidth="1" strokeDasharray="4,4" />
+        <path d="M 0,100 Q 300,80 500,160 T 1000,120" fill="none" stroke="rgba(138, 164, 143, 0.12)" strokeWidth="1" strokeDasharray="4,4" />
+        <path d="M 0,250 Q 250,220 520,280 T 1000,240" fill="none" stroke="rgba(138, 164, 143, 0.18)" strokeWidth="1.5" strokeDasharray="6,4" />
+        <path d="M 0,450 Q 400,400 700,480 T 1000,420" fill="none" stroke="rgba(138, 164, 143, 0.12)" strokeWidth="1" strokeDasharray="4,4" />
 
         {/* River Network Path Layer */}
         {activeLayers.riverBoundaries && (
@@ -136,7 +136,7 @@ export default function GisMapCanvas({
             <path
               d="M 50,50 C 180,120 320,180 520,280 C 650,340 800,240 950,200"
               fill="none"
-              stroke="#00e5ff"
+              stroke="#d9a441"
               strokeWidth="14"
               strokeOpacity="0.25"
               strokeLinecap="round"
@@ -144,7 +144,7 @@ export default function GisMapCanvas({
             <path
               d="M 50,50 C 180,120 320,180 520,280 C 650,340 800,240 950,200"
               fill="none"
-              stroke="#38bdf8"
+              stroke="#8aa48f"
               strokeWidth="4"
               strokeOpacity="0.8"
             />
@@ -152,7 +152,7 @@ export default function GisMapCanvas({
             <path
               d="M 400,0 C 480,100 520,280 740,190 C 850,140 920,80 1000,50"
               fill="none"
-              stroke="#38bdf8"
+              stroke="#8aa48f"
               strokeWidth="3"
               strokeOpacity="0.6"
             />
@@ -172,7 +172,7 @@ export default function GisMapCanvas({
           <polygon
             points="580,340 680,340 660,420 560,410"
             fill="rgba(16, 185, 129, 0.15)"
-            stroke="#10b981"
+            stroke="#8aa48f"
             strokeWidth="1.5"
             strokeDasharray="4,4"
           />
@@ -181,8 +181,8 @@ export default function GisMapCanvas({
         {/* Drone Surveillance Flight Path Trajectory */}
         {activeLayers.drones && dronePaths.map(d => (
           <g key={d.id}>
-            <path d={d.path} fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="6,6" className="animate-pulse" />
-            <circle cx="520" cy="280" r="6" fill="#00e5ff">
+            <path d={d.path} fill="none" stroke="#d9a441" strokeWidth="2" strokeDasharray="6,6" className="animate-pulse" />
+            <circle cx="520" cy="280" r="6" fill="#d9a441">
               <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
             </circle>
           </g>
@@ -191,7 +191,7 @@ export default function GisMapCanvas({
         {/* ANPR Road Camera Nodes */}
         {activeLayers.cameras && cameraNodes.map(c => (
           <g key={c.id} transform={`translate(${c.x}, ${c.y})`}>
-            <circle cx="0" cy="0" r="10" fill="rgba(15, 23, 42, 0.9)" stroke="#38bdf8" strokeWidth="1.5" />
+            <circle cx="0" cy="0" r="10" fill="rgba(15, 23, 42, 0.9)" stroke="#8aa48f" strokeWidth="1.5" />
             <text x="14" y="4" fill="#94a3b8" fontSize="10" fontFamily="monospace">{c.name}</text>
           </g>
         ))}
@@ -247,11 +247,11 @@ export default function GisMapCanvas({
       {/* Hover Info Tooltip Popup */}
       {hoveredPoint && (
         <div
-          className="absolute z-30 bg-[#0f172a]/95 backdrop-blur-md border border-[#00e5ff]/40 p-3 rounded-lg shadow-2xl text-xs font-mono w-64 pointer-events-none"
+          className="absolute z-30 bg-[#2d2418]/95 backdrop-blur-md border border-[#d9a441]/40 p-3 rounded-lg shadow-2xl text-xs font-mono w-64 pointer-events-none"
           style={{ left: Math.min(hoveredPoint.x + 20, 680), top: Math.max(hoveredPoint.y - 60, 40) }}
         >
-          <div className="flex items-center justify-between border-b border-[#00e5ff]/20 pb-1 mb-2">
-            <span className="font-bold text-[#00e5ff]">{hoveredPoint.name}</span>
+          <div className="flex items-center justify-between border-b border-[#d9a441]/20 pb-1 mb-2">
+            <span className="font-bold text-[#d9a441]">{hoveredPoint.name}</span>
             <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
               hoveredPoint.type === 'CRITICAL' ? 'bg-red-500/20 text-red-400 border border-red-500/50' : 'bg-amber-500/20 text-amber-400'
             }`}>
@@ -267,7 +267,7 @@ export default function GisMapCanvas({
       )}
 
       {/* Bottom Telemetry Legend Footer */}
-      <div className="absolute bottom-3 left-4 right-4 z-20 flex items-center justify-between bg-[#0f172a]/90 backdrop-blur-md border border-[#00e5ff]/20 px-4 py-2 rounded-lg text-xs font-mono">
+      <div className="absolute bottom-3 left-4 right-4 z-20 flex items-center justify-between bg-[#2d2418]/90 backdrop-blur-md border border-[#d9a441]/20 px-4 py-2 rounded-lg text-xs font-mono">
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-2">
             <span className="w-3 h-3 rounded-full bg-red-500 inline-block animate-ping"></span>
@@ -284,7 +284,7 @@ export default function GisMapCanvas({
         </div>
 
         <div className="text-gray-400">
-          MAP SCALE: <span className="text-[#00e5ff]">1:25,000</span> | MODE: <span className="text-emerald-400">TACTICAL GIS</span>
+          MAP SCALE: <span className="text-[#d9a441]">1:25,000</span> | MODE: <span className="text-emerald-400">TACTICAL GIS</span>
         </div>
       </div>
     </div>

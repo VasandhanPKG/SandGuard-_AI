@@ -69,9 +69,9 @@ export default function AlertManagementScreen({ onNavigate }) {
   return (
     <div className="space-y-6 font-mono text-xs select-none">
       {/* Alert Severity Filter Tabs Header */}
-      <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20 flex flex-wrap items-center justify-between gap-4">
+      <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center space-x-2">
-          <Filter className="w-4 h-4 text-[#00e5ff]" />
+          <Filter className="w-4 h-4 text-[#d9a441]" />
           <span className="text-gray-300 font-bold">INCIDENT SEVERITY TRIAGE:</span>
         </div>
 
@@ -82,8 +82,8 @@ export default function AlertManagementScreen({ onNavigate }) {
               onClick={() => setFilter(f)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${
                 filter === f
-                  ? 'bg-[#00e5ff] text-black border-[#00e5ff]'
-                  : 'bg-[#070d1e] text-gray-400 border-gray-800 hover:border-[#00e5ff]/40'
+                  ? 'bg-[#d9a441] text-black border-[#d9a441]'
+                  : 'bg-[#1b1610] text-gray-400 border-gray-800 hover:border-[#d9a441]/40'
               }`}
             >
               {f}
@@ -95,9 +95,9 @@ export default function AlertManagementScreen({ onNavigate }) {
       {/* Main Section: Alert Master Queue + Selected Incident Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column: Master Alert Queue */}
-        <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20 space-y-3">
-          <div className="border-b border-[#00e5ff]/20 pb-2 flex justify-between items-center text-gray-400">
-            <span className="font-bold text-[#00e5ff]">ALERT QUEUE ({filteredAlerts.length})</span>
+        <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20 space-y-3">
+          <div className="border-b border-[#d9a441]/20 pb-2 flex justify-between items-center text-gray-400">
+            <span className="font-bold text-[#d9a441]">ALERT QUEUE ({filteredAlerts.length})</span>
             <span>SORT: SEVERITY</span>
           </div>
 
@@ -108,8 +108,8 @@ export default function AlertManagementScreen({ onNavigate }) {
                 onClick={() => setSelectedAlert(a)}
                 className={`p-3.5 rounded-lg border transition-all cursor-pointer ${
                   selectedAlert?.id === a.id
-                    ? 'bg-[#17213b] border-[#00e5ff] glow-cyan'
-                    : 'bg-[#070d1e] border-gray-800 hover:border-gray-700'
+                    ? 'bg-[#3d2f23] border-[#d9a441] glow-cyan'
+                    : 'bg-[#1b1610] border-gray-800 hover:border-gray-700'
                 }`}
               >
                 <div className="flex justify-between items-start mb-1">
@@ -133,9 +133,9 @@ export default function AlertManagementScreen({ onNavigate }) {
 
         {/* Right 2 Columns: Detailed Selected Incident Workspace */}
         {selectedAlert && (
-          <div className="lg:col-span-2 glass-card p-5 rounded-xl border border-[#00e5ff]/30 space-y-5 flex flex-col justify-between">
+          <div className="lg:col-span-2 glass-card p-5 rounded-xl border border-[#d9a441]/30 space-y-5 flex flex-col justify-between">
             <div>
-              <div className="flex justify-between items-center border-b border-[#00e5ff]/20 pb-3 mb-4">
+              <div className="flex justify-between items-center border-b border-[#d9a441]/20 pb-3 mb-4">
                 <div>
                   <h3 className="text-sm font-bold text-white flex items-center space-x-2">
                     <AlertOctagon className="w-4 h-4 text-red-400" />
@@ -150,7 +150,7 @@ export default function AlertManagementScreen({ onNavigate }) {
               </div>
 
               {/* Location & Coordinates */}
-              <div className="bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/20 mb-4 flex justify-between items-center">
+              <div className="bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/20 mb-4 flex justify-between items-center">
                 <div>
                   <div className="text-gray-400 text-[10px]">LOCATION</div>
                   <div className="text-white font-bold">{selectedAlert.location}</div>
@@ -162,15 +162,15 @@ export default function AlertManagementScreen({ onNavigate }) {
               <div className="space-y-3 mb-5">
                 <div className="text-gray-400 text-[10px] uppercase">MULTI-SENSOR EVIDENCE GALLERY</div>
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/20 text-center">
+                  <div className="bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/20 text-center">
                     <div className="text-gray-500 text-[10px]">SATELLITE CHANGE</div>
-                    <div className="text-[#00e5ff] font-bold text-xs mt-1">85% Surface Shift</div>
+                    <div className="text-[#d9a441] font-bold text-xs mt-1">85% Surface Shift</div>
                   </div>
-                  <div className="bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/20 text-center">
+                  <div className="bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/20 text-center">
                     <div className="text-gray-500 text-[10px]">DRONE FLIR RECON</div>
                     <div className="text-red-400 font-bold text-xs mt-1">CAT 320 Excavator</div>
                   </div>
-                  <div className="bg-[#070d1e] p-3 rounded-lg border border-[#00e5ff]/20 text-center">
+                  <div className="bg-[#1b1610] p-3 rounded-lg border border-[#d9a441]/20 text-center">
                     <div className="text-gray-500 text-[10px]">ANPR CAMERA SCAN</div>
                     <div className="text-amber-400 font-bold text-xs mt-1">TN52 AB4321 (15 Trips)</div>
                   </div>
@@ -180,10 +180,10 @@ export default function AlertManagementScreen({ onNavigate }) {
               {/* Audit Timeline */}
               <div className="space-y-2 mb-4">
                 <div className="text-gray-400 text-[10px] uppercase">INCIDENT AUDIT TIMELINE</div>
-                <div className="space-y-1.5 border-l-2 border-[#00e5ff]/40 pl-3">
+                <div className="space-y-1.5 border-l-2 border-[#d9a441]/40 pl-3">
                   {selectedAlert.timeline?.map((t, i) => (
                     <div key={i} className="text-[11px] text-gray-300">
-                      <strong className="text-[#00e5ff]">{t.time}:</strong> {t.text}
+                      <strong className="text-[#d9a441]">{t.time}:</strong> {t.text}
                     </div>
                   ))}
                 </div>
@@ -191,13 +191,13 @@ export default function AlertManagementScreen({ onNavigate }) {
             </div>
 
             {/* Enforcement Action Dispatch Toolbar */}
-            <div className="pt-4 border-t border-[#00e5ff]/20 flex flex-wrap gap-3">
+            <div className="pt-4 border-t border-[#d9a441]/20 flex flex-wrap gap-3">
               <button className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-black font-bold py-2.5 rounded-lg flex items-center justify-center space-x-2 transition-colors">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>APPROVE INSPECTION</span>
               </button>
 
-              <button className="flex-1 bg-[#00e5ff] hover:bg-[#38bdf8] text-black font-bold py-2.5 rounded-lg flex items-center justify-center space-x-2 transition-colors">
+              <button className="flex-1 bg-[#d9a441] hover:bg-[#8aa48f] text-black font-bold py-2.5 rounded-lg flex items-center justify-center space-x-2 transition-colors">
                 <UserCheck className="w-4 h-4" />
                 <span>ASSIGN FIELD OFFICER</span>
               </button>

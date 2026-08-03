@@ -14,25 +14,25 @@ export default function DroneVerificationScreen() {
     <div className="space-y-6 font-mono text-xs">
       {/* Top Drone Telemetry Status Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20">
+        <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20">
           <div className="text-gray-400 text-[10px] mb-1">ACTIVE DRONE UNIT</div>
-          <div className="text-sm font-bold text-[#00e5ff]">UAV-ALPHA-04 (Skydio X2)</div>
+          <div className="text-sm font-bold text-[#d9a441]">UAV-ALPHA-04 (Skydio X2)</div>
           <div className="text-[10px] text-emerald-400 mt-1">STATUS: SURVEILLANCE ACTIVE</div>
         </div>
 
-        <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20">
+        <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20">
           <div className="text-gray-400 text-[10px] mb-1">BATTERY & ALTITUDE</div>
           <div className="text-sm font-bold text-white">78% | ALT: 120m</div>
           <div className="text-[10px] text-gray-400 mt-1">5G TACTICAL LINK: 98%</div>
         </div>
 
-        <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20">
+        <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20">
           <div className="text-gray-400 text-[10px] mb-1">PAYLOAD SENSOR</div>
           <div className="text-sm font-bold text-white">FLIR Thermal + 4K Optical</div>
           <div className="text-[10px] text-gray-400 mt-1">DUAL CAMERA FEED</div>
         </div>
 
-        <div className="glass-card p-4 rounded-xl border border-[#00e5ff]/20">
+        <div className="glass-card p-4 rounded-xl border border-[#d9a441]/20">
           <div className="text-gray-400 text-[10px] mb-1">OBJECTS DETECTED</div>
           <div className="text-sm font-bold text-red-400">10 Flagged Items</div>
           <div className="text-[10px] text-red-300 mt-1">2 EXCAVATORS / 1 DREDGER</div>
@@ -41,7 +41,7 @@ export default function DroneVerificationScreen() {
 
       {/* Main Section: Drone FLIR HUD Overlay Component */}
       <div className="space-y-2">
-        <h3 className="text-sm font-bold text-[#00e5ff] flex items-center space-x-2">
+        <h3 className="text-sm font-bold text-[#d9a441] flex items-center space-x-2">
           <Video className="w-4 h-4" />
           <span>LIVE DRONE HD FLIR THERMAL STREAM & AI BOUNDING BOXES</span>
         </h3>
@@ -49,9 +49,9 @@ export default function DroneVerificationScreen() {
       </div>
 
       {/* AI Telemetry & Object Detection Log Table */}
-      <div className="glass-card p-5 rounded-xl border border-[#00e5ff]/20">
-        <div className="flex items-center justify-between border-b border-[#00e5ff]/20 pb-3 mb-4">
-          <h4 className="text-sm font-bold text-[#00e5ff]">REAL-TIME AI OBJECT DETECTION SUMMARY</h4>
+      <div className="glass-card p-5 rounded-xl border border-[#d9a441]/20">
+        <div className="flex items-center justify-between border-b border-[#d9a441]/20 pb-3 mb-4">
+          <h4 className="text-sm font-bold text-[#d9a441]">REAL-TIME AI OBJECT DETECTION SUMMARY</h4>
           <span className="bg-red-500/20 text-red-400 border border-red-500/40 px-2.5 py-1 rounded text-[10px] font-bold">
             ILLEGAL EQUIPMENT DETECTED
           </span>
@@ -71,9 +71,9 @@ export default function DroneVerificationScreen() {
             </thead>
             <tbody className="divide-y divide-gray-800 text-gray-300">
               {detectedObjects.map((o, i) => (
-                <tr key={i} className="hover:bg-[#17213b]/50">
+                <tr key={i} className="hover:bg-[#3d2f23]/50">
                   <td className="py-2.5 font-bold text-white">{o.type}</td>
-                  <td className="py-2.5 text-[#00e5ff]">{o.count}</td>
+                  <td className="py-2.5 text-[#d9a441]">{o.count}</td>
                   <td className="py-2.5 text-emerald-400">{o.conf}</td>
                   <td className="py-2.5">{o.gps}</td>
                   <td className="py-2.5 text-gray-400">{o.time}</td>

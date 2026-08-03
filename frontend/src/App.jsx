@@ -42,7 +42,7 @@ export default function App() {
   if (currentScreen === 'login') {
     if (renderEngine === 'REACT') {
       return (
-        <div className="w-screen h-screen bg-[#070d1e] overflow-hidden">
+        <div className="w-screen h-screen bg-[var(--bg-sand-dark)] overflow-hidden">
           <LoginScreen onLoginSuccess={() => setCurrentScreen('dashboard')} />
         </div>
       );
@@ -50,7 +50,7 @@ export default function App() {
   }
 
   return (
-    <div className="w-screen h-screen bg-[#070d1e] flex flex-col overflow-hidden text-white font-mono select-none">
+    <div className="w-screen h-screen bg-[var(--bg-sand-dark)] flex flex-col overflow-hidden text-[var(--text-primary)] font-sans select-none">
       {/* Top Header Navigation Bar */}
       <Header
         currentScreen={currentScreen}
@@ -68,7 +68,7 @@ export default function App() {
         />
 
         {/* Content Canvas */}
-        <main className="flex-1 h-full overflow-y-auto p-6 bg-[#070d1e] relative">
+        <main className="flex-1 h-full overflow-y-auto p-6 bg-[var(--bg-sand-panel)] relative">
           {renderEngine === 'REACT' ? (
             <>
               {currentScreen === 'dashboard' && <CommandCenterDashboard onNavigate={handleNavigate} />}
@@ -85,8 +85,8 @@ export default function App() {
           ) : (
             <iframe
               src={stitchMap[currentScreen] || stitchMap.dashboard}
-              title={`SandShield AI - ${currentScreen}`}
-              className="w-full h-full border-none rounded-xl bg-[#0a122a]"
+              title={`Sand Guard - ${currentScreen}`}
+              className="w-full h-full border-none rounded-xl bg-[#151007]"
             />
           )}
         </main>

@@ -13,9 +13,9 @@ export default function LoginScreen({ onLogin }) {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#070d1e] bg-radar-grid flex flex-col justify-between p-6 select-none overflow-hidden">
+    <div className="relative min-h-screen w-full bg-[var(--bg-sand-dark)] bg-radar-grid flex flex-col justify-between p-6 select-none overflow-hidden">
       {/* Top Security Classification Banner */}
-      <div className="w-full max-w-4xl mx-auto bg-red-950/40 border border-red-500/50 rounded-lg p-2.5 flex items-center justify-between text-xs font-mono text-red-300 backdrop-blur-md">
+      <div className="w-full max-w-4xl mx-auto bg-[#c94c2b]/10 border border-[#c94c2b]/30 rounded-lg p-2.5 flex items-center justify-between text-xs font-mono text-[#d9a441] backdrop-blur-md">
         <div className="flex items-center space-x-2">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
           <span className="font-bold">RESTRICTED ACCESS - OFFICIAL USE ONLY</span>
@@ -24,14 +24,14 @@ export default function LoginScreen({ onLogin }) {
       </div>
 
       {/* Main Centered Login Box */}
-      <div className="w-full max-w-md mx-auto my-auto glass-card border border-[#00e5ff]/40 p-8 rounded-2xl shadow-2xl relative z-10">
+      <div className="w-full max-w-md mx-auto my-auto glass-card border border-[#d9a441]/40 p-8 rounded-2xl shadow-2xl relative z-10">
         {/* Logo & Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#0f172a] border-2 border-[#00e5ff] text-[#00e5ff] mb-4 glow-cyan">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#2d2418] border-2 border-[#d9a441] text-[#d9a441] mb-4 glow-cyan">
             <Shield className="w-9 h-9" />
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-wide">SANDSHIELD AI</h1>
-          <p className="text-xs font-mono text-[#00e5ff] mt-1">Government Command & Control Environmental Intelligence</p>
+          <h1 className="text-2xl font-bold text-white tracking-wide">SAND GUARD</h1>
+          <p className="text-xs font-mono text-[#d9a441] mt-1">Government Command & Control Environmental Intelligence</p>
         </div>
 
         {/* Login Form */}
@@ -44,7 +44,7 @@ export default function LoginScreen({ onLogin }) {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#070d1e] border border-[#00e5ff]/30 focus:border-[#00e5ff] text-white pl-10 pr-4 py-2.5 rounded-lg outline-none transition-all"
+                className="w-full bg-[#1b1610] border border-[#d9a441]/30 focus:border-[#d9a441] text-white pl-10 pr-4 py-2.5 rounded-lg outline-none transition-all"
                 required
               />
             </div>
@@ -58,7 +58,7 @@ export default function LoginScreen({ onLogin }) {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#070d1e] border border-[#00e5ff]/30 focus:border-[#00e5ff] text-white pl-10 pr-4 py-2.5 rounded-lg outline-none transition-all"
+                className="w-full bg-[#1b1610] border border-[#d9a441]/30 focus:border-[#d9a441] text-white pl-10 pr-4 py-2.5 rounded-lg outline-none transition-all"
                 required
               />
             </div>
@@ -71,7 +71,7 @@ export default function LoginScreen({ onLogin }) {
               <select
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                className="w-full bg-[#070d1e] border border-[#00e5ff]/30 focus:border-[#00e5ff] text-white pl-10 pr-4 py-2.5 rounded-lg outline-none transition-all appearance-none cursor-pointer"
+                className="w-full bg-[var(--bg-sand-dark)] border border-[#d9a441]/30 focus:border-[#d9a441] text-[var(--text-primary)] pl-10 pr-4 py-2.5 rounded-lg outline-none transition-all appearance-none cursor-pointer"
               >
                 <option>State Sand Mining Enforcement Cell</option>
                 <option>River Basin Management Authority</option>
@@ -82,15 +82,15 @@ export default function LoginScreen({ onLogin }) {
           </div>
 
           {/* 2FA Option Toggle */}
-          <div className="flex items-center justify-between p-3 bg-[#070d1e]/80 border border-[#00e5ff]/20 rounded-lg">
+          <div className="flex items-center justify-between p-3 bg-[#1b1610]/80 border border-[#d9a441]/20 rounded-lg">
             <div className="flex items-center space-x-2">
-              <Key className="w-4 h-4 text-[#00e5ff]" />
+              <Key className="w-4 h-4 text-[#d9a441]" />
               <span className="text-gray-300 text-[11px]">Hardware 2FA / OTP Security</span>
             </div>
             <button
               type="button"
               onClick={() => setUse2FA(!use2FA)}
-              className={`w-10 h-5 rounded-full transition-colors relative ${use2FA ? 'bg-[#00e5ff]' : 'bg-gray-700'}`}
+              className={`w-10 h-5 rounded-full transition-colors relative ${use2FA ? 'bg-[#d9a441]' : 'bg-gray-700'}`}
             >
               <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-black transition-transform ${use2FA ? 'left-5' : 'left-0.5'}`}></span>
             </button>
@@ -98,7 +98,7 @@ export default function LoginScreen({ onLogin }) {
 
           <button
             type="submit"
-            className="w-full bg-[#00e5ff] hover:bg-[#38bdf8] text-black font-bold py-3 rounded-lg transition-all flex items-center justify-center space-x-2 text-sm glow-cyan cursor-pointer mt-6"
+            className="w-full bg-[#d9a441] hover:bg-[#d68a2c] text-black font-bold py-3 rounded-lg transition-all flex items-center justify-center space-x-2 text-sm glow-cyan cursor-pointer mt-6"
           >
             <span>AUTHENTICATE & ENTER COMMAND CENTER</span>
             <ArrowRight className="w-4 h-4" />
